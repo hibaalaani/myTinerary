@@ -3,6 +3,7 @@ import "../App.css";
 import MYtinerary from "./MYtineraryLogo.png";
 import Circle from "../Circle.png";
 import Footer from "../Footer";
+import Mytineraries from "./Mytineraries";
 export default class Landing extends Component {
   render() {
     return (
@@ -20,18 +21,15 @@ export default class Landing extends Component {
         <p className="mt-4 textSize col-sm-12">
           Want to build your own MYtinerary ?
         </p>
-        <a href="/" className="d-flex float-left m-4">
+        {/* <a href="/login" className="d-flex float-left m-4">
           {" "}
           Log In
-        </a>
-        <a href="/" className="d-flex float-right m-4">
+        </a>{" "} */}
+        {/* <a href="/about" className="d-flex float-right m-4">
           {" "}
           Craete Account
-        </a>
-        <div className="col-12 mt-4">
-          {" "}
-          <Footer />
-        </div>
+        </a> */}
+        <Mytineraries />
       </div>
     );
   }
