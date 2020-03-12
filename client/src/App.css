@@ -1,5 +1,5 @@
 body {
-  margin: 10px;
+  margin: 20px;
 }
 
 .App {
@@ -9,6 +9,10 @@ body {
 
 .App-logo {
   width: 80vmin;
+  width: 100%;
+  margin: 0px;
+  background-size: cover;
+  padding-top: 0%;
   height: auto;
   pointer-events: none;
 }
@@ -49,7 +53,32 @@ body {
 .circle {
   width: 100px;
 }
+
 .footer {
   width: 50px;
+  text-align: center;
+}
+
+
+
+.card {
+  width: 18rem;
+  position: fixed;
+  height: 18rem;
+  float: left;
+  padding: 2%;
+  /* display: inline-block; */
+  margin: 20px auto;
+  text-align: center;
+}
+
+.imgCarsoul {
+  width: 18rem;
+  border-radius: 10%;
+  background-color: #61dafb;
+  height: 18rem;
+  float: left;
+  padding: 2%;
+  /* display: inline-block; */
   text-align: center;
 }

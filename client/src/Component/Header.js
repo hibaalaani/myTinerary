@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.css";
 import {
   Collapse,
   Navbar,
@@ -12,12 +13,23 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  NavbarText
+  Button,
+  Form
 } from "reactstrap";
-
+import FormControl from "react-bootstrap/FormControl";
 export default class Header extends Component {
-  state = {
-    isOpen: false
+  constructor(props) {
+    super();
+    this.state = {
+      isOpen: false,
+      search: ""
+    };
+  }
+
+  handleChangeChild = e => {
+    console.log("e from header", e);
+    //console.log("this.props", this.props);
+    this.props.callbackFromParent(e);
   };
 
   render() {
@@ -54,7 +66,21 @@ export default class Header extends Component {
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
-            <NavbarText>Simple Text</NavbarText>
+            <Form inline>
+              <FormControl
+                value={this.state.search}
+                onChange={this.handleChangeChild}
+                type="text"
+                placeholder="Search"
+                className="mr-sm-2"
+              />
+              <Button
+                variant="outline-success"
+                onChange={this.handleChangeChild}
+              >
+                Search
+              </Button>
+            </Form>
           </Collapse>
         </Navbar>
       </div>

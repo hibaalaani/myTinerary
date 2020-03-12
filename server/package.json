@@ -4,18 +4,22 @@
   "description": "server",
   "main": "server.js",
   "dependencies": {
+    "@brainhubeu/react-carousel": "^1.12.20",
+    "bootstrap": "^4.4.1",
     "concurrently": "^5.1.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mongoose": "^5.9.3"
+    "mongoose": "^5.9.3",
+    "react": "^16.13.0",
+    "react-bootstrap": "^0.32.4",
+    "react-dom": "^16.13.0",
+    "react-leaf-carousel": "^2.0.0",
+    "reactstrap": "^8.4.1"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "concurrently \"nodemon server.js\" \"cd ../client && npm start\""
   },
   "author": "",
   "license": "ISC"
 }
-"scripts": {
-  "start": "concurrently \"nodemon server.js\" \"cd ../client && npm start\""
-    }
