@@ -42,6 +42,7 @@ class Cities extends Component {
   render() {
     console.log("this.props", this.props);
     const filterList = this.filter();
+    console.log("filterList", filterList);
     const { cities } = this.props;
     console.log("cities from citues", cities);
     return (

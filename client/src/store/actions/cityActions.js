@@ -5,9 +5,9 @@ export const FITCH_CITY = "FITCH_CITY";
 export const fetchCitiesAction = () => {
   return dispatch => {
     //add the full url of your back end
-    fetch("http://localhost:5000/cities")
+    fetch("http://localhost:5000/api/cities/all")
       .then(resp => {
-        return resp.json()
+        return resp.json();
       })
       .then(json => {
         dispatch({ type: "FETCH_CITIES_SUCCESS", payload: json });
