@@ -1,18 +1,19 @@
 export const FITCH_CITY = "FITCH_CITY";
-export const fetchCitiesAction = city => {
-  return dispatch => {
-    dispatch({ type: "FETCH-CITY", city });
 
-    fetch("/cities")
+// I cleaned a bit your action, I was almost good, just a few probem with the .json() convertion and handeling the payload
+//it shuld work now ;)
+export const fetchCitiesAction = () => {
+  return dispatch => {
+    //add the full url of your back end
+    fetch("http://localhost:5000/cities")
       .then(resp => {
-        return (city = resp.json());
+        return resp.json()
       })
       .then(json => {
-        dispatch({ type: "FETCH-CITY", city });
+        dispatch({ type: "FETCH_CITIES_SUCCESS", payload: json });
       })
-
       .catch(err => {
-        dispatch({ type: "CREATE_ERROR", err });
+        dispatch({ type: "FETCH_CITIES_ERROR", payload: err });
       });
     //       .then(handleErrors)
 
