@@ -1,17 +1,20 @@
 const initialState = {
-  cities: ["city1", "city2"]
+  cities: ["city1", "city2"],
+  err: ""
 };
 
+//you had some issues acting the payload to pass data from your action to your reducer
+//I changed a bit the naming too so it makes more sense
 function citiesReducer(state = initialState, action) {
   console.log("city action", action);
   switch (action.type) {
-    case "FETCH-CITY": //to do
-      console.log("created city", action.city);
-      return { ...state, initialState: action.city };
+    case "FETCH_CITIES_SUCCESS":
+      console.log("FETCH_CITIES_SUCCESS", action);
+      return { ...state, cities: action.payload, err: "" };
       return state;
-    case "CREATE_ERROR":
-      console.log("err ", action.err);
-      return state;
+    case "FETCH_CITIES_ERROR":
+      console.log("FETCH_CITIES_ERROR", action);
+      return { ...state, err: action.payload };
     default:
       return state;
   }
