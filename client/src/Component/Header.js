@@ -37,7 +37,7 @@ export default class Header extends Component {
     return (
       <div>
         <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">reactstrap</NavbarBrand>
+          <NavbarBrand href="/">MyItenarary</NavbarBrand>
           <NavbarToggler
             onClick={() => this.setState({ isOpen: !this.state.isOpen })}
           />
@@ -46,7 +46,13 @@ export default class Header extends Component {
               <NavItem>
                 <NavLink>
                   {" "}
-                  <Link to="/Cities">GitHub </Link>
+                  <Link to="/Cities">Cities We Offer </Link>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink>
+                  {" "}
+                  <Link to="/AddCity">New City </Link>
                 </NavLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>

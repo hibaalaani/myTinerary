@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import "../App.css";
-import Header from "./Header.jpg";
+import PhotoWithCamera from "./PhotoWithCamera.jpg";
 import Circle from "../Circle.png";
 import CarouselImg from "./CarouselImg";
 import { Link } from "react-router-dom";
+// import AddCity from "./AddCity";
 
 export default class Landing extends Component {
   constructor(props) {
@@ -20,18 +21,18 @@ export default class Landing extends Component {
       .then(result => {
         console.log("result :", result);
         this.setState({ cities: result });
-        console.log(this.state.cities);
+        console.log("from landing page ", this.state.cities);
       });
   }
   render() {
     const cities = this.state.cities;
     return (
-      <div>
-        <header className="col-12">
-          <img src={Header} className="App-logo " alt="logo" />
+      <div className="container-fluid App">
+        <header className="col-12 ">
+          <img src={PhotoWithCamera} className="App-logo " alt="logo" />
         </header>
 
-        <div className="container App">
+        <div>
           <p className="mt-4 textSize col-sm-12 ">
             Find your perfect trip ,designed by insiders who know their cities{" "}
           </p>
@@ -45,6 +46,7 @@ export default class Landing extends Component {
 
           {cities && <CarouselImg cities={cities} />}
         </div>
+        {/* <AddCity cities={cities} /> */}
       </div>
     );
   }

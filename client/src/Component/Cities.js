@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Card, CardGroup } from "reactstrap";
-export default class Cities extends Component {
+import { connect } from "react-redux";
+import { fetchCitiesAction } from "../store/actions/cityActions";
+
+class Cities extends Component {
   constructor() {
     super();
     this.state = {
@@ -10,15 +13,7 @@ export default class Cities extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:5000/api/cities/all")
-      .then(res => {
-        return res.json();
-      })
-      .then(result => {
-        console.log("result :", result);
-        this.setState({ cities: result });
-        console.log(this.state.cities);
-      });
+    this.props.fetchCitiesAction();
   }
   cutArray() {
     return this.state.cities.map((city, index) => {
@@ -34,8 +29,8 @@ export default class Cities extends Component {
   filter() {
     if (this.state.cities) {
       const filterCity = this.state.cities.filter((city, index) => {
-        console.log(" our cities" + city.name);
-        console.log("our search" + this.state.search);
+        console.log(" our cities  " + city.name);
+        console.log("our search " + this.state.search);
         let cityName = city.name.toLowerCase();
         return cityName.startsWith(this.state.search.toLowerCase());
       });
@@ -45,12 +40,15 @@ export default class Cities extends Component {
   }
 
   render() {
+    console.log("this.props", this.props);
     const filterList = this.filter();
-    const city = this.state.cities;
+    const { cities } = this.props;
+    console.log("cities from citues", cities);
     return (
       <div>
         <label htmlFor="filter">Filter by City: </label>
         <input
+          className="navbar-margin"
           type="search"
           id="filter"
           value={this.state.search}
@@ -59,7 +57,7 @@ export default class Cities extends Component {
 
         {filterList &&
           filterList.map((city, index) => (
-            <div key={index} cities={city}>
+            <div key={index} city={city}>
               {/* <div> */}
               <img className="card col-md-4" src={city.picture} />
               {/* </div> */}
@@ -69,3 +67,14 @@ export default class Cities extends Component {
     );
   }
 }
+const mapStateToProps = (state, ownProps) => {
+  console.log(state);
+
+  return {
+    cities: state.cities.cities
+  };
+};
+const mapDispatchToProps = dispatch => ({
+  fetchCitiesAction: city => dispatch(fetchCitiesAction(city))
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Cities);

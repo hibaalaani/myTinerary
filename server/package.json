@@ -14,7 +14,8 @@
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.13.0",
     "react-leaf-carousel": "^2.0.0",
-    "reactstrap": "^8.4.1"
+    "reactstrap": "^8.4.1",
+    "redux-devtools-extension": "^2.13.8"
   },
   "devDependencies": {},
   "scripts": {

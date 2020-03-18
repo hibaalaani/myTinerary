@@ -1,5 +1,5 @@
 body {
-  margin: 20px;
+  margin: 0 5vw;
 }
 
 .App {
@@ -8,12 +8,13 @@ body {
 }
 
 .App-logo {
-  width: 80vmin;
-  width: 100%;
+
+  width: 90%;
+  height: 30vh;
   margin: 0px;
   background-size: cover;
   padding-top: 0%;
-  height: auto;
+
   pointer-events: none;
 }
 
@@ -59,7 +60,9 @@ body {
   text-align: center;
 }
 
-
+.navbar-margin {
+  margin-top: 10%;
+}
 
 .card {
   width: 18rem;
@@ -82,3 +85,12 @@ body {
   /* display: inline-block; */
   text-align: center;
 }
+
+/* .background {
+  /* background-image: url(PhotoWithCamera.jpg) no repeat; */
+/* background-size: cover;
+width: 100%;
+background-color: #61dafb;
+}
+
+*/
