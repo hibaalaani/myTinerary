@@ -19,11 +19,12 @@ class AddCity extends Component {
   handelSubmit = e => {
     e.preventDefault();
     console.log(e);
-    this.props.fetchCitiesAction(this.state);
+    this.props.fetchCitiesAction(this.state.cities);
   };
   render() {
     const cities = this.props.fetchCitiesAction;
-    console.log("cities", cities);
+    console.log(cities);
+    console.log("cities from addCity", cities);
     return (
       <div>
         <form onSubmit={this.handelSubmit}>
@@ -54,4 +55,11 @@ const mapDispatchToParops = dispatch => {
     fetchCitiesAction: city => dispatch(fetchCitiesAction(city))
   };
 };
-export default connect(null, mapDispatchToParops)(AddCity);
+const mapStateToProps = (state, ownProps) => {
+  console.log(state);
+
+  return {
+    cities: state.cities.cities
+  };
+};
+export default connect(mapStateToProps, mapDispatchToParops)(AddCity);

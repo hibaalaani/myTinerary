@@ -16,19 +16,19 @@ class Cities extends Component {
     this.props.fetchCitiesAction();
   }
   cutArray() {
-    return this.state.cities.map((city, index) => {
+    return this.props.cities.map((city, index) => {
       return index < 15;
     });
   }
   handleChange = e => {
-    console.log("event from handel change", e.target);
+    console.log("event from handel change", e.target.value);
     this.setState({
       search: e.target.value
     });
   };
   filter() {
-    if (this.state.cities) {
-      const filterCity = this.state.cities.filter((city, index) => {
+    if (this.props.cities) {
+      const filterCity = this.props.cities.filter((city, index) => {
         console.log(" our cities  " + city.name);
         console.log("our search " + this.state.search);
         let cityName = city.name.toLowerCase();
@@ -40,10 +40,9 @@ class Cities extends Component {
   }
 
   render() {
-    console.log("this.props", this.props);
     const filterList = this.filter();
-    console.log("filterList", filterList);
     const { cities } = this.props;
+    console.log("this.props", this.props.cities);
     console.log("cities from citues", cities);
     return (
       <div>
@@ -69,7 +68,7 @@ class Cities extends Component {
   }
 }
 const mapStateToProps = (state, ownProps) => {
-  console.log(state);
+  console.log("mamToState", state);
 
   return {
     cities: state.cities.cities
