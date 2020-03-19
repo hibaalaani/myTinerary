@@ -1,5 +1,5 @@
 const initialState = {
-  cities: ["city1", "city2"],
+  cities: [],
   err: ""
 };
 
