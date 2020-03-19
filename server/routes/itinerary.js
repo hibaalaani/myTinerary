@@ -12,6 +12,16 @@ router.get("/all", (_req, res) => {
     })
     .catch(err => console.log(err));
 });
+//this is how you implement a city route by specific city
+router.get("/city/:name", (req, res) => {
+  let itineraryRequested = req.params.name;
+  itineraryModel
+    .find({ name: itineraryRequested })
+    .then(itinerary => {
+      res.send(itinerary);
+    })
+    .catch(err => console.log(err));
+});
 
 router.post("/", (req, res) => {
   console.log("itinerary", req.body);

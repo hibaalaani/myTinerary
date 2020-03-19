@@ -4,6 +4,7 @@ import PhotoWithCamera from "./PhotoWithCamera.jpg";
 import Circle from "../Circle.png";
 import CarouselImg from "./CarouselImg";
 import { Link } from "react-router-dom";
+import Itinerary from "./Itinerary";
 // import AddCity from "./AddCity";
 
 export default class Landing extends Component {
@@ -47,6 +48,7 @@ export default class Landing extends Component {
           {cities && <CarouselImg cities={cities} />}
         </div>
         {/* <AddCity cities={cities} /> */}
+        <Itinerary />
       </div>
     );
   }

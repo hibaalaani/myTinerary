@@ -7,7 +7,7 @@ import Login from "./Component/Login";
 import Cities from "./Component/Cities";
 import AddCity from "./Component/AddCity";
 // import Mytineraries from "./Component/Mytineraries";
-
+import Itinerary from "./Component/Itinerary";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Notfound from "./Component/Notfound";
@@ -26,7 +26,7 @@ function App() {
         <Link to="/login"></Link>
 
         <Link to="/Cities"></Link>
-
+        <Link to="/Itinerary"></Link>
         <Link to="/AddCity"></Link>
         <Switch>
           <Route exact path="/" component={Landing} />
@@ -34,6 +34,7 @@ function App() {
           <Route exact path="/Login" component={Login} />
           <Route path="/Cities" component={Cities} />
           <Route path="/AddCity" component={AddCity} />
+          <Route path="/Itineraries" component={Itinerary} />
           <Route component={Notfound} />
         </Switch>
       </div>
