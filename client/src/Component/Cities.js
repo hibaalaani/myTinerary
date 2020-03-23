@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Card, CardGroup } from "reactstrap";
 import { connect } from "react-redux";
 import { fetchCitiesAction } from "../store/actions/cityActions";
+// import AddCity from "./AddCity";
 
 class Cities extends Component {
   constructor() {
@@ -38,7 +39,13 @@ class Cities extends Component {
       return filterCity;
     } else return [];
   }
-
+  // addNinja = city => {
+  //   // city.id = Math.random();
+  //   let cities = [...this.state.cities, city];
+  //   this.setState({
+  //     cities: cities
+  //   });
+  // };
   render() {
     const filterList = this.filter();
     const { cities } = this.props;

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import InfiniteCarousel from "react-leaf-carousel";
 export default class CarouselImg extends Component {
   constructor(props) {
@@ -37,13 +38,16 @@ export default class CarouselImg extends Component {
           {cities.map((city, index) => {
             return (
               <div key={city.id}>
-                <img
-                  className="imgCarsoul rounded  d-block w-100"
-                  // style={style.img}
-                  src={city.picture}
-                  alt=""
-                />
-                <p className="p-4 mt-4 card-title">{city.name}</p>
+                <a href={"/" + city.name}>
+                  <img
+                    className="imgCarsoul rounded  d-block w-100"
+                    // style={style.img}
+                    src={city.picture}
+                    alt=""
+                  />
+
+                  <p className="p-4 mt-4 card-title">{city.name}</p>
+                </a>
               </div>
             );
           })}

@@ -34,7 +34,8 @@ function App() {
           <Route exact path="/Login" component={Login} />
           <Route path="/Cities" component={Cities} />
           <Route path="/AddCity" component={AddCity} />
-          <Route path="/Itineraries" component={Itinerary} />
+          <Route path="/Itinerary" component={Itinerary} />
+          <Route exact path="/itineraries/:city" component={Itinerary} />
           <Route component={Notfound} />
         </Switch>
       </div>

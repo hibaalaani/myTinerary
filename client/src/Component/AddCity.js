@@ -3,7 +3,7 @@ import { fetchCitiesAction } from "../store/actions/cityActions";
 import { connect } from "react-redux";
 
 class AddCity extends Component {
-  constructor(props) {
+  constructor() {
     super();
     this.state = {
       name: null,
@@ -19,7 +19,14 @@ class AddCity extends Component {
   handelSubmit = e => {
     e.preventDefault();
     console.log(e);
+    // let cities = this.props.cities;
+    // this.props.addNinja(this.state);
     this.props.fetchCitiesAction(this.state.cities);
+    // let cities = { ...this.state.cities, cities };
+    // this.setState({
+    //   cities: cities
+    // });
+    console.log("submit", this.state);
   };
   render() {
     const cities = this.props.fetchCitiesAction;
