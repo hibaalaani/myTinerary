@@ -15,3 +15,9 @@ export const fitchItinerariesAction = () => {
       });
   };
 };
+export const fitchItinerariesByCityName = (city) => {
+  return dispatch => {
+    //add the full url of your back end
+    // fetch("http://localhost:5000/api/itineraries/"+ city)
+
+  }

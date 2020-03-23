@@ -3,6 +3,8 @@ import { Card, CardGroup } from "reactstrap";
 import { connect } from "react-redux";
 import { fetchCitiesAction } from "../store/actions/cityActions";
 // import AddCity from "./AddCity";
+import { Link } from "react-router-dom";
+
 
 class Cities extends Component {
   constructor() {
@@ -64,11 +66,14 @@ class Cities extends Component {
 
         {filterList &&
           filterList.map((city, index) => (
-            <div key={index} city={city}>
-              {/* <div> */}
-              <img className="card col-md-4" src={city.picture} />
-              {/* </div> */}
-            </div>
+            <Link to={"itineraries/" + city.name}>
+
+              <div key={index} city={city}>
+                {/* <div> */}
+                <img className="card col-md-4" src={city.picture} />
+                {/* </div> */}
+              </div>
+            </Link>
           ))}
       </div>
     );

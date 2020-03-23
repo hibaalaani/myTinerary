@@ -8,6 +8,7 @@ export default class CarouselImg extends Component {
 
   render() {
     const cities = this.props.cities;
+    console.log('cities', cities)
     return (
       <div>
         <InfiniteCarousel
@@ -37,8 +38,9 @@ export default class CarouselImg extends Component {
         >
           {cities.map((city, index) => {
             return (
-              <div key={city.id}>
-                <a href={"/" + city.name}>
+              <Link to={"/" + city.name}>
+
+                <div key={city.id}>
                   <img
                     className="imgCarsoul rounded  d-block w-100"
                     // style={style.img}
@@ -47,8 +49,8 @@ export default class CarouselImg extends Component {
                   />
 
                   <p className="p-4 mt-4 card-title">{city.name}</p>
-                </a>
-              </div>
+                </div>
+              </Link>
             );
           })}
         </InfiniteCarousel>
