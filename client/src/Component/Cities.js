@@ -57,7 +57,7 @@ class Cities extends Component {
       <div>
         <label htmlFor="filter">Filter by City: </label>
         <input
-          className="navbar-margin"
+          className=""
           type="search"
           id="filter"
           value={this.state.search}

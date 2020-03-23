@@ -10,7 +10,7 @@ const itinerarySchema = new mongoose.Schema({
     required: true
   },
   rating: {
-    type: String
+    type: Number
   },
   duration: {
     type: String
@@ -19,7 +19,10 @@ const itinerarySchema = new mongoose.Schema({
     type: String
   },
   hashtags: {
-    type: String
+    type: [String]
+  },
+  activities: {
+    type=[String]
   }
 });
 module.exports = mongoose.model("itinerary", itinerarySchema);

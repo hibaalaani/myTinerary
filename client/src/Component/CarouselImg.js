@@ -38,19 +38,20 @@ export default class CarouselImg extends Component {
         >
           {cities.map((city, index) => {
             return (
-              <Link to={"/" + city.name}>
 
-                <div key={city.id}>
+              <div key={city.id}>
+                <Link to={"/Itineraries" + city.name}>
+
                   <img
-                    className="imgCarsoul rounded  d-block w-100"
+                    className="imgCarsoul rounded card d-block w-100"
                     // style={style.img}
                     src={city.picture}
                     alt=""
                   />
 
                   <p className="p-4 mt-4 card-title">{city.name}</p>
-                </div>
-              </Link>
+                </Link>
+              </div>
             );
           })}
         </InfiniteCarousel>

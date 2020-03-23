@@ -26,7 +26,7 @@ function App() {
         <Link to="/login"></Link>
 
         <Link to="/Cities"></Link>
-        <Link to="/Itinerary"></Link>
+        <Link to="/Itineraries"></Link>
         <Link to="/AddCity"></Link>
         <Switch>
           <Route exact path="/" component={Landing} />
