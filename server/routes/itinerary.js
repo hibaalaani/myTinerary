@@ -31,7 +31,8 @@ router.post("/", (req, res) => {
     rating: req.body.rating,
     duration: req.body.duration,
     price: req.body.price,
-    hashtags: req.body.hashtags
+    hashtags: req.body.hashtags,
+    activities: req.body.activities
   });
   newItinerary
     .save()

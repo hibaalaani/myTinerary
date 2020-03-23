@@ -33,6 +33,7 @@ class Itinerary extends Component {
           filterList.map((itinerary, index) => (
             <div key={index} itinerary={itinerary}>
               {/* <div> */}
+              {/* <h3 className="card-title bg-primary">{itinerary.activities}</h3> */}
               <img className="card col-md-4" src={itinerary.profile} />
               {/* </div> */}
             </div>
