@@ -6,8 +6,11 @@ import CarouselImg from "./CarouselImg";
 import { Link } from "react-router-dom";
 import Itinerary from "./Itinerary";
 // import AddCity from "./AddCity";
+import { fetchCitiesAction } from "../store/actions/cityActions";
+import { connect } from "react-redux";
 
-export default class Landing extends Component {
+
+class Landing extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,18 +18,21 @@ export default class Landing extends Component {
     };
   }
   componentDidMount() {
-    fetch("http://localhost:5000/api/cities/all")
-      .then(res => {
-        return res.json();
-      })
-      .then(result => {
-        console.log("result :", result);
-        this.setState({ cities: result });
-        console.log("from landing page ", this.state.cities);
-      });
+    this.props.fetchCitiesAction();
+
+    // fetch("http://localhost:5000/api/cities/all")
+    //   .then(res => {
+    //     return res.json();
+    //   })
+    //   .then(result => {
+    //     console.log("result :", result);
+    //     this.setState({ cities: result });
+    //     console.log("from landing page ", this.state.cities);
+    //   });
   }
   render() {
-    const cities = this.state.cities;
+    const cities = this.props.cities;
+    console.log('cities :', cities);
     return (
       <div className="container-fluid App">
         <header className="col-12 ">
@@ -48,8 +54,20 @@ export default class Landing extends Component {
           {cities && <CarouselImg cities={cities} />}
         </div>
         {/* <AddCity cities={cities} /> */}
-        <Itinerary />
+        {/* <Itinerary /> */}
       </div>
     );
   }
 }
+const mapStateToProps = (state, ownProps) => {
+  console.log("mamToState", state);
+
+  return {
+    cities: state.cities.cities
+  };
+};
+const mapDispatchToProps = dispatch => ({
+  fetchCitiesAction: city => dispatch(fetchCitiesAction(city))
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Landing);
+
