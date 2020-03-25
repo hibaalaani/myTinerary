@@ -4,10 +4,9 @@ import PhotoWithCamera from "./PhotoWithCamera.jpg";
 import Circle from "../Circle.png";
 import CarouselImg from "./CarouselImg";
 import { Link } from "react-router-dom";
-import Itinerary from "./Itinerary";
-// import AddCity from "./AddCity";
-
-export default class Landing extends Component {
+import { fetchCitiesAction } from "../store/actions/cityActions";
+import { connect } from "react-redux";
+class Landing extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,18 +14,20 @@ export default class Landing extends Component {
     };
   }
   componentDidMount() {
-    fetch("http://localhost:5000/api/cities/all")
-      .then(res => {
-        return res.json();
-      })
-      .then(result => {
-        console.log("result :", result);
-        this.setState({ cities: result });
-        console.log("from landing page ", this.state.cities);
-      });
+    // fetch("http://localhost:5000/api/cities/all")
+    //   .then(res => {
+    //     return res.json();
+    //   })
+    //   .then(result => {
+    //     console.log("result :", result);
+    //     this.setState({ cities: result });
+    //     console.log("from landing page ", this.state.cities);
+    //   });
+    this.props.fetchCitiesAction();
   }
   render() {
-    const cities = this.state.cities;
+    const cities = this.props.cities;
+    console.log("cities22", cities);
     return (
       <div className="container-fluid App">
         <header className="col-12 ">
@@ -45,11 +46,19 @@ export default class Landing extends Component {
             Want to build your own MYtinerary ?
           </p>
 
-          {cities && <CarouselImg cities={cities} />}
+          {cities.length > 0 && <CarouselImg cities={cities} />}
         </div>
-        {/* <AddCity cities={cities} /> */}
-        <Itinerary />
       </div>
     );
   }
 }
+const mapStateToProps = (state, ownProps) => {
+  console.log("mamatoSTte", state);
+  return {
+    cities: state.cities.cities
+  };
+};
+const mapDispatchToProps = dispatch => ({
+  fetchCitiesAction: city => dispatch(fetchCitiesAction(city))
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Landing);

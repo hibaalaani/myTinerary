@@ -13,7 +13,7 @@ router.get("/all", (_req, res) => {
     .catch(err => console.log(err));
 });
 //this is how you implement a city route by specific city
-router.get("/city/:name", (req, res) => {
+router.get("/:name", (req, res) => {
   let itineraryRequested = req.params.name;
   itineraryModel
     .find({ name: itineraryRequested })

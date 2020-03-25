@@ -1,6 +1,6 @@
 export const FITCH_CITY = "FITCH_CITY";
 
-// I cleaned a bit your action, I was almost good, just a few probem with the .json() convertion and handeling the payload
+// I cleaned a bit your action, It was almost good, just a few probem with the .json() convertion and handeling the payload
 //it shuld work now ;)
 export const fetchCitiesAction = () => {
   return dispatch => {

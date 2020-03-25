@@ -65,7 +65,7 @@ export default class Header extends Component {
                     <Link to="/Login">Login </Link>
                   </DropdownItem>
                   <DropdownItem>
-                    <Link to="/create">Create Account </Link>
+                    <Link to="/SignUp">Sign Up </Link>
                   </DropdownItem>
                   {/* <DropdownItem divider /> */}
                   {/* <DropdownItem>Reset</DropdownItem> */}

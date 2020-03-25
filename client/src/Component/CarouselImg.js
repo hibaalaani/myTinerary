@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import InfiniteCarousel from "react-leaf-carousel";
+// import { fitchItinerariesAction } from "../store/actions/itineraryActions";
 export default class CarouselImg extends Component {
   constructor(props) {
     super(props);
@@ -8,6 +9,7 @@ export default class CarouselImg extends Component {
 
   render() {
     const cities = this.props.cities;
+    console.log("cities", cities);
     return (
       <div>
         <InfiniteCarousel
@@ -36,19 +38,20 @@ export default class CarouselImg extends Component {
           scrollOnDevice={true}
         >
           {cities.map((city, index) => {
+            console.log(city.picture);
             return (
+              // <Link to={"/" + city.name}>
               <div key={city.id}>
-                <Link to={"/Itineraries" + city.name}>
-                  <img
-                    className="imgCarsoul rounded card d-block w-100"
-                    // style={style.img}
-                    src={city.picture}
-                    alt=""
-                  />
+                <img
+                  className="imgCarsoul rounded card d-block w-100"
+                  //style={style.img}
+                  src={city.picture}
+                  alt=""
+                />
 
-                  <p className="p-4 mt-4 card-title">{city.name}</p>
-                </Link>
+                <p className="p-4 mt-4 card-title">{city.name}</p>
               </div>
+              // </Link>
             );
           })}
         </InfiniteCarousel>

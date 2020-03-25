@@ -22,7 +22,7 @@ const itinerarySchema = new mongoose.Schema({
     type: [String]
   },
   activities: {
-    type=[String]
+    type: [String]
   }
 });
 module.exports = mongoose.model("itinerary", itinerarySchema);

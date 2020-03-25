@@ -26,6 +26,7 @@ app.use(
 
 app.use("/api/cities", require("./routes/cities"));
 app.use("/api/itineraries", require("./routes/itinerary"));
+app.use("/api/activities", require("./routes/activity"));
 app.listen(port, () => {
   console.log("Server is running on " + port + "port");
 });

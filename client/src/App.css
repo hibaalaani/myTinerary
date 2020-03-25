@@ -55,6 +55,15 @@ body {
   width: 100px;
 }
 
+.itinerary {
+  margin: 0 auto;
+  background-color: #61dafb;
+}
+
+.itinerary img {
+  width: 100%
+}
+
 .footer {
   width: 50px;
   text-align: center;
@@ -73,6 +82,11 @@ body {
   /* display: inline-block; */
   margin: 20px auto;
   text-align: center;
+}
+
+.card-img {
+  width: 16rem;
+  height: 16rem;
 }
 
 .imgCarsoul {
