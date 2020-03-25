@@ -4,8 +4,17 @@ import PhotoWithCamera from "./PhotoWithCamera.jpg";
 import Circle from "../Circle.png";
 import CarouselImg from "./CarouselImg";
 import { Link } from "react-router-dom";
+<<<<<<< HEAD
 import { fetchCitiesAction } from "../store/actions/cityActions";
 import { connect } from "react-redux";
+=======
+import Itinerary from "./Itinerary";
+// import AddCity from "./AddCity";
+import { fetchCitiesAction } from "../store/actions/cityActions";
+import { connect } from "react-redux";
+
+
+>>>>>>> 11ae063289282a49cd4096dad0bec13360a33945
 class Landing extends Component {
   constructor(props) {
     super(props);
@@ -14,6 +23,11 @@ class Landing extends Component {
     };
   }
   componentDidMount() {
+<<<<<<< HEAD
+=======
+    this.props.fetchCitiesAction();
+
+>>>>>>> 11ae063289282a49cd4096dad0bec13360a33945
     // fetch("http://localhost:5000/api/cities/all")
     //   .then(res => {
     //     return res.json();
@@ -23,11 +37,18 @@ class Landing extends Component {
     //     this.setState({ cities: result });
     //     console.log("from landing page ", this.state.cities);
     //   });
+<<<<<<< HEAD
     this.props.fetchCitiesAction();
   }
   render() {
     const cities = this.props.cities;
     console.log("cities22", cities);
+=======
+  }
+  render() {
+    const cities = this.props.cities;
+    console.log('cities :', cities);
+>>>>>>> 11ae063289282a49cd4096dad0bec13360a33945
     return (
       <div className="container-fluid App">
         <header className="col-12 ">
@@ -48,12 +69,22 @@ class Landing extends Component {
 
           {cities.length > 0 && <CarouselImg cities={cities} />}
         </div>
+<<<<<<< HEAD
+=======
+        {/* <AddCity cities={cities} /> */}
+        {/* <Itinerary /> */}
+>>>>>>> 11ae063289282a49cd4096dad0bec13360a33945
       </div>
     );
   }
 }
 const mapStateToProps = (state, ownProps) => {
+<<<<<<< HEAD
   console.log("mamatoSTte", state);
+=======
+  console.log("mamToState", state);
+
+>>>>>>> 11ae063289282a49cd4096dad0bec13360a33945
   return {
     cities: state.cities.cities
   };
@@ -62,3 +93,7 @@ const mapDispatchToProps = dispatch => ({
   fetchCitiesAction: city => dispatch(fetchCitiesAction(city))
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Landing);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 11ae063289282a49cd4096dad0bec13360a33945

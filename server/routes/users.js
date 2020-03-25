@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const usersModel = require("../model/usersModel");
 
-/*get all cities*/
+/*get all users*/
 router.get("/all", (_req, res) => {
   usersModel
     .find({})
@@ -12,7 +12,7 @@ router.get("/all", (_req, res) => {
     })
     .catch(err => console.log(err));
 });
-//this is how you implement a city route by specific city
+//this is how you implement a users route by specific city
 router.get("/Login", (req, res) => {
   let usersRequested = req.params.Login;
   usersModel

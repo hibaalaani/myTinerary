@@ -30,12 +30,21 @@ function App() {
         <Link to="/AddCity"></Link>
         <Switch>
           <Route exact path="/" component={Landing} />
+<<<<<<< HEAD
           <Route path="/SignUp" component={SignUp} />
           <Route exact path="/Login" component={Login} />
           <Route exact path="/Cities" component={Cities} />
           <Route exact path="/AddCity" component={AddCity} />
           <Route exact path="/Itineraries" component={Itinerary} />
           <Route exact path="/Itineraries/:city" component={Itinerary} />
+=======
+          <Route exact path="/Create" component={Create} />
+          <Route exact path="/Login" component={Login} />
+          <Route exact path="/Cities" component={Cities} />
+          <Route exact path="/AddCity" component={AddCity} />
+          <Route exact path="/Itinerary" component={Itinerary} />
+          <Route exact path="/itineraries/:city" component={Itinerary} />
+>>>>>>> 11ae063289282a49cd4096dad0bec13360a33945
           <Route component={Notfound} />
         </Switch>
       </div>
