@@ -2,14 +2,7 @@ import React, { Component } from "react";
 import { Card, CardGroup } from "reactstrap";
 import { connect } from "react-redux";
 import { fetchCitiesAction } from "../store/actions/cityActions";
-<<<<<<< HEAD
 import { Link } from "react-router-dom";
-=======
-// import AddCity from "./AddCity";
-import { Link } from "react-router-dom";
-
-
->>>>>>> 11ae063289282a49cd4096dad0bec13360a33945
 class Cities extends Component {
   constructor() {
     super();
@@ -71,19 +64,11 @@ class Cities extends Component {
         {filterList &&
           filterList.map((city, index) => (
             <Link to={"itineraries/" + city.name}>
-<<<<<<< HEAD
               <div key={index} city={city}>
                 <div className="card">
                   <h3 className="card-title">{city.name}</h3>
                   <img className="card-img " src={city.picture} />
                 </div>
-=======
-
-              <div key={index} city={city}>
-                {/* <div> */}
-                <img className="card col-md-4" src={city.picture} />
-                {/* </div> */}
->>>>>>> 11ae063289282a49cd4096dad0bec13360a33945
               </div>
             </Link>
           ))}

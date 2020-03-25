@@ -9,14 +9,9 @@ class Itinerary extends Component {
     };
   }
   componentDidMount() {
-<<<<<<< HEAD
     const city = this.props.match.params.city;
 
     this.props.fetchItinerariesByCityName(city);
-=======
-    const city = this.props.match.params.city
-    // this.props.fitchItinerariesAction();
->>>>>>> 11ae063289282a49cd4096dad0bec13360a33945
   }
 
   filter() {
