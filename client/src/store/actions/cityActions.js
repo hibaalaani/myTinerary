@@ -34,6 +34,4 @@ export const fetchCitiesAction = () => {
   //       this.setState({ cities: result });
   //       console.log(this.state.cities);
   //     });
-
-  console.log("action");
 };

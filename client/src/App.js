@@ -2,7 +2,7 @@ import React from "react";
 
 import { Route, Link, BrowserRouter as Router, Switch } from "react-router-dom";
 import Landing from "./Component/Landing";
-import SignUp from "./Component/SignUp";
+import Users from "./Component/Users";
 import Login from "./Component/Login";
 import Cities from "./Component/Cities";
 import AddCity from "./Component/AddCity";
@@ -21,7 +21,7 @@ function App() {
       <div className="App">
         <Link to="/"></Link>
 
-        <Link to="/SignUp"></Link>
+        <Link to="/Users"></Link>
 
         <Link to="/login"></Link>
 
@@ -30,7 +30,7 @@ function App() {
         <Link to="/AddCity"></Link>
         <Switch>
           <Route exact path="/" component={Landing} />
-          <Route path="/SignUp" component={SignUp} />
+          <Route path="/Users" component={Users} />
           <Route exact path="/Login" component={Login} />
           <Route exact path="/Cities" component={Cities} />
           <Route exact path="/AddCity" component={AddCity} />

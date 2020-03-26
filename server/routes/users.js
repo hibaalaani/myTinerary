@@ -1,29 +1,68 @@
 const express = require("express");
 
 const router = express.Router();
-const usersModel = require("../model/usersModel");
+const userModel = require("../model/userModel");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+const myPlaintextPassword = "s0//P4$$w0rD";
+const someOtherPlaintextPassword = "not_bacon";
 
 /*get all users*/
 router.get("/all", (_req, res) => {
-  usersModel
+  userModel
     .find({})
     .then(users => {
       res.send(users);
     })
     .catch(err => console.log(err));
 });
-//this is how you implement a users route by specific city
-router.get("/Login", (req, res) => {
-  let usersRequested = req.params.Login;
-  usersModel
-    .findOne({ Login: usersRequested })
-    .then(Login => {
-      res.send(Login);
-    })
-    .catch(err => console.log(err));
+
+router.post("/register", async (req, res) => {
+  console.log(req.body);
+  //   const newUser = new userModel({
+  //     name: req.body.name,
+  //     email: req.body.email,
+  //     password: req.body.password,
+  //     picture: req.body.picture
+  //   });
+  //   newUser
+  //     .save()
+  //     .then(user => {
+  //       res.send(user);
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //       res.status(500).send("Server error");
+  //     });
+
+  //Check if this user already exisits
+  let user = await userModel.findOne({ email: req.body.email });
+  if (user) {
+    return res.status(400).send("That user already exisits!");
+  } else {
+    bcrypt.hash(req.body.password, saltRounds, async (err, hash) => {
+      // Store hash in your password DB.
+      // Insert the new user if they do not exist yet
+      user = new userModel({
+        name: req.body.name,
+        email: req.body.email,
+        password: hash,
+        picture: req.body.picture
+      });
+      await user.save();
+      res.send(user);
+    });
+    // Load hash from your password DB.
+    // bcrypt.compare(myPlaintextPassword, hash, function(err, result) {
+    //   result == true;
+    // });
+    // bcrypt.compare(someOtherPlaintextPassword, hash, function(err, result) {
+    //   result == false;
+    // });
+  }
 });
 
 router.get("/test", (req, res) => {
-  res.send({ msg: "Cities test route." });
+  res.send({ msg: "Users test route." });
 });
 module.exports = router;

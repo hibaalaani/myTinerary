@@ -28,7 +28,7 @@ class Itinerary extends Component {
   }
   render() {
     const filterList = this.filter();
-    const { itineraries } = this.props;
+    // const { itineraries } = this.props;
     return (
       <div>
         <h1>Our Itineraries</h1>

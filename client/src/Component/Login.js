@@ -12,7 +12,11 @@ export default class Login extends Component {
   };
   handelSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
+    const userData = {
+      email: this.state.email,
+      password: this.state.password
+    };
+    console.log(userData);
   };
   render() {
     return (
