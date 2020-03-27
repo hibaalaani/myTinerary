@@ -45,7 +45,7 @@ export default class Users extends Component {
     axios
       .post("http://localhost:5000/api/users/register", { newUser })
       .then(_res => {
-        console.log("response", newUser);
+        // console.log("response", newUser);
         this.setState({
           users: [...this.state, newUser]
         });
