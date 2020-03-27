@@ -33,7 +33,7 @@ export default class Users extends Component {
     });
   };
   handelSubmit = e => {
-    this.props.fetchUsersAction();
+    // this.props.fetchUsersAction();
     e.preventDefault();
     // const users = this.props.params.match.id;
     const newUser = {
@@ -44,8 +44,8 @@ export default class Users extends Component {
     };
     axios
       .post("http://localhost:5000/api/users/register", { newUser })
-      .then(res => {
-        console.log("response", res);
+      .then(_res => {
+        console.log("response", newUser);
         this.setState({
           users: [...this.state, newUser]
         });

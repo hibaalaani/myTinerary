@@ -11,7 +11,7 @@ function itineraryReducer(state = initialState, action) {
     case "FETCH_ITINERARIES_SUCCESS":
       console.log("FETCH_ITINERARIES_SUCCESS", action);
       return { ...state, itineraries: action.payload, err: "" };
-      return state;
+
     case "FETCH_ITINERARIES_ERROR":
       console.log("FETCH_ITINERARIES_ERROR", action);
       return { ...state, err: action.payload };

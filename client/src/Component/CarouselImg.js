@@ -1,12 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import InfiniteCarousel from "react-leaf-carousel";
 // import { fitchItinerariesAction } from "../store/actions/itineraryActions";
 export default class CarouselImg extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const cities = this.props.cities;
     console.log("cities", cities);

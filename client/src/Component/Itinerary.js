@@ -46,6 +46,7 @@ class Itinerary extends Component {
               <img
                 className="card-body  align-center"
                 src={itinerary.profile}
+                alt={itinerary.name}
               />
               <div className="text-light pb-3">
                 <h4>
