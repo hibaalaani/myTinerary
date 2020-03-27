@@ -69,8 +69,6 @@ export default class Users extends Component {
           }
         });
     }
-
-    console.log("new user", newUser);
   };
 
   render() {
