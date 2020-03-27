@@ -36,25 +36,39 @@ export default class Users extends Component {
     // this.props.fetchUsersAction();
     e.preventDefault();
     // const users = this.props.params.match.id;
-    const newUser = {
-      name: this.state.name,
-      email: this.state.email,
-      password: this.state.password,
-      picture: this.state.picture
-    };
-    axios
-      .post("http://localhost:5000/api/users/register", { newUser })
-      .then(_res => {
-        // console.log("response", newUser);
-        this.setState({
-          users: [...this.state, newUser]
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      });
 
-    console.log("new user", newUser);
+    //finish the condition including all the fields
+    if (this.state.name === "" || this.state.email === "") {
+      //alert that says that user should fill all the fields
+    } else {
+      const newUser = {
+        name: this.state.name,
+        email: this.state.email,
+        password: this.state.password,
+        picture: this.state.picture
+      };
+      axios
+        .post("http://localhost:5000/api/users/register", newUser)
+        .then(res => {
+          console.log("response", res);
+          if (res.status === 200) {
+            //send the user to his account page
+          }
+          this.setState({
+            users: [...this.state, newUser]
+          });
+        })
+        .catch(error => {
+          console.log(error.response);
+          if (error.response) {
+            if (error.response.status === 409) {
+              alert("This email is already in use");
+            } else {
+              //alert with something else
+            }
+          }
+        });
+    }
   };
 
   render() {

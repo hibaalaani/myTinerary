@@ -38,19 +38,25 @@ router.post("/register", async (req, res) => {
   //Check if this user already exisits
   let user = await userModel.findOne({ email: req.body.email });
   if (user) {
-    return res.status(400).send("That user already exisits!");
+    return res.status(409).send("That user already exisits!");
   } else {
     bcrypt.hash(req.body.password, saltRounds, async (err, hash) => {
       // Store hash in your password DB.
       // Insert the new user if they do not exist yet
-      user = new userModel({
-        name: req.body.name,
-        email: req.body.email,
-        password: hash,
-        picture: req.body.picture
-      });
-      await user.save();
-      res.send(user);
+      try {
+        const user = new userModel({
+          name: req.body.name,
+          email: req.body.email,
+          password: hash,
+          picture: req.body.picture
+        });
+        await user.save();
+        console.log("user saved");
+        res.send(user);
+      } catch (error) {
+        console.log("in catch block");
+        res.send(error);
+      }
     });
     // Load hash from your password DB.
     // bcrypt.compare(myPlaintextPassword, hash, function(err, result) {
