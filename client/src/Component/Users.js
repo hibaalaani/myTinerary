@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
-export default class Users extends Component {
+import { connect } from 'react-redux'
+import { register } from '../store/actions/usersAction'
+class Users extends Component {
   constructor() {
     super();
     this.state = {
@@ -51,28 +53,29 @@ export default class Users extends Component {
         password: this.state.password,
         picture: this.state.picture
       };
-      axios
-        .post("http://localhost:5000/api/users/register", newUser)
-        .then(res => {
-          console.log("response", res);
-          if (res.status === 200) {
-            //send the user to his account page
-            window.location = "/UserAccount";
-          }
-          this.setState({
-            users: [...this.state, newUser]
-          });
-        })
-        .catch(error => {
-          console.log("error" + error.response);
-          if (error.response) {
-            if (error.response.status === 409) {
-              alert("This email is already in use");
-            } else {
-              //alert with something else
-            }
-          }
-        });
+      this.props.register(newUser);
+      // axios
+      //   .post("http://localhost:5000/api/users/register", newUser)
+      //   .then(res => {
+      //     console.log("response", res);
+      //     if (res.status === 200) {
+      //       //send the user to his account page
+      //       window.location = "/UserAccount";
+      //     }
+      //     this.setState({
+      //       users: [...this.state, newUser]
+      //     });
+      //   })
+      //   .catch(error => {
+      //     console.log("error" + error.response);
+      //     if (error.response) {
+      //       if (error.response.status === 409) {
+      //         alert("This email is already in use");
+      //       } else {
+      //         //alert with something else
+      //       }
+      //     }
+      //   });
     }
   };
 
@@ -113,3 +116,15 @@ export default class Users extends Component {
     );
   }
 }
+const mapStateToProps = (state, ownProps) => {
+  console.log("mamToState", state);
+
+  return {
+    user: state.users
+  };
+};
+const mapDispatchToProps = dispatch => ({
+  register: newUser => dispatch(register(newUser))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Users)
