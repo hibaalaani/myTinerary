@@ -11,7 +11,7 @@ function usersReducers(state = initialState, action) {
     case "FETCH_USERS_SUCCESS":
       console.log("FETCH_USERS_SUCCESS", action);
       return { ...state, users: action.payload, err: "" };
-      return state;
+
     case "FETCH_USERS_ERROR":
       console.log("FETCH_ITINERARIES_ERROR", action);
       return { ...state, err: action.payload };

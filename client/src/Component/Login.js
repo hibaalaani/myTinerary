@@ -12,11 +12,19 @@ export default class Login extends Component {
   };
   handelSubmit = e => {
     e.preventDefault();
-    const userData = {
-      email: this.state.email,
-      password: this.state.password
-    };
-    console.log(userData);
+    if (this.state.email === "" || this.state.password === "") {
+      return alert("you need to fill both field");
+    } else {
+      const userData = {
+        email: this.state.email,
+        password: this.state.password
+      };
+      console.log(userData);
+    }
+    this.setState({
+      email: "",
+      password: ""
+    });
   };
   render() {
     return (

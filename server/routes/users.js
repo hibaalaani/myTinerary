@@ -1,9 +1,13 @@
 const express = require("express");
-
+const key = require("../keys");
+const jwt = require("jsonwebtoken");
 const router = express.Router();
 const userModel = require("../model/userModel");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
+// Load input validation
+const validateRegisterInput = require("../validation/register");
+const validateLoginInput = require("../validation/login");
 const myPlaintextPassword = "s0//P4$$w0rD";
 const someOtherPlaintextPassword = "not_bacon";
 
@@ -19,29 +23,19 @@ router.get("/all", (_req, res) => {
 
 router.post("/register", async (req, res) => {
   console.log(req.body);
-  //   const newUser = new userModel({
-  //     name: req.body.name,
-  //     email: req.body.email,
-  //     password: req.body.password,
-  //     picture: req.body.picture
-  //   });
-  //   newUser
-  //     .save()
-  //     .then(user => {
-  //       res.send(user);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //       res.status(500).send("Server error");
-  //     });
+  // const { errors, isValid } = validateRegisterInput(req.body);
+  // // Check validation
+  // if (!isValid) {
+  //   return res.status(400).json(errors);
+  // }
 
   //Check if this user already exisits
   let user = await userModel.findOne({ email: req.body.email });
   if (user) {
     return res.status(409).send("That user already exisits!");
   } else {
+    // Store hash in your password DB.
     bcrypt.hash(req.body.password, saltRounds, async (err, hash) => {
-      // Store hash in your password DB.
       // Insert the new user if they do not exist yet
       try {
         const user = new userModel({
@@ -58,14 +52,59 @@ router.post("/register", async (req, res) => {
         res.send(error);
       }
     });
-    // Load hash from your password DB.
-    // bcrypt.compare(myPlaintextPassword, hash, function(err, result) {
-    //   result == true;
-    // });
-    // bcrypt.compare(someOtherPlaintextPassword, hash, function(err, result) {
-    //   result == false;
-    // });
+
+    ///////login user
+    router.post("/login", async (req, res) => {
+      console.log(req.body);
+      // Form validation
+      const { errors, isValid } = validateLoginInput(req.body);
+      // Check validation
+      if (!isValid) {
+        return res.status(400).json(errors);
+      }
+      const email = req.body.email;
+      const password = req.body.password;
+      // Find user by email
+      userModel.findOne({ email }).then(user => {
+        // Check if user exists
+        if (!user) {
+          return res.status(404).json({ emailnotfound: "Email not found" });
+        }
+        // Check password
+        bcrypt.compare(password, user.password).then(isMatch => {
+          if (isMatch) {
+            // User matched
+            // Create JWT Payload
+            const payload = {
+              id: user.id,
+              name: user.name
+            };
+            // Sign token
+            jwt.sign(
+              payload,
+              keys.secretOrKey,
+              {
+                expiresIn: 31556926 // 1 year in seconds
+              },
+              (err, token) => {
+                res.json({
+                  success: true,
+                  token: "Bearer " + token
+                });
+              }
+            );
+          } else {
+            return res
+              .status(400)
+              .json({ passwordincorrect: "Password incorrect" });
+          }
+        });
+      });
+    });
   }
+});
+router.get("/Account", (req, res) => {
+  res.send("wellcom");
 });
 
 router.get("/test", (req, res) => {

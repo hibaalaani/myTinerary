@@ -38,8 +38,12 @@ export default class Users extends Component {
     // const users = this.props.params.match.id;
 
     //finish the condition including all the fields
-    if (this.state.name === "" || this.state.email === "") {
-      //alert that says that user should fill all the fields
+    if (
+      this.state.name === "" ||
+      this.state.email === "" ||
+      this.state.password === ""
+    ) {
+      alert("You should fill all the fields");
     } else {
       const newUser = {
         name: this.state.name,
@@ -53,13 +57,14 @@ export default class Users extends Component {
           console.log("response", res);
           if (res.status === 200) {
             //send the user to his account page
+            window.location = "/UserAccount";
           }
           this.setState({
             users: [...this.state, newUser]
           });
         })
         .catch(error => {
-          console.log(error.response);
+          console.log("error" + error.response);
           if (error.response) {
             if (error.response.status === 409) {
               alert("This email is already in use");
