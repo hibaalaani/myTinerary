@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { fetchUsersAction } from "../store/actions/usersAction";
 export class UserAccount extends Component {
   constructor(props) {
@@ -28,5 +29,15 @@ export class UserAccount extends Component {
     );
   }
 }
+const mapStateToProps = (state, ownProps) => {
+  console.log("mamToState", state);
 
-export default UserAccount;
+  return {
+    user: state.users
+  };
+};
+const mapDispatchToProps = dispatch => ({
+  // register: newUser => dispatch(register(newUser))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserAccount)

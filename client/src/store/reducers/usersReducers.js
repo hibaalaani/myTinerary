@@ -1,4 +1,6 @@
 const initialState = {
+  token: '',
+  isLoggedin: false,
   users: [],
   err: ""
 };
@@ -15,6 +17,12 @@ function usersReducers(state = initialState, action) {
     case "FETCH_USERS_ERROR":
       console.log("FETCH_ITINERARIES_ERROR", action);
       return { ...state, err: action.payload };
+    case "LOGIN_SUCCESS":
+      return {
+        ...state,
+        token: action.payload.data.token,
+        isLoggedin: true
+      };
     default:
       return state;
   }
