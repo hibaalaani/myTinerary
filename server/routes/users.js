@@ -5,6 +5,7 @@ const router = express.Router();
 const userModel = require("../model/userModel");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
+const passport = require("passport");
 // Load input validation
 const validateRegisterInput = require("../validation/register");
 const validateLoginInput = require("../validation/login");
@@ -105,7 +106,19 @@ router.post("/login", async (req, res) => {
   });
 });
 
-/* router.get("/google", (req, res) => {});
+router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    userModel
+      .findOne({ _id: req.user.id })
+      .then(user => {
+        res.json(user);
+      })
+      .catch(err => res.status(404).json({ error: "User does not exist!" }));
+  }
+);
+// router.get("/google", (req, res) => {});
 router.get(
   "/auth/google",
   passport.authenticate("google", { scope: ["profile"] })
@@ -118,7 +131,7 @@ router.get(
     // Successful authentication, redirect home.
     res.redirect("/");
   }
-); */
+);
 router.get("/redirect", (req, res) => {});
 
 router.get("/Account", (req, res) => {
