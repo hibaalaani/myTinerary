@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
+const passport = require("passport");
 
 const db = require("./keys").mongoURI;
 
@@ -22,12 +23,17 @@ app.use(
     extended: true
   })
 ); // for parsing application/x-www-form-urlencoded
-
+// Passport middleware
+app.use(passport.initialize());
+// // Passport config
+require("./passport")(passport);
 app.use("/api/cities", require("./routes/cities"));
 app.use("/api/itineraries", require("./routes/itinerary"));
 // app.use("/api/activities", require("./routes/activity"));
 app.use("/api/users", require("./routes/users"));
-app.use("/api/users/register", require("./routes/users"));
+// app.use("/api/users/login", require("./routes/users"));
+
+// app.use("/api/users/register", require("./routes/users"));
 app.listen(port, () => {
   console.log("Server is running on " + port + "port");
 });

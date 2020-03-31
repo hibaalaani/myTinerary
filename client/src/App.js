@@ -12,6 +12,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Notfound from "./Component/Notfound";
 import Header from "./Component/Header";
+import UserAccount from "./Component/UserAccount";
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
         <Link to="/"></Link>
 
         <Link to="/Users"></Link>
-
+        <Link to="/UserAccount"></Link>
         <Link to="/login"></Link>
 
         <Link to="/Cities"></Link>
@@ -31,6 +32,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Landing} />
           <Route path="/Users" component={Users} />
+          <Route path="/UserAccount" component={UserAccount} />
           <Route exact path="/Login" component={Login} />
           <Route exact path="/Cities" component={Cities} />
           <Route exact path="/AddCity" component={AddCity} />

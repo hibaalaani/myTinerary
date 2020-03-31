@@ -11,7 +11,7 @@ function citiesReducer(state = initialState, action) {
     case "FETCH_CITIES_SUCCESS":
       console.log("FETCH_CITIES_SUCCESS", action);
       return { ...state, cities: action.payload, err: "" };
-      return state;
+
     case "FETCH_CITIES_ERROR":
       console.log("FETCH_CITIES_ERROR", action);
       return { ...state, err: action.payload };
