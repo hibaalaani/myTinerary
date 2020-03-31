@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import axios from "axios";
-import { connect } from 'react-redux'
-import { register } from '../store/actions/usersAction'
+import { connect } from "react-redux";
+import { register } from "../store/actions/usersAction";
 class Users extends Component {
   constructor() {
     super();
@@ -53,6 +52,7 @@ class Users extends Component {
         password: this.state.password,
         picture: this.state.picture
       };
+      /////fetch from redux
       this.props.register(newUser);
       // axios
       //   .post("http://localhost:5000/api/users/register", newUser)
@@ -127,4 +127,4 @@ const mapDispatchToProps = dispatch => ({
   register: newUser => dispatch(register(newUser))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Users)
+export default connect(mapStateToProps, mapDispatchToProps)(Users);

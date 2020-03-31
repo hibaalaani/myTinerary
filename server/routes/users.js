@@ -53,8 +53,7 @@ router.post("/register", async (req, res) => {
       }
     });
   }
-})
-
+});
 
 ///////login user
 router.post("/login", async (req, res) => {
@@ -70,7 +69,7 @@ router.post("/login", async (req, res) => {
   // Find user by email
   userModel.findOne({ email }).then(user => {
     // Check if user exists
-    console.log('user', user)
+    console.log("user", user);
     if (!user) {
       return res.status(404).json({ emailnotfound: "Email not found" });
     }
@@ -106,6 +105,21 @@ router.post("/login", async (req, res) => {
   });
 });
 
+/* router.get("/google", (req, res) => {});
+router.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["profile"] })
+);
+
+router.get(
+  "/auth/google/callback",
+  passport.authenticate("google", { failureRedirect: "/login" }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect("/");
+  }
+); */
+router.get("/redirect", (req, res) => {});
 
 router.get("/Account", (req, res) => {
   res.send("wellcom");
