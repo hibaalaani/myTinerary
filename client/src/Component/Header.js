@@ -72,7 +72,7 @@ export default class Header extends Component {
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
-            <Form inline>
+            {/* <Form inline>
               <FormControl
                 value={this.state.search}
                 onChange={this.handleChangeChild}
@@ -85,8 +85,8 @@ export default class Header extends Component {
                 onChange={this.handleChangeChild}
               >
                 Search
-              </Button>
-            </Form>
+              </Button> */}
+            {/* </Form> */}
           </Collapse>
         </Navbar>
       </div>

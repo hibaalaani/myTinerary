@@ -62,12 +62,14 @@ class Login extends Component {
           </form>
         )}
         {/* <Link to="/google"> */}
-        <button
-          className="btn btn-primary"
-          href="http://localhost:5000/api/users/auth/google"
-        >
-          Login In With Google
-        </button>
+        <a href="http://localhost:5000/api/users/auth/google">
+          <button
+            className="btn btn-primary"
+            // href="http://localhost:5000/api/users/auth/google"
+          >
+            Login In With Google
+          </button>
+        </a>
         {/* </Link> */}
       </div>
     );

@@ -56,7 +56,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-///////login user
+////////////////////////////////login user
 router.post("/login", async (req, res) => {
   console.log(req.body);
   // Form validation
@@ -105,9 +105,9 @@ router.post("/login", async (req, res) => {
     });
   });
 });
-
+///////////authentication forthe user
 router.get(
-  "/",
+  "/login",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     userModel
@@ -128,11 +128,12 @@ router.get(
   "/auth/google/callback",
   passport.authenticate("google", { failureRedirect: "/login" }),
   function(req, res) {
+    console.log(req);
     // Successful authentication, redirect home.
     res.redirect("/");
   }
 );
-router.get("/redirect", (req, res) => {});
+// router.get("/redirect", (req, res) => {});
 
 router.get("/Account", (req, res) => {
   res.send("wellcom");

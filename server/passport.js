@@ -26,10 +26,11 @@ module.exports = passport => {
       {
         clientID:
           "352999401573-jcep0lnj6ujsubt1kanrted2bv96e307.apps.googleusercontent.com",
-        clientSecret: " NDZEvxFKhQpoijBBXX-_Gzcl",
-        callbackURL: "http://localhost:5000/users/auth/google/callback"
+        clientSecret: "NDZEvxFKhQpoijBBXX-_Gzcl",
+        callbackURL: "http://localhost:5000/api/users/auth/google/callback"
       },
       function(accessToken, refreshToken, profile, cb) {
+        console.log(profile);
         User.findOrCreate({ googleId: profile.id }, function(err, user) {
           return cb(err, user);
         });

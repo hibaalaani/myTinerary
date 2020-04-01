@@ -1,5 +1,6 @@
 body {
-  margin: 0 5vw;
+  margin: 0;
+  background-color: #b2b7be;
 }
 
 .App {
@@ -78,15 +79,17 @@ body {
   position: fixed;
   height: 18rem;
   float: left;
-  padding: 2%;
+  background-color: #d2dbe7;
+
   /* display: inline-block; */
-  margin: 20px auto;
+  margin: 3%;
   text-align: center;
 }
 
 .card-img {
   width: 16rem;
   height: 16rem;
+
 }
 
 .imgCarsoul {
@@ -101,10 +104,8 @@ body {
 }
 
 /* .background {
-  /* background-image: url(PhotoWithCamera.jpg) no repeat; */
-/* background-size: cover;
-width: 100%;
-background-color: #61dafb;
-}
 
-*/
+  background-size: cover;
+  width: 100%;
+  background-color: #61dafb;
+} */
