@@ -30,7 +30,7 @@ module.exports = passport => {
         callbackURL: "http://localhost:5000/api/users/auth/google/callback"
       },
       function(accessToken, refreshToken, profile, cb) {
-        console.log(profile);
+        console.log("profile", profile);
         User.findOrCreate({ googleId: profile.id }, function(err, user) {
           return cb(err, user);
         });

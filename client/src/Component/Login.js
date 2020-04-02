@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { login } from "../store/actions/usersAction";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 class Login extends Component {
   state = {
@@ -45,7 +47,7 @@ class Login extends Component {
                 <label htmlFor="email">email</label>
                 <input type="email" id="email" onChange={this.handelChange} />
               </div>
-              <div class="col-md-4">
+              <div className="col-md-4">
                 <label htmlFor="password">password</label>
                 <input
                   type="password"
@@ -62,21 +64,20 @@ class Login extends Component {
           </form>
         )}
         {/* <Link to="/google"> */}
-        <a href="http://localhost:5000/api/users/auth/google">
-          <button
-            className="btn btn-primary"
-            // href="http://localhost:5000/api/users/auth/google"
-          >
-            Login In With Google
-          </button>
-        </a>
+        <button
+          className="btn btn-primary"
+          href="http://localhost:5000/api/users/auth/google"
+        >
+          <FontAwesomeIcon icon={faGoogle} className="mr-2 " />
+          Login In With Google
+        </button>
         {/* </Link> */}
       </div>
     );
   }
 }
 const mapStateToProps = state => {
-  console.log("mamToState", state);
+  console.log("mapToState", state);
   return {
     user: state.users
   };

@@ -40,4 +40,4 @@ const mapDispatchToProps = dispatch => ({
   // register: newUser => dispatch(register(newUser))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserAccount)
+export default connect(mapStateToProps, mapDispatchToProps)(UserAccount);
