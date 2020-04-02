@@ -29,12 +29,27 @@ module.exports = passport => {
         clientSecret: "NDZEvxFKhQpoijBBXX-_Gzcl",
         callbackURL: "http://localhost:5000/api/users/auth/google/callback"
       },
-      function(accessToken, refreshToken, profile, cb) {
+      function (accessToken, refreshToken, profile, cb) {
         console.log(profile);
-        User.findOrCreate({ googleId: profile.id }, function(err, user) {
-          return cb(err, user);
-        });
-      }
-    )
-  );
-};
+        userModel.findOne({ googleId: profile.id }).then((currentUser) => {
+          if (currentUser) {
+            // already have this user
+            console.log('user is: ', currentUser);
+            done(null, currentUser);
+          } else {
+            // if not, create user in our db
+            console.log('new user');
+            //add user in mongoDB acording to your user model...
+            new userModel({
+              //for example
+              // name: profile.displayName,
+              // avatar: profile.photos[0].value,
+              // email: profile.emails[0].value,
+            }).save().then((newUser) => {
+              console.log('created new user: ', newUser);
+              done(null, newUser);
+            });
+          }
+        })
+      }));
+}
