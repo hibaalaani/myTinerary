@@ -1,4 +1,5 @@
 const JwtStrategy = require("passport-jwt").Strategy;
+const passport = require('passport');
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 var GoogleStrategy = require("passport-google-oauth20").Strategy;
 const mongoose = require("mongoose");
@@ -7,6 +8,18 @@ const keys = require("./keys");
 const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = keys.secretOrKey;
+
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  userModel.findById(id).then((user) => {
+    done(null, user);
+  });
+});
+
 module.exports = passport => {
   passport.use(
     new JwtStrategy(opts, (jwt_payload, done) => {
@@ -29,22 +42,22 @@ module.exports = passport => {
         clientSecret: "NDZEvxFKhQpoijBBXX-_Gzcl",
         callbackURL: "http://localhost:5000/api/users/auth/google/callback"
       },
-      function (accessToken, refreshToken, profile, cb) {
+      function (accessToken, refreshToken, profile, done) {
         console.log(profile);
-        userModel.findOne({ googleId: profile.id }).then((currentUser) => {
-          if (currentUser) {
+        userModel.findOne({ email: profile.emails[0].value }).then(user => {
+          if (user) {
             // already have this user
-            console.log('user is: ', currentUser);
-            done(null, currentUser);
+            console.log('user is: ', user);
+            done(null, user);
           } else {
             // if not, create user in our db
             console.log('new user');
             //add user in mongoDB acording to your user model...
             new userModel({
-              //for example
-              // name: profile.displayName,
-              // avatar: profile.photos[0].value,
-              // email: profile.emails[0].value,
+              name: profile.displayName,
+              picture: profile.photos[0].value,
+              email: profile.emails[0].value,
+              password: ""
             }).save().then((newUser) => {
               console.log('created new user: ', newUser);
               done(null, newUser);
