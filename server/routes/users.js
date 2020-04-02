@@ -37,6 +37,7 @@ router.post("/register", async (req, res) => {
   } else {
     // Store hash in your password DB.
     bcrypt.hash(req.body.password, saltRounds, async (err, hash) => {
+      console.log(req);
       // Insert the new user if they do not exist yet
       try {
         const user = new userModel({
@@ -107,7 +108,7 @@ router.post("/login", async (req, res) => {
 });
 ///////////authentication forthe user
 router.get(
-  "/login",
+  "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     userModel

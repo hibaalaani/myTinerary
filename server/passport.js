@@ -42,6 +42,7 @@ module.exports = passport => {
         clientSecret: "NDZEvxFKhQpoijBBXX-_Gzcl",
         callbackURL: "http://localhost:5000/api/users/auth/google/callback"
       },
+
       function (accessToken, refreshToken, profile, done) {
         console.log(profile);
         userModel.findOne({ email: profile.emails[0].value }).then(user => {
@@ -66,3 +67,4 @@ module.exports = passport => {
         })
       }));
 }
+

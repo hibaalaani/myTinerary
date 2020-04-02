@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
+import login from "../store/actions/usersAction";
 import {
   Collapse,
   Navbar,
@@ -28,8 +29,10 @@ export default class Header extends Component {
 
   handleChangeChild = e => {
     console.log("e from header", e);
+    const user = this.props.user.token;
     //console.log("this.props", this.props);
-    this.props.callbackFromParent(e);
+    // this.props.callbackFromParent(e);
+    this.props.login(user);
   };
 
   render() {
@@ -72,21 +75,20 @@ export default class Header extends Component {
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
-            {/* <Form inline>
-              <FormControl
+            <Form inline>
+              {/* <FormControl
                 value={this.state.search}
                 onChange={this.handleChangeChild}
                 type="text"
                 placeholder="Search"
                 className="mr-sm-2"
-              />
-              <Button
-                variant="outline-success"
-                onChange={this.handleChangeChild}
-              >
+              />*/}
+              <Button variant="outline-success ">
+                {" "}
+                {this.props.user}
                 Search
-              </Button> */}
-            {/* </Form> */}
+              </Button>
+            </Form>
           </Collapse>
         </Navbar>
       </div>

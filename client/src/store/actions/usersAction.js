@@ -1,7 +1,7 @@
 // I cleaned a bit your action, It was almost good, just a few probem with the .json() convertion and handeling the payload
 //it shuld work now ;)
-import axios from 'axios'
-
+import axios from "axios";
+import { Router } from "react-router-dom";
 
 export const fetchUsersAction = () => {
   return dispatch => {
@@ -21,7 +21,7 @@ export const fetchUsersAction = () => {
   console.log("action");
 };
 
-export const register = (newUser) => {
+export const register = newUser => {
   return dispatch => {
     axios
       .post("http://localhost:5000/api/users/register", newUser)
@@ -44,11 +44,10 @@ export const register = (newUser) => {
         }
       });
     //add the full url of your back end
+  };
+};
 
-  }
-}
-
-export const login = (user) => {
+export const login = user => {
   return dispatch => {
     axios
       .post("http://localhost:5000/api/users/login", user)
@@ -71,6 +70,5 @@ export const login = (user) => {
         }
       });
     //add the full url of your back end
-
-  }
-}
+  };
+};

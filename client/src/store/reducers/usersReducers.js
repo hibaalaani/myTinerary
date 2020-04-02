@@ -1,8 +1,9 @@
 const initialState = {
-  token: '',
+  token: "",
   isLoggedin: false,
   users: [],
-  err: ""
+  err: "",
+  isLoggedOut: true
 };
 
 //you had some issues acting the payload to pass data from your action to your reducer
@@ -21,7 +22,8 @@ function usersReducers(state = initialState, action) {
       return {
         ...state,
         token: action.payload.data.token,
-        isLoggedin: true
+        isLoggedin: true,
+        isLoggedOut: false
       };
     default:
       return state;
