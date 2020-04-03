@@ -1,7 +1,6 @@
 // I cleaned a bit your action, It was almost good, just a few probem with the .json() convertion and handeling the payload
 //it shuld work now ;)
 import axios from "axios";
-import { Router } from "react-router-dom";
 
 export const fetchUsersAction = () => {
   return dispatch => {
@@ -17,8 +16,6 @@ export const fetchUsersAction = () => {
         dispatch({ type: "FETCH_USERS_ERROR", payload: err });
       });
   };
-
-  console.log("action");
 };
 
 export const register = newUser => {
@@ -37,9 +34,10 @@ export const register = newUser => {
         console.log("error" + error.response);
         if (error.response) {
           if (error.response.status === 409) {
-            alert("loggin error");
+            alert("Register error");
           } else {
             //alert with something else
+            alert("Be Sure From Your Register");
           }
         }
       });

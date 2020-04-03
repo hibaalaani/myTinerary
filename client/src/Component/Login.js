@@ -40,42 +40,90 @@ class Login extends Component {
         {this.props.user.isLoggedin ? (
           <p>{this.props.user.token}</p>
         ) : (
-          <form className="form-group" onSubmit={this.handelSubmit}>
-            <h5 className="card-title">Sign In</h5>
-            <div className="row block">
-              <div className="col-md-4">
-                <label htmlFor="email">email</label>
-                <input type="email" id="email" onChange={this.handelChange} />
-              </div>
-              <div className="col-md-4">
-                <label htmlFor="password">password</label>
+          //   <form className="form-group" onSubmit={this.handelSubmit}>
+          //     <h5 className="card-title">Sign In</h5>
+          //     <div className="row block">
+          //       <div className="col-md-4">
+          //         <label htmlFor="email">email</label>
+          //         <input type="email" id="email" onChange={this.handelChange} />
+          //       </div>
+          //       <div className="col-md-4">
+          //         <label htmlFor="password">password</label>
+          //         <input
+          //           type="password"
+          //           id="password"
+          //           onChange={this.handelChange}
+          //         />
+          //       </div>
+          //       <div className="col-md-4">
+          //         <div className="form-group">
+          //           <button>login</button>
+          //         </div>
+          //       </div>
+          //     </div>
+          //   </form>
+          // )}
+          // {/* <Link to="/google"> */}
+          // <button
+          //   className="btn btn-primary"
+          //   href="http://localhost:5000/api/users/auth/google"
+          // >
+          //   <FontAwesomeIcon icon={faGoogle} className="mr-2 " />
+          //   Login In With Google
+          // </button>
+          // {/* </Link> */}
+          <form className="form-horizontal" onSubmit={this.handelSubmit}>
+            <div className="form-group">
+              <label
+                htmlFor="inputEmail3"
+                className="col-sm-2 control-label"
+              ></label>
+              <div className="col-sm-10">
                 <input
-                  type="password"
-                  id="password"
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  placeholder="Email"
                   onChange={this.handelChange}
                 />
               </div>
-              <div className="col-md-4">
-                <div className="form-group">
-                  <button>login</button>
-                </div>
+            </div>
+            <div className="form-group">
+              <label
+                htmlFor="inputPassword3"
+                className="col-sm-2 control-label"
+              ></label>
+              <div className="col-sm-10">
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  placeholder="Password"
+                  onChange={this.handelChange}
+                />
               </div>
+            </div>
+            <div className="form-group row">
+              <div className="col-sm-offset-2 col-sm-10 align-items-center">
+                <button>Sign in</button>
+              </div>
+
+              {/* <div className="form-group"> */}
             </div>
           </form>
         )}
-        {/* <Link to="/google"> */}
-        <button
-          className="btn btn-primary"
-          href="http://localhost:5000/api/users/auth/google"
-        >
-          <FontAwesomeIcon icon={faGoogle} className="mr-2 " />
-          Login In With Google
-        </button>
-        {/* </Link> */}
+        <div className="col-sm-offset-2 col-sm-10 align-items-center">
+          <button href="http://localhost:5000/api/users/auth/google">
+            {" "}
+            <FontAwesomeIcon icon={faGoogle} className="mr-2 " />
+            Sign In With Google
+          </button>
+        </div>
       </div>
     );
   }
 }
+
 const mapStateToProps = state => {
   console.log("mapToState", state);
   return {

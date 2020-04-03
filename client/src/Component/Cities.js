@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, CardGroup } from "reactstrap";
+// import { Card, CardGroup } from "reactstrap";
 import { connect } from "react-redux";
 import { fetchCitiesAction } from "../store/actions/cityActions";
 import { Link } from "react-router-dom";
@@ -67,7 +67,7 @@ class Cities extends Component {
               <div key={index} city={city}>
                 <div className="card">
                   <h3 className="card-title">{city.name}</h3>
-                  <img className="card-img " src={city.picture} />
+                  <img className="card-img " src={city.picture} alt="" />
                 </div>
               </div>
             </Link>

@@ -122,22 +122,33 @@ router.get(
 // router.get("/google", (req, res) => {});
 router.get(
   "/auth/google",
-  passport.authenticate("google", { scope: ['email', 'profile'] })
+  passport.authenticate("google", { scope: ["email", "profile"] })
 );
 
 router.get(
   "/auth/google/callback",
   passport.authenticate("google", { failureRedirect: "/login" }),
-  function (req, res) {
+  function(req, res) {
     console.log(req.user);
 
     //generate token
-    res.send(req.user)
+    res.send(req.user);
     // Successful authentication, redirect home.
     res.redirect("/");
   }
 );
 // router.get("/redirect", (req, res) => {});
+///////////////add route for users favoriate//////////
+
+router.get("/favourite", (req, res) => {
+  userModel
+
+    .findOne({ favourite: req.body.favourite })
+    .then(favourite => {
+      res.send(favourite);
+    })
+    .catch(err => console.log(err));
+});
 
 router.get("/Account", (req, res) => {
   res.send("wellcom");

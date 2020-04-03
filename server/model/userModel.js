@@ -14,6 +14,9 @@ const userSchema = new mongoose.Schema({
   },
   picture: {
     type: String
+  },
+  favourite: {
+    type: String
   }
 });
 module.exports = mongoose.model("users", userSchema);

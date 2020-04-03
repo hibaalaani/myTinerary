@@ -109,3 +109,39 @@ body {
   width: 100%;
   background-color: #61dafb;
 } */
+body header {
+  background-image: url("./Component/PhotoWithCamera.jpg");
+  background-position: 50% 80%;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 400px;
+
+}
+
+.container-for-header-text {
+  text-align: center;
+
+
+}
+
+.header-text-wrapper {
+  padding: 20%;
+  margin: auto;
+  /* width: 80%; */
+  float: none;
+}
+
+
+
+.container-for-header-text p {
+  margin-top: 10%;
+  font: normal 1.2em sans-serif;
+  color: #cc350f;
+
+}
+
+.container-for-header-text h1 {
+  font: normal 2.4em "Patua One", serif;
+  color: #cc350f;
+
+}

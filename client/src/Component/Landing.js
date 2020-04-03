@@ -29,9 +29,16 @@ class Landing extends Component {
     const cities = this.props.cities;
     console.log("cities22", cities);
     return (
-      <div className="container-fluid App">
-        <header className="col-12 ">
-          <img src={PhotoWithCamera} className="App-logo " alt="logo" />
+      <div className="container-fluid">
+        <header className="col-12 header">
+          <section className="container-for-header-text col-12">
+            <div className="header-text-wrapper col-md-6 col-sm-12">
+              <h1>My Itinerary</h1>
+              <p>make your trip with LOVE</p>
+            </div>
+          </section>
+
+          {/* <img src={PhotoWithCamera} className="App-logo " alt="logo" /> */}
         </header>
 
         <div>

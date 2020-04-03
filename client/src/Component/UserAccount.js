@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchUsersAction } from "../store/actions/usersAction";
+// import { fetchUsersAction } from "../store/actions/usersAction";
 export class UserAccount extends Component {
   constructor(props) {
     super(props);

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
-import login from "../store/actions/usersAction";
+// import login from "../store/actions/usersAction";
 import {
   Collapse,
   Navbar,
@@ -17,7 +17,7 @@ import {
   Button,
   Form
 } from "reactstrap";
-import FormControl from "react-bootstrap/FormControl";
+// import FormControl from "react-bootstrap/FormControl";
 export default class Header extends Component {
   constructor(props) {
     super();
@@ -29,10 +29,10 @@ export default class Header extends Component {
 
   handleChangeChild = e => {
     console.log("e from header", e);
-    const user = this.props.user.token;
+    // const user = this.props.user.token;
     //console.log("this.props", this.props);
     // this.props.callbackFromParent(e);
-    this.props.login(user);
+    // this.props.login(user);
   };
 
   render() {
