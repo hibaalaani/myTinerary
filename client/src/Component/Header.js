@@ -83,11 +83,7 @@ export default class Header extends Component {
                 placeholder="Search"
                 className="mr-sm-2"
               />*/}
-              <Button variant="outline-success ">
-                {" "}
-                {this.props.user}
-                Search
-              </Button>
+              <Button variant="outline-success "> {this.props.user}</Button>
             </Form>
           </Collapse>
         </Navbar>

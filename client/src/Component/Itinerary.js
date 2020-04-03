@@ -13,7 +13,13 @@ class Itinerary extends Component {
 
     this.props.fetchItinerariesByCityName(city);
   }
-
+  handelChange = e => {
+    console.log(e);
+    this.setState({
+      /////change the button color
+      ///////post the favourite to the user
+    });
+  };
   filter() {
     if (this.props.itineraries) {
       const filterItinerary = this.props.itineraries.filter(
@@ -56,6 +62,9 @@ class Itinerary extends Component {
               </div>
             </div>
           ))}
+        <button btn btn-primary onChange={this.handelChange()}>
+          Add To Your Favourite{" "}
+        </button>
       </div>
     );
   }

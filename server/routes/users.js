@@ -119,7 +119,6 @@ router.get(
       .catch(err => res.status(404).json({ error: "User does not exist!" }));
   }
 );
-// router.get("/google", (req, res) => {});
 router.get(
   "/auth/google",
   passport.authenticate("google", { scope: ["email", "profile"] })
@@ -131,10 +130,34 @@ router.get(
   function(req, res) {
     console.log(req.user);
 
-    //generate token
-    //res.send(req.user);
-    const token = "iogerihqbr";
-    // Successful authentication, redirect home.
+    ///////////////////////////////generate token
+    //Sign token
+    const payload = {
+      id: req.user.id,
+      name: req.user.name
+    };
+    // const token = jwt.sign(
+    //   payload,
+    //   keys.secretOrKey,
+    //   {
+    //     expiresIn: 31556926 // 1 year in seconds
+    //   },
+    //   (err, token) => {
+    //     res.json({
+    //       success: true,
+    //       token: "Bearer " + token
+    //     });
+    //   }
+    // );
+
+    const token = user => {
+      console.log(" is: ", user);
+      return jwt.sign({ user }, keys.secretOrKey, {
+        user,
+        expiresIn: 31556926
+      });
+    };
+    // Successful authentication, redirect home.with query code
     res.redirect("http://localhost:3000/?code=" + token);
   }
 );
