@@ -4,7 +4,7 @@ import { login } from "../store/actions/usersAction";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
-
+import { Button } from "reactstrap";
 class Login extends Component {
   state = {
     email: "",
@@ -113,11 +113,10 @@ class Login extends Component {
           </form>
         )}
         <div className="col-sm-offset-2 col-sm-10 align-items-center">
-          <button href="http://localhost:5000/api/users/auth/google">
-            {" "}
+          <Button href="http://localhost:5000/api/users/auth/google">
             <FontAwesomeIcon icon={faGoogle} className="mr-2 " />
             Sign In With Google
-          </button>
+          </Button>
         </div>
       </div>
     );
