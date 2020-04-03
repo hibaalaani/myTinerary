@@ -132,9 +132,10 @@ router.get(
     console.log(req.user);
 
     //generate token
-    res.send(req.user);
+    //res.send(req.user);
+    const token = "iogerihqbr";
     // Successful authentication, redirect home.
-    res.redirect("/");
+    res.redirect("http://localhost:3000/?code=" + token);
   }
 );
 // router.get("/redirect", (req, res) => {});
