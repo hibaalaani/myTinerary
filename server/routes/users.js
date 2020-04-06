@@ -175,12 +175,13 @@ router.get("/logout", (req, res) => {
 });
 
 ///////////Add Favourite
-router.post("/favourite", (req, res) => {
-  userModel.findOne({ email: req.body.email });
-
-  const favourite = new userModel({
-    favourite: req.body.favourite,
-  });
+router.post("/:userID/favourite", (req, res) => {
+  let currentUser = userModel.findOne({ email: req.body.email });
+  currentUser.favorites.push(req.body.favourite);
+  currentUser.save();
+  // const favourite = new userModel({
+  //   favourite: req.body.favourite,
+  // });
   favourite.save();
   console.log("favourite saved");
   res.send("favourite Added", favourite).catch(error);
