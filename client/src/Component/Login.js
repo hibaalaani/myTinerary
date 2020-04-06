@@ -40,38 +40,6 @@ class Login extends Component {
         {this.props.user.isLoggedin ? (
           <p>{this.props.user.token}</p>
         ) : (
-          //   <form className="form-group" onSubmit={this.handelSubmit}>
-          //     <h5 className="card-title">Sign In</h5>
-          //     <div className="row block">
-          //       <div className="col-md-4">
-          //         <label htmlFor="email">email</label>
-          //         <input type="email" id="email" onChange={this.handelChange} />
-          //       </div>
-          //       <div className="col-md-4">
-          //         <label htmlFor="password">password</label>
-          //         <input
-          //           type="password"
-          //           id="password"
-          //           onChange={this.handelChange}
-          //         />
-          //       </div>
-          //       <div className="col-md-4">
-          //         <div className="form-group">
-          //           <button>login</button>
-          //         </div>
-          //       </div>
-          //     </div>
-          //   </form>
-          // )}
-          // {/* <Link to="/google"> */}
-          // <button
-          //   className="btn btn-primary"
-          //   href="http://localhost:5000/api/users/auth/google"
-          // >
-          //   <FontAwesomeIcon icon={faGoogle} className="mr-2 " />
-          //   Login In With Google
-          // </button>
-          // {/* </Link> */}
           <form className="form-horizontal" onSubmit={this.handelSubmit}>
             <div className="form-group">
               <label
@@ -107,8 +75,6 @@ class Login extends Component {
               <div className="col-sm-offset-2 col-sm-10 align-items-center">
                 <button>Sign in</button>
               </div>
-
-              {/* <div className="form-group"> */}
             </div>
           </form>
         )}

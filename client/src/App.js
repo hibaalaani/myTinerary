@@ -34,7 +34,7 @@ function App() {
         <Link to="/AddCity"></Link>
         <Switch>
           <Route exact path="/" component={Landing} />
-          <Route path="/Users" component={Users} />
+          <Route exact path="/Users" component={Users} />
           <Route path="/UserAccount" component={UserAccount} />
           <Route exact path="/Login" component={Login} />
           <Route exact path="/Cities" component={Cities} />

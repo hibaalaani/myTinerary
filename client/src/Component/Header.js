@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
-// import login from "../store/actions/usersAction";
+import { login } from "../store/actions/usersAction";
+import { connect } from "react-redux";
 import {
   Collapse,
   Navbar,
@@ -15,38 +16,47 @@ import {
   DropdownMenu,
   DropdownItem,
   Button,
-  Form
+  Form,
 } from "reactstrap";
 // import FormControl from "react-bootstrap/FormControl";
-export default class Header extends Component {
+class Header extends Component {
   constructor(props) {
     super();
     this.state = {
       isOpen: false,
-      search: ""
+      search: "",
+      user: "",
     };
   }
 
-  handleChangeChild = e => {
-    console.log("e from header", e);
-    // const user = this.props.user.token;
-    //console.log("this.props", this.props);
-    // this.props.callbackFromParent(e);
-    // this.props.login(user);
-  };
+  componentDidMount() {
+    const user = {
+      userName: this.state.user,
+    };
+    this.props.login(user);
+  }
+  // handleChangeChild = e => {
+  //   console.log("e from header", e);
+
+  //   // const user = this.props.user.token;
+  //   //console.log("this.props", this.props);
+  //   // this.props.callbackFromParent(e);
+  //   // this.props.login(user);
+  // };
 
   render() {
+    console.log(this.props.user);
     //toggle = () => this.setState({ isOpen: !isOpen });
     return (
       <div>
-        <Navbar color="light" light expand="md">
+        <Navbar color="dark" dark expand="sm">
           <NavbarBrand href="/">MyItenarary</NavbarBrand>
           <NavbarToggler
             onClick={() => this.setState({ isOpen: !this.state.isOpen })}
           />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="mr-auto" navbar>
-              <NavItem>
+              <NavItem dark>
                 <NavLink>
                   {" "}
                   <Link to="/Cities">Cities We Offer </Link>
@@ -83,7 +93,13 @@ export default class Header extends Component {
                 placeholder="Search"
                 className="mr-sm-2"
               />*/}
-              <Button variant="outline-success "> {this.props.user}</Button>
+              <Button variant="outline-success ">
+                {this.props.user.isLoggedin ? (
+                  <p>{this.props.user.id}</p>
+                ) : (
+                  <p>LogIn</p>
+                )}
+              </Button>
             </Form>
           </Collapse>
         </Navbar>
@@ -91,3 +107,14 @@ export default class Header extends Component {
     );
   }
 }
+const mapStateToProps = (state, ownProps) => {
+  console.log("mamToState", state);
+
+  return {
+    user: state.users,
+  };
+};
+const mapDispatchToProps = (dispatch) => ({
+  login: (user) => dispatch(login(user)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

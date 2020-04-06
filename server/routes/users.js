@@ -16,10 +16,10 @@ const someOtherPlaintextPassword = "not_bacon";
 router.get("/all", (_req, res) => {
   userModel
     .find({})
-    .then(users => {
+    .then((users) => {
       res.send(users);
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 });
 
 router.post("/register", async (req, res) => {
@@ -44,7 +44,7 @@ router.post("/register", async (req, res) => {
           name: req.body.name,
           email: req.body.email,
           password: hash,
-          picture: req.body.picture
+          picture: req.body.picture,
         });
         await user.save();
         console.log("user saved");
@@ -69,32 +69,33 @@ router.post("/login", async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   // Find user by email
-  userModel.findOne({ email }).then(user => {
+  userModel.findOne({ email }).then((user) => {
     // Check if user exists
     console.log("user", user);
     if (!user) {
       return res.status(404).json({ emailnotfound: "Email not found" });
     }
     // Check password
-    bcrypt.compare(password, user.password).then(isMatch => {
+    bcrypt.compare(password, user.password).then((isMatch) => {
       if (isMatch) {
         // User matched
         // Create JWT Payload
         const payload = {
           id: user.id,
-          name: user.name
+          name: user.name,
         };
         // Sign token
         jwt.sign(
           payload,
           keys.secretOrKey,
           {
-            expiresIn: 31556926 // 1 year in seconds
+            expiresIn: 31556926, // 1 year in seconds
           },
+
           (err, token) => {
             res.json({
               success: true,
-              token: "Bearer " + token
+              token: "Bearer " + token,
             });
           }
         );
@@ -113,10 +114,10 @@ router.get(
   (req, res) => {
     userModel
       .findOne({ _id: req.user.id })
-      .then(user => {
+      .then((user) => {
         res.json(user);
       })
-      .catch(err => res.status(404).json({ error: "User does not exist!" }));
+      .catch((err) => res.status(404).json({ error: "User does not exist!" }));
   }
 );
 router.get(
@@ -127,14 +128,14 @@ router.get(
 router.get(
   "/auth/google/callback",
   passport.authenticate("google", { failureRedirect: "/login" }),
-  function(req, res) {
+  function (req, res) {
     console.log(req.user);
 
     ///////////////////////////////generate token
     //Sign token
     const payload = {
       id: req.user.id,
-      name: req.user.name
+      name: req.user.name,
     };
     // const token = jwt.sign(
     //   payload,
@@ -150,11 +151,11 @@ router.get(
     //   }
     // );
 
-    const token = user => {
+    const token = (user) => {
       console.log(" is: ", user);
       return jwt.sign({ user }, keys.secretOrKey, {
         user,
-        expiresIn: 31556926
+        expiresIn: 31556926,
       });
     };
     // Successful authentication, redirect home.with query code
@@ -163,17 +164,47 @@ router.get(
 );
 // router.get("/redirect", (req, res) => {});
 ///////////////add route for users favoriate//////////
+router.get("/logout", (req, res) => {
+  userModel.findOne(req.body.email).then((user) => {
+    // Check if user exists
+    console.log("user", user);
+    Auth.signOut();
 
-router.get("/favourite", (req, res) => {
-  userModel
-
-    .findOne({ favourite: req.body.favourite })
-    .then(favourite => {
-      res.send(favourite);
-    })
-    .catch(err => console.log(err));
+    props.history.push("/login");
+  });
 });
 
+///////////Add Favourite
+router.post("/favourite", (req, res) => {
+  userModel.findOne({ email: req.body.email });
+
+  const favourite = new userModel({
+    favourite: req.body.favourite,
+  });
+  favourite.save();
+  console.log("favourite saved");
+  res.send("favourite Added", favourite).catch(error);
+  console.log("in catch block");
+  res.send(error);
+});
+///////////////////get favourite
+router.get("/:favourite", (req, res) => {
+  let favItinerary = req.params.favourite;
+  userModel
+    .findOne({ favourite: favItinerary })
+    .then((itinerary) => {
+      res.send(itinerary);
+    })
+    .catch((err) => console.log(err));
+});
+/////////////delete favourite
+router.delete("/:favourite", (req, res) => {
+  userModel
+    .findById(req.body.id)
+    .then((favourite) =>
+      favourite.remove().then(() => res.json({ success: true }))
+    );
+});
 router.get("/Account", (req, res) => {
   res.send("wellcom");
 });
