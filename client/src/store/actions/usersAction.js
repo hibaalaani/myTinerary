@@ -3,26 +3,26 @@
 import axios from "axios";
 
 export const fetchUsersAction = () => {
-  return dispatch => {
+  return (dispatch) => {
     //add the full url of your back end
     fetch("http://localhost:5000/api/users/all")
-      .then(resp => {
+      .then((resp) => {
         return resp.json();
       })
-      .then(json => {
+      .then((json) => {
         dispatch({ type: "FETCH_USERS_SUCCESS", payload: json });
       })
-      .catch(err => {
+      .catch((err) => {
         dispatch({ type: "FETCH_USERS_ERROR", payload: err });
       });
   };
 };
 
-export const register = newUser => {
-  return dispatch => {
+export const register = (newUser) => {
+  return (dispatch) => {
     axios
       .post("http://localhost:5000/api/users/register", newUser)
-      .then(res => {
+      .then((res) => {
         console.log("response", res);
         if (res.status === 200) {
           //send the user to his account page
@@ -30,7 +30,7 @@ export const register = newUser => {
           window.location = "/UserAccount";
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("error" + error.response);
         if (error.response) {
           if (error.response.status === 409) {
@@ -45,19 +45,25 @@ export const register = newUser => {
   };
 };
 
-export const login = user => {
-  return dispatch => {
+export const login = (user) => {
+  return (dispatch) => {
     axios
       .post("http://localhost:5000/api/users/login", user)
-      .then(res => {
+      .then((res) => {
         console.log("response", res);
         if (res.status === 200) {
+          // decode the token
+          console.log(res);
           //send the user to his account page
-          dispatch({ type: "LOGIN_SUCCESS", payload: res });
+          dispatch({
+            type: "LOGIN_SUCCESS",
+            payload: res, //send the decoded token instead
+          });
+
           // window.location = "/UserAccount";
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("error" + error);
         if (error.response) {
           if (error.response.status === 409) {

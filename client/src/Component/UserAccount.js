@@ -5,15 +5,15 @@ export class UserAccount extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: ""
+      users: "",
     };
   }
   componentDidMount() {
     fetch("http://localhost:5000/api/users/")
-      .then(res => {
+      .then((res) => {
         return res.json();
       })
-      .then(result => {
+      .then((result) => {
         console.log("result :", result);
         this.setState({ users: result });
         console.log("from landing page ", this.state.users);
@@ -33,10 +33,10 @@ const mapStateToProps = (state, ownProps) => {
   console.log("mamToState", state);
 
   return {
-    user: state.users
+    user: state.users,
   };
 };
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   // register: newUser => dispatch(register(newUser))
 });
 
