@@ -8,24 +8,24 @@ import { Button } from "reactstrap";
 class Login extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
   };
-  handelChange = e => {
+  handelChange = (e) => {
     this.setState({
-      [e.target.id]: e.target.value
+      [e.target.id]: e.target.value,
     });
   };
-  handelSubmit = e => {
+  handelSubmit = (e) => {
     e.preventDefault();
     if (this.state.email === "" || this.state.password === "") {
       return alert("you need to fill both field");
     } else {
-      const userData = {
+      const user = {
         email: this.state.email,
-        password: this.state.password
+        password: this.state.password,
       };
-      console.log(userData);
-      this.props.login(userData);
+      console.log(user);
+      this.props.login(user);
     }
     // this.setState({
     //   email: "",
@@ -89,14 +89,14 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   console.log("mapToState", state);
   return {
-    user: state.users
+    user: state.users,
   };
 };
-const mapDispatchToProps = dispatch => ({
-  login: userData => dispatch(login(userData))
+const mapDispatchToProps = (dispatch) => ({
+  login: (user) => dispatch(login(user)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
