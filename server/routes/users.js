@@ -163,9 +163,9 @@ router.get("/logout", (req, res) => {
 });
 ///////////////get one user
 router.get("/:id", (req, res) => {
-  let userIndvi = req.params.id;
+  let userId = req.params.id;
   userModel
-    .findOne({ id: userIndvi })
+    .findOne({ id: userId })
     .then((user) => {
       console.log("user", user);
       res.send(user);
@@ -174,20 +174,17 @@ router.get("/:id", (req, res) => {
 });
 
 ///////////Add favorites
-router.post("/:userId/favorites", (req, res) => {
-  let currentUser = userModel.findOne({ id: req.params.id }).then((user) => {
-    console.log("currentUser", user);
-    user.favorites.push(req.body.favorites);
-    console.log("currentUserAfter", user);
-
-    user.save();
+router.post("/:name/favorites", (req, res) => {
+  let name = req.params.name;
+  let email = req.body.email;
+  userModel.findOne({ email: email }).then((user) => {
+    user.favorites.push(name);
+    user.save().then((saveduser) => {
+      res.status(200).send(saveduser);
+    });
   });
-  //   let currentUser = userModel.findOne({ id: req.params.id }).then((user) => {
-  //     console.log("currentUser", user);
-  //     user.favorites.push(req.body.favourite);
-  //     user.save();
-  //   });
 });
+
 ///////////////////get favourite
 // router.get("/:favourite", (req, res) => {
 //   let favItinerary = req.params.favourite;
@@ -199,17 +196,16 @@ router.post("/:userId/favorites", (req, res) => {
 //     .catch((err) => console.log(err));
 // });
 /////////////delete favourite
-router.delete("/:user_id/favorites", (req, res) => {
-  let favoritesName = req.body.name;
-  let currentUser = userModel
-    .findOne({ id: req.params.id })
-    .then(() => {
-      console.log("currentUser", currentUser);
-      currentUser.favorites.remove(favoritesName);
-      console.log(currentUser);
-      res.send("Welcome " + currentUser.name);
-    })
-    .catch((err) => console.log(err));
+router.delete("/:name/favorites", (req, res) => {
+  let name = req.params.name;
+  let email = req.body.email;
+  userModel.findOne({ email: email }).then((user) => {
+    let index = user.favorites.indexOf(name);
+    user.favorites.splice(index, 1);
+    user.save().then((saveduser) => {
+      res.status(200).send(saveduser);
+    });
+  });
 });
 
 router.get("/Account", (req, res) => {

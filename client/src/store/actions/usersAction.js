@@ -47,16 +47,18 @@ export const register = (newUser) => {
   };
 };
 
-export const login = (user) => {
+export const login = (userData) => {
   return (dispatch) => {
     axios
-      .post("http://localhost:5000/api/users/login", user)
+      .post("http://localhost:5000/api/users/login", userData)
       .then((res) => {
         console.log("response", res);
         if (res.status === 200) {
           // decode the token
-          localStorage.setItem("token", token);
+
           const token = res.data.token;
+          localStorage.setItem("token", token);
+          console.log("token", token);
           const decoded = jwt_decode(token); // decode your token here
 
           console.log("decoded", decoded);
@@ -65,11 +67,12 @@ export const login = (user) => {
           dispatch({
             type: "LOGIN_SUCCESS",
             payload: decoded,
-            user, //send the decoded token instead
+            // payload: token,
+            user: decoded.name,
+            //send the decoded token instead
           });
-
-          // window.location = "/UserAccount";
         }
+        // window.location = "/UserAccount ";
       })
       .catch((error) => {
         console.log("error" + error);
@@ -85,39 +88,40 @@ export const login = (user) => {
   };
 };
 
-export const decodedUser = (JwtDecode) => {
-  return (dispatch) => {
-    axios
-      .get("http://localhost:5000/api/users")
-      .then((res) => {
-        console.log("response", res);
-        if (res.status === 200) {
-          // decode the token
-          const token = res.data.token;
-          const decoded = jwt_decode(token); // decode your token here
-          localStorage.setItem("token", token);
-          console.log("decoded", decoded);
-          console.log("res", res);
-          //send the user to his account page
-          dispatch({
-            type: "LOGIN_SUCCESS",
-            payload: decoded,
-            JwtDecode, //send the decoded token instead
-          });
+// export const decodedUser = (JwtDecode) => {
+//   return (dispatch) => {
+//     axios
+//       .get("http://localhost:5000/api/users/login")
+//       .then((res) => {
+//         console.log("response", res);
+//         if (res.status === 200) {
+//           // decode the token
+//           const token = res.data.token;
+//           console.log(token);
+//           const decoded = jwt_decode(token); // decode your token here
+//           localStorage.setItem("token", token);
+//           console.log("decoded", decoded);
+//           console.log("res", res);
+//           //send the user to his account page
+//           dispatch({
+//             type: "LOGIN_SUCCESS",
+//             payload: decoded,
+//             JwtDecode, //send the decoded token instead
+//           });
 
-          // window.location = "/UserAccount";
-        }
-      })
-      .catch((error) => {
-        console.log("error" + error);
-        if (error.response) {
-          if (error.response.status === 409) {
-            alert("loggin error");
-          } else {
-            //alert with something else
-          }
-        }
-      });
-    //add the full url of your back end
-  };
-};
+//           // window.location = "/UserAccount";
+//         }
+//       })
+//       .catch((error) => {
+//         console.log("error" + error);
+//         if (error.response) {
+//           if (error.response.status === 409) {
+//             alert("loggin error");
+//           } else {
+//             //alert with something else
+//           }
+//         }
+//       });
+//     //add the full url of your back end
+//   };
+// };

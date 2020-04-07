@@ -2,13 +2,13 @@ const initialState = {
   token: "",
   isLoggedin: false,
   users: [],
-  err: ""
+  err: "",
 };
 
 //you had some issues acting the payload to pass data from your action to your reducer
 //I changed a bit the naming too so it makes more sense
 function usersReducers(state = initialState, action) {
-  console.log("city action", action);
+  console.log("user action", action);
   switch (action.type) {
     case "FETCH_USERS_SUCCESS":
       console.log("FETCH_USERS_SUCCESS", action);
@@ -20,9 +20,12 @@ function usersReducers(state = initialState, action) {
     case "LOGIN_SUCCESS":
       return {
         ...state,
-        token: action.payload.data.token,
-        isLoggedin: true
+        // token: action.payload.data.token,
+        token: action.payload.decoded,
+        users: action.user,
+        isLoggedin: true,
       };
+
     default:
       return state;
   }

@@ -30,22 +30,13 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    const user = {
-      userName: this.state.user,
+    const userData = {
+      user: this.state.user,
     };
-    this.props.login(user);
+    console.log(userData);
+    this.props.login(userData);
   }
-  // handleChangeChild = e => {
-  //   console.log("e from header", e);
-
-  //   // const user = this.props.user.token;
-  //   //console.log("this.props", this.props);
-  //   // this.props.callbackFromParent(e);
-  //   // this.props.login(user);
-  // };
-
   render() {
-    console.log(this.props.user);
     //toggle = () => this.setState({ isOpen: !isOpen });
     return (
       <div>
@@ -95,7 +86,7 @@ class Header extends Component {
               />*/}
               <Button variant="outline-success ">
                 {this.props.user.isLoggedin ? (
-                  <p>{this.props.user.id}</p>
+                  <p> welcome {this.props.user.users}</p>
                 ) : (
                   <p>LogIn</p>
                 )}
@@ -115,6 +106,6 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 const mapDispatchToProps = (dispatch) => ({
-  login: (user) => dispatch(login(user)),
+  login: (userData) => dispatch(login(userData)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

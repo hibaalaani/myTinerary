@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Axios from "axios";
 import JwtDecode from "jwt-decode";
-import login from "../store/actions/usersAction";
+import { login } from "../store/actions/usersAction";
 // import { fetchUsersAction } from "../store/actions/usersAction";
 export class UserAccount extends Component {
   constructor(props) {
@@ -13,21 +13,13 @@ export class UserAccount extends Component {
   }
 
   componentDidMount() {
-    this.props.JwtDecode();
-    // Axios.get("http://localhost:5000/api/users/", JwtDecode).then((res) => {
-    //   console.log("response", res);
-    // });
-    // .then((result) => {
-    //   console.log("result :", result);
-    //   this.setState({ users: result });
-    //   console.log("from landing page ", this.state.users);
-    // });
+    this.props.register(userData);
+    const userData = this.props.payload;
   }
   render() {
-    const user = this.state.users;
     return (
       <div className="container">
-        <h1> you are finish the registration {user}</h1>
+        <h1> you are finish the registration {this.payload.name}</h1>
       </div>
     );
   }
@@ -40,7 +32,7 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 const mapDispatchToProps = (dispatch) => ({
-  JwtDecode: (user) => dispatch(JwtDecode(user)),
+  login: (userData) => dispatch(login(userData)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserAccount);
