@@ -22,30 +22,26 @@ router.get("/:name", (req, res) => {
     })
     .catch((err) => console.log(err));
 });
+/////////////post user to the itenerary
 router.post("/:name/favorites", (req, res) => {
   let user = req.body.email;
   console.log(user);
   let itineraryRequested = req.params.name;
   itineraryModel.findOne({ name: itineraryRequested }).then((itinerary) => {
     itinerary.favorites.push(user);
-    // res.send(res.json);
+    res.send(itinerary);
   });
 });
-router.post("/", (req, res) => {
+///////////////////delete user from favorite itinerary
+
+router.delete("/:name/favorites", (req, res) => {
   console.log("itinerary", req.body);
-  const newItinerary = new itineraryModel({
-    name: req.body.name,
-    profile: req.body.profile,
-    rating: req.body.rating,
-    duration: req.body.duration,
-    price: req.body.price,
-    hashtags: req.body.hashtags,
-    activities: req.body.activities,
-  });
-  newItinerary
-    .save()
+  const itinerary = req.params.name;
+  const user = req.body.email;
+  itineraryModel
+    .findOneAndDelete({ favorites: user })
     .then((itinerary) => {
-      res.send(itinerary);
+      res.send(itinerary.favorites);
     })
     .catch((err) => {
       console.log(err);

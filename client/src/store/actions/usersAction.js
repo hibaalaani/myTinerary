@@ -1,7 +1,7 @@
 // I cleaned a bit your action, It was almost good, just a few probem with the .json() convertion and handeling the payload
 //it shuld work now ;)
 import axios from "axios";
-import jwt from "jwt-decode"; // import dependency
+import jwt_decode from "jwt-decode"; // import dependency
 
 // const jwtDecode = require("jwt-decode");
 export const fetchUsersAction = () => {
@@ -55,9 +55,10 @@ export const login = (user) => {
         console.log("response", res);
         if (res.status === 200) {
           // decode the token
-          const token = res.data.token;
-          const decoded = jwt(token); // decode your token here
           localStorage.setItem("token", token);
+          const token = res.data.token;
+          const decoded = jwt_decode(token); // decode your token here
+
           console.log("decoded", decoded);
           console.log("res", res);
           //send the user to his account page
@@ -93,7 +94,7 @@ export const decodedUser = (JwtDecode) => {
         if (res.status === 200) {
           // decode the token
           const token = res.data.token;
-          const decoded = jwt(token); // decode your token here
+          const decoded = jwt_decode(token); // decode your token here
           localStorage.setItem("token", token);
           console.log("decoded", decoded);
           console.log("res", res);

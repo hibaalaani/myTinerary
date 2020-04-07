@@ -163,9 +163,10 @@ router.get("/logout", (req, res) => {
 router.get("/:id", (req, res) => {
   let userIndvi = req.params.id;
   userModel
-    .find({ id: userIndvi })
+    .findOne({ id: userIndvi })
     .then((user) => {
       console.log("user", user);
+      res.send(user);
     })
     .catch((err) => console.log(err));
 });
@@ -175,6 +176,8 @@ router.post("/:userId/favorites", (req, res) => {
   let currentUser = userModel.findOne({ id: req.params.id }).then((user) => {
     console.log("currentUser", user);
     user.favorites.push(req.body.favorites);
+    console.log("currentUserAfter", user);
+
     user.save();
   });
   //   let currentUser = userModel.findOne({ id: req.params.id }).then((user) => {
