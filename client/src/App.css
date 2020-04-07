@@ -114,7 +114,9 @@ body header {
   background-position: 50% 80%;
   background-size: 100%;
   background-repeat: no-repeat;
-  height: 400px;
+  height: 700px;
+
+  margin: 0 auto;
 
 }
 
@@ -125,8 +127,8 @@ body header {
 }
 
 .header-text-wrapper {
-  padding: 20%;
-  margin: auto;
+  /* padding: 20%; */
+  margin: 20% auto;
   /* width: 80%; */
   float: none;
 }
