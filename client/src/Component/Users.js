@@ -9,31 +9,18 @@ class Users extends Component {
         name: "",
         email: "",
         password: "",
-        picture: ""
-      }
+        picture: "",
+      },
     };
   }
 
-  // componentDidMount() {
-  //   // fetch("http://localhost:5000/api/users/")
-  //   .then(res => {
-  //     return res.json();
-  //   })
-  //   .then(result => {
-  //     console.log("result :", result);
-  //     this.setState({ users: result });
-  //     console.log("from landing page ", this.state.users);
-  //   });
-  // let url = "http://localhost:5000/api/users/";
-  // axios.post(url).then(response => console.log(response));
-  // }
-  handelChange = e => {
+  handelChange = (e) => {
     console.log(e);
     this.setState({
-      [e.target.id]: e.target.value
+      [e.target.id]: e.target.value,
     });
   };
-  handelSubmit = e => {
+  handelSubmit = (e) => {
     // this.props.fetchUsersAction();
     e.preventDefault();
     // const users = this.props.params.match.id;
@@ -50,7 +37,7 @@ class Users extends Component {
         name: this.state.name,
         email: this.state.email,
         password: this.state.password,
-        picture: this.state.picture
+        picture: this.state.picture,
       };
       /////fetch from redux
       this.props.register(newUser);
@@ -120,11 +107,11 @@ const mapStateToProps = (state, ownProps) => {
   console.log("mamToState", state);
 
   return {
-    user: state.users
+    user: state.users,
   };
 };
-const mapDispatchToProps = dispatch => ({
-  register: newUser => dispatch(register(newUser))
+const mapDispatchToProps = (dispatch) => ({
+  register: (newUser) => dispatch(register(newUser)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Users);

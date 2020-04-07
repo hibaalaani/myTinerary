@@ -137,20 +137,6 @@ router.get(
       id: req.user.id,
       name: req.user.name,
     };
-    // const token = jwt.sign(
-    //   payload,
-    //   keys.secretOrKey,
-    //   {
-    //     expiresIn: 31556926 // 1 year in seconds
-    //   },
-    //   (err, token) => {
-    //     res.json({
-    //       success: true,
-    //       token: "Bearer " + token
-    //     });
-    //   }
-    // );
-
     const token = (user) => {
       console.log(" is: ", user);
       return jwt.sign({ user }, keys.secretOrKey, {
@@ -158,11 +144,11 @@ router.get(
         expiresIn: 31556926,
       });
     };
+
     // Successful authentication, redirect home.with query code
     res.redirect("http://localhost:3000/?code=" + token);
   }
 );
-// router.get("/redirect", (req, res) => {});
 ///////////////add route for users favoriate//////////
 router.get("/logout", (req, res) => {
   userModel.findOne(req.body.email).then((user) => {
@@ -173,39 +159,54 @@ router.get("/logout", (req, res) => {
     props.history.push("/login");
   });
 });
-
-///////////Add Favourite
-router.post("/:userID/favourite", (req, res) => {
-  let currentUser = userModel.findOne({ email: req.body.email });
-  currentUser.favorites.push(req.body.favourite);
-  currentUser.save();
-  // const favourite = new userModel({
-  //   favourite: req.body.favourite,
-  // });
-  favourite.save();
-  console.log("favourite saved");
-  res.send("favourite Added", favourite).catch(error);
-  console.log("in catch block");
-  res.send(error);
-});
-///////////////////get favourite
-router.get("/:favourite", (req, res) => {
-  let favItinerary = req.params.favourite;
+///////////////get one user
+router.get("/:id", (req, res) => {
+  let userIndvi = req.params.id;
   userModel
-    .findOne({ favourite: favItinerary })
-    .then((itinerary) => {
-      res.send(itinerary);
+    .find({ id: userIndvi })
+    .then((user) => {
+      console.log("user", user);
     })
     .catch((err) => console.log(err));
 });
-/////////////delete favourite
-router.delete("/:favourite", (req, res) => {
-  userModel
-    .findById(req.body.id)
-    .then((favourite) =>
-      favourite.remove().then(() => res.json({ success: true }))
-    );
+
+///////////Add favorites
+router.post("/:userId/favorites", (req, res) => {
+  let currentUser = userModel.findOne({ id: req.params.id }).then((user) => {
+    console.log("currentUser", user);
+    user.favorites.push(req.body.favorites);
+    user.save();
+  });
+  //   let currentUser = userModel.findOne({ id: req.params.id }).then((user) => {
+  //     console.log("currentUser", user);
+  //     user.favorites.push(req.body.favourite);
+  //     user.save();
+  //   });
 });
+///////////////////get favourite
+// router.get("/:favourite", (req, res) => {
+//   let favItinerary = req.params.favourite;
+//   userModel
+//     .findOne({ favourite: favItinerary })
+//     .then((itinerary) => {
+//       res.send(itinerary);
+//     })
+//     .catch((err) => console.log(err));
+// });
+/////////////delete favourite
+router.delete("/:user_id/favorites", (req, res) => {
+  let favoritesName = req.body.name;
+  let currentUser = userModel
+    .findOne({ id: req.params.id })
+    .then(() => {
+      console.log("currentUser", currentUser);
+      currentUser.favorites.remove(favoritesName);
+      console.log(currentUser);
+      res.send("Welcome " + currentUser.name);
+    })
+    .catch((err) => console.log(err));
+});
+
 router.get("/Account", (req, res) => {
   res.send("wellcom");
 });

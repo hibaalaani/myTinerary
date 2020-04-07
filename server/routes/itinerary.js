@@ -7,22 +7,30 @@ const itineraryModel = require("../model/itineraryModel");
 router.get("/all", (_req, res) => {
   itineraryModel
     .find({})
-    .then(itineraries => {
+    .then((itineraries) => {
       res.send(itineraries);
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 });
 //this is how you implement a city route by specific city
 router.get("/:name", (req, res) => {
   let itineraryRequested = req.params.name;
   itineraryModel
     .find({ name: itineraryRequested })
-    .then(itinerary => {
+    .then((itinerary) => {
       res.send(itinerary);
     })
-    .catch(err => console.log(err));
+    .catch((err) => console.log(err));
 });
-
+router.post("/:name/favorites", (req, res) => {
+  let user = req.body.email;
+  console.log(user);
+  let itineraryRequested = req.params.name;
+  itineraryModel.findOne({ name: itineraryRequested }).then((itinerary) => {
+    itinerary.favorites.push(user);
+    // res.send(res.json);
+  });
+});
 router.post("/", (req, res) => {
   console.log("itinerary", req.body);
   const newItinerary = new itineraryModel({
@@ -32,18 +40,19 @@ router.post("/", (req, res) => {
     duration: req.body.duration,
     price: req.body.price,
     hashtags: req.body.hashtags,
-    activities: req.body.activities
+    activities: req.body.activities,
   });
   newItinerary
     .save()
-    .then(itinerary => {
+    .then((itinerary) => {
       res.send(itinerary);
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       res.status(500).send("Server error");
     });
 });
+
 router.get("/test", (req, res) => {
   res.send({ msg: "itinerary test route." });
 });
