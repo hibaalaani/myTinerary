@@ -21,7 +21,7 @@ function usersReducers(state = initialState, action) {
       return {
         ...state,
         // token: action.payload.data.token,
-        token: action.payload.decoded,
+        token: action.decoded,
         users: action.user,
         isLoggedin: true,
       };

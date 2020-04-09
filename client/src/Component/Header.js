@@ -86,7 +86,7 @@ class Header extends Component {
               />*/}
               <Button variant="outline-success ">
                 {this.props.user.isLoggedin ? (
-                  <p> welcome {this.props.user.users}</p>
+                  <p> Hello {this.props.user.users}</p>
                 ) : (
                   <p>LogIn</p>
                 )}

@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import { login } from "../store/actions/usersAction";
 import { fetchItinerariesByCityName } from "../store/actions/itineraryActions";
+import { fetchItinerariesFavorite } from "../store/actions/itineraryActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
@@ -14,7 +16,7 @@ class Itinerary extends Component {
     super();
     this.state = {
       itineraries: [],
-      favourite: "",
+      favorites: [],
       favColor: green,
     };
     this.handelChange = this.handelChange.bind(this);
@@ -31,42 +33,15 @@ class Itinerary extends Component {
     // this.setState({
     ///change the button color
     /////post the favourite to the user
-    // const newFavourite = this.props.match.params.name;
-    const newFavourite = this.props.itineraries;
-    console.log("newFavourite", newFavourite);
-    axios
-      .post("http://localhost:5000/api/users/favourite", newFavourite)
-      .then((res) => {
-        console.log("response", res);
-        if (res.status === 200) {
-          //send the user to his account page
-          let history = useHistory();
-          history.push("/home");
-        }
-        if (this.state.favourite != newFavourite) {
-          this.setState({
-            users: [...this.state.favourite, newFavourite],
-          });
-        } else {
-          this.setState({
-            users: [...this.state.favourite, ""],
-          });
-        }
-      })
-      .catch((error) => {
-        console.log("error " + error.response);
-        if (error.response) {
-          console.log(error.response.status);
-          if (error.response.status === 409) {
-            alert("This email is already in use");
-          } else {
-            //alert with something else
-            alert("you add this itinerary");
-          }
-        }
-      });
-    // });
+    const emailAdded = {
+      favorites: this.props.favorites,
+    };
+    // this.props.login(newFavorite);
+
+    this.props.fetchItinerariesFavorite(emailAdded);
+    console.log("emailAdded", emailAdded);
   };
+
   filter() {
     if (this.props.itineraries) {
       const filterItinerary = this.props.itineraries.filter(
@@ -147,10 +122,15 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     itineraries: state.itineraries.itineraries,
+    user: state.users,
+    favorites: state.itineraries.favorites,
   };
 };
 const mapDispatchToProps = (dispatch) => ({
   fetchItinerariesByCityName: (city) =>
     dispatch(fetchItinerariesByCityName(city)),
+
+  fetchItinerariesFavorite: (emailAdded) =>
+    dispatch(fetchItinerariesFavorite(emailAdded)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Itinerary);
