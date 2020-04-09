@@ -67,8 +67,9 @@ export const login = (userData) => {
           dispatch({
             type: "LOGIN_SUCCESS",
             payload: decoded,
-            // payload: token,
-            user: decoded.name,
+            token: token,
+            //  payload: token,
+            //   user: decoded.name,
             //send the decoded token instead
           });
         }

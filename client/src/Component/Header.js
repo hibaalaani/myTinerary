@@ -88,7 +88,7 @@ class Header extends Component {
                 {this.props.user.isLoggedin ? (
                   <p> Hello {this.props.user.users}</p>
                 ) : (
-                  <p>LogIn</p>
+                  <Link to="/Login">Login </Link>
                 )}
               </Button>
             </Form>

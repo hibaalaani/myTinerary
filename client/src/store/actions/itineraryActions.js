@@ -32,16 +32,19 @@ export const fetchItinerariesByCityName = (city) => {
       });
   };
 };
-export const fetchItinerariesFavorite = (emailAdded) => {
+export const fetchItinerariesFavorite = (emailAdded, name) => {
+  console.log("name", name);
   return (dispatch) => {
     axios
-      .post("http://localhost:5000/api/itineraries/:name/favorites", emailAdded)
+      .post(`http://localhost:5000/api/itineraries/${name}/favorites`, {
+        email: emailAdded,
+      })
       .then((res) => {
         console.log("response", res);
         if (res.status === 200) {
           //send the user to his account page
-          dispatch({ type: "ADD_ITINERARY_FAVORITE", payload: res.data[0] });
-          // window.location = "/UserAccount";
+          dispatch({ type: "ADD_ITINERARY_FAVORITE" });
+          dispatch(fetchItinerariesByCityName(name));
         }
       })
       .catch((error) => {

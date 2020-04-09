@@ -33,15 +33,16 @@ class Itinerary extends Component {
     // this.setState({
     ///change the button color
     /////post the favourite to the user
-    const emailAdded = {
-      favorites: this.props.favorites,
-    };
+
     // this.props.login(newFavorite);
 
-    this.props.fetchItinerariesFavorite(emailAdded);
-    console.log("emailAdded", emailAdded);
+    // this.props.fetchItinerariesFavorite(emailAdded);
+    // console.log("emailAdded", emailAdded);
   };
-
+  handelFavorite = (name) => {
+    const emailAdded = this.props.user.email;
+    this.props.fetchItinerariesFavorite(emailAdded, name);
+  };
   filter() {
     if (this.props.itineraries) {
       const filterItinerary = this.props.itineraries.filter(
@@ -56,6 +57,7 @@ class Itinerary extends Component {
   }
   render() {
     const filterList = this.filter();
+    const email = this.props.user.email;
     // const { itineraries } = this.props;
     return (
       <div>
@@ -86,20 +88,25 @@ class Itinerary extends Component {
                     icon={faHeart}
                     className="col-sm-4"
                     size="3x"
-                    style={{ color: this.state.favColor }}
-                    onClick={this.handelChange}
+                    style={
+                      itinerary.favorites.includes(email)
+                        ? { color: "red" }
+                        : { color: "green" }
+                    }
+                    onClick={() => this.handelFavorite(itinerary.name)}
                   />
                   <Button
+                    // onClick={() => this.handelFavorite(itinerary.name)}
                     color="danger"
                     className="col-sm-4"
                     size="lg"
-                    onClick={(id) => {
-                      this.setState(() => ({
-                        itineraries: this.state.itineraries.filter(
-                          (itinerary) => itinerary.id != id
-                        ),
-                      }));
-                    }}
+                    // onClick={(id) => {
+                    //   this.setState(() => ({
+                    //     itineraries: this.state.itineraries.filter(
+                    // (itinerary) => itinerary.id != id
+                    // ),
+                    //     }));
+                    //   }}
                   >
                     &times;
                   </Button>
@@ -130,7 +137,7 @@ const mapDispatchToProps = (dispatch) => ({
   fetchItinerariesByCityName: (city) =>
     dispatch(fetchItinerariesByCityName(city)),
 
-  fetchItinerariesFavorite: (emailAdded) =>
-    dispatch(fetchItinerariesFavorite(emailAdded)),
+  fetchItinerariesFavorite: (emailAdded, name) =>
+    dispatch(fetchItinerariesFavorite(emailAdded, name)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Itinerary);
