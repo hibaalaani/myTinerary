@@ -28,7 +28,7 @@ export const register = (newUser) => {
         console.log("response", res);
         if (res.status === 200) {
           //send the user to his account page
-          dispatch({ type: "REGISTER_SUCCESS", payload: res });
+          // dispatch({ type: "REGISTER_SUCCESS", payload: res });
           window.location = "/UserAccount";
         }
       })

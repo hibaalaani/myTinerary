@@ -13,10 +13,15 @@ function usersReducers(state = initialState, action) {
     case "FETCH_USERS_SUCCESS":
       console.log("FETCH_USERS_SUCCESS", action);
       return { ...state, users: action.payload, err: "" };
-
+    // case "REGISTER_SUCCESS":
+    //   return {
+    //     ...state,
+    //     users: action.payload,
+    //     isLoggedin: true,
+    //   };
     case "FETCH_USERS_ERROR":
       console.log("FETCH_ITINERARIES_ERROR", action);
-      return { ...state, err: action.payload };
+      return { ...state, err: action.payload.data };
     case "LOGIN_SUCCESS":
       return {
         ...state,
