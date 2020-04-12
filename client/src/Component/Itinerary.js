@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import axios from "axios";
-import { useHistory } from "react-router-dom";
+import AddComments from "../Component/AddComments";
 import { login } from "../store/actions/usersAction";
 import { fetchItinerariesByCityName } from "../store/actions/itineraryActions";
-import { fetchItinerariesFavorite } from "../store/actions/itineraryActions";
+import {
+  fetchItinerariesFavorite,
+  fetchItinerariesDeleteFavorite,
+} from "../store/actions/itineraryActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
@@ -18,6 +20,7 @@ class Itinerary extends Component {
       itineraries: [],
       favorites: [],
       favColor: green,
+      comments: [],
     };
     this.handelChange = this.handelChange.bind(this);
   }
@@ -42,6 +45,10 @@ class Itinerary extends Component {
   handelFavorite = (name) => {
     const emailAdded = this.props.user.email;
     this.props.fetchItinerariesFavorite(emailAdded, name);
+  };
+  handelDeleteFavorite = (name) => {
+    const emailAdded = this.props.user.email;
+    this.props.fetchItinerariesDeleteFavorite(emailAdded, name);
   };
   filter() {
     if (this.props.itineraries) {
@@ -86,30 +93,21 @@ class Itinerary extends Component {
                 <div className="row justify-content-around">
                   <FontAwesomeIcon
                     icon={faHeart}
-                    className="col-sm-4"
                     size="3x"
                     style={
                       itinerary.favorites.includes(email)
                         ? { color: "red" }
                         : { color: "green" }
                     }
-                    onClick={() => this.handelFavorite(itinerary.name)}
-                  />
-                  <Button
                     // onClick={() => this.handelFavorite(itinerary.name)}
-                    color="danger"
-                    className="col-sm-4"
-                    size="lg"
-                    // onClick={(id) => {
-                    //   this.setState(() => ({
-                    //     itineraries: this.state.itineraries.filter(
-                    // (itinerary) => itinerary.id != id
-                    // ),
-                    //     }));
-                    //   }}
-                  >
-                    &times;
-                  </Button>
+                    onClick={() =>
+                      itinerary.favorites.includes(email)
+                        ? this.handelDeleteFavorite(itinerary.name)
+                        : this.handelFavorite(itinerary.name)
+                    }
+                  />
+
+                  <AddComments />
                 </div>
               </div>
             </div>
@@ -139,5 +137,7 @@ const mapDispatchToProps = (dispatch) => ({
 
   fetchItinerariesFavorite: (emailAdded, name) =>
     dispatch(fetchItinerariesFavorite(emailAdded, name)),
+  fetchItinerariesDeleteFavorite: (emailAdded, name) =>
+    dispatch(fetchItinerariesDeleteFavorite(emailAdded, name)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Itinerary);

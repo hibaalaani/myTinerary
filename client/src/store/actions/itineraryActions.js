@@ -60,3 +60,62 @@ export const fetchItinerariesFavorite = (emailAdded, name) => {
       });
   };
 };
+
+////////////delete email favorite from the itinerary
+export const fetchItinerariesDeleteFavorite = (emailAdded, name) => {
+  console.log("name", name);
+  return (dispatch) => {
+    axios
+      .delete(`http://localhost:5000/api/itineraries/${name}/favorites`, {
+        email: emailAdded,
+      })
+      .then((res) => {
+        console.log("response", res);
+        if (res.status === 200) {
+          //send the user to his account page
+          dispatch({ type: "DELETE_ITINERARY_FAVORITE" });
+          dispatch(fetchItinerariesByCityName(name));
+        }
+      })
+      .catch((error) => {
+        console.log("error" + error.response);
+        if (error.response) {
+          if (error.response.status === 409) {
+            alert("problem with email");
+          } else {
+            //alert with something else
+            alert("Be Sure From Your email and link");
+          }
+        }
+      });
+  };
+};
+////////////////Add comments to the itinerary by user
+export const addComments = (email, name) => {
+  console.log("name", name);
+  return (dispatch) => {
+    axios
+      .post(`http://localhost:5000/api/itineraries/${name}/comments`, {
+        comments: email,
+      })
+      .then((res) => {
+        console.log("response", res);
+        if (res.status === 200) {
+          //send the user to his account page
+          dispatch({ type: "ADD_COMMENTS", payload: res });
+          dispatch(fetchItinerariesByCityName(name));
+        }
+      })
+      .catch((error) => {
+        console.log("error" + error.response);
+        if (error.response) {
+          if (error.response.status === 409) {
+            alert("problem with email");
+          } else {
+            //alert with something else
+            alert("Be Sure From Your email and link");
+          }
+        }
+      });
+  };
+};

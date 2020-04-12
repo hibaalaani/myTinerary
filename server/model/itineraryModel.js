@@ -27,5 +27,6 @@ const itinerarySchema = new mongoose.Schema({
   favorites: {
     type: [String],
   },
+  comments: [String],
 });
 module.exports = mongoose.model("itinerary", itinerarySchema);

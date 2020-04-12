@@ -15,7 +15,7 @@ import { addComments } from "../store/actions/itineraryActions";
 class AddComments extends Component {
   state = {
     modal: false,
-    comment: "",
+    comments: "",
   };
   toggle = () => {
     this.setState({
@@ -29,12 +29,11 @@ class AddComments extends Component {
   };
   onSubmit = (e) => {
     e.preventDefault();
-    const newComment = {
-      comment: this.props.itineraries.comment,
-    };
-
+    // const newComment = this.props.itineraries.comments;
+    const email = this.props.user.email;
+    const newComments = this.state.comments;
     //////add comments
-    this.props.addComments(newComment);
+    this.props.addComments(email);
     ///////////close modal
     this.toggle();
   };
@@ -44,6 +43,8 @@ class AddComments extends Component {
   //   const handleShow = () => setShow(true);
 
   render() {
+    const newComments = this.props.itineraries.comments;
+    const itinerary = this.props.itineraries;
     return (
       <div>
         <>
@@ -56,7 +57,7 @@ class AddComments extends Component {
               Add comment to the itinerary
             </ModalHeader>
             <ModalBody>
-              <Form onSubmit={this.onSubmit}>
+              <Form onSubmit={() => this.onSubmit(itinerary.name)}>
                 <FormGroup>
                   <Label for="comments">Comments </Label>
                   <Input
@@ -88,6 +89,6 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 const mapDispatchToProps = (dispatch) => ({
-  addComments: (newComment) => dispatch(addComments(newComment)),
+  addComments: (name, email) => dispatch(addComments(email, name)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(AddComments);

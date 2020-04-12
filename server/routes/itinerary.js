@@ -37,7 +37,6 @@ router.post("/:name/favorites", (req, res) => {
 ///////////////////delete user from favorite itinerary
 
 router.delete("/:name/favorites", (req, res) => {
-  console.log("itinerary", req.body);
   const name = req.params.name;
   const email = req.body.email;
   itineraryModel
@@ -56,6 +55,18 @@ router.delete("/:name/favorites", (req, res) => {
     });
 });
 
+/////////////post comment to the itenerary
+router.post("/:name/comments", (req, res) => {
+  let newComments = req.body.comments;
+  let email = req.body.email;
+  let name = req.params.name;
+  itineraryModel.findOne({ name: name }).then((itinerary) => {
+    itinerary.comments.push(email);
+    itinerary.save().then((saveditinerary) => {
+      res.status(200).send(saveditinerary);
+    });
+  });
+});
 router.get("/test", (req, res) => {
   res.send({ msg: "itinerary test route." });
 });

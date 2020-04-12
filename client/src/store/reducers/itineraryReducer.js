@@ -20,6 +20,9 @@ function itineraryReducer(state = initialState, action) {
     case "ADD_ITINERARY_FAVORITE":
       console.log("ADD_ITINERARY_FAVORITE", action);
       return { ...state };
+
+    case "DELETE_ITINERARY_FAVORITE":
+      return { ...state };
     default:
       return state;
   }
