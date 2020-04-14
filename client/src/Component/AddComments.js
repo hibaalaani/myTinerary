@@ -63,7 +63,7 @@ class AddComments extends Component {
             <ModalBody>
               <Form>
                 <FormGroup>
-                  <Label for="comments">Comments </Label>
+                  <Label for="comments">Write your comment </Label>
                   <Input
                     type="text"
                     // name="comments"
