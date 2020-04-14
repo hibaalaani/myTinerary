@@ -12,14 +12,16 @@ export class UserAccount extends Component {
     };
   }
 
-  componentDidMount() {
-    this.props.register(userData);
-    const userData = this.props.payload;
-  }
   render() {
+    const userData = this.props.user;
     return (
       <div className="container">
-        <h1> you are finish the registration {this.payload.name}</h1>
+        <h1> you are finish the registration </h1>{" "}
+        {this.props.user.isLoggedin ? (
+          <p> Hello {this.props.user.users}</p>
+        ) : (
+          this.state.user
+        )}
       </div>
     );
   }

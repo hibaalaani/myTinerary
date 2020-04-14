@@ -18,5 +18,8 @@ const userSchema = new mongoose.Schema({
   favorites: {
     type: [String],
   },
+  comments: {
+    type: [String],
+  },
 });
 module.exports = mongoose.model("users", userSchema);

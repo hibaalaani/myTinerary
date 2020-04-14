@@ -15,7 +15,7 @@ import { addComments } from "../store/actions/itineraryActions";
 class AddComments extends Component {
   state = {
     modal: false,
-    comments: "",
+    comments: [],
   };
   toggle = () => {
     this.setState({
@@ -24,16 +24,19 @@ class AddComments extends Component {
   };
   onChange = (e) => {
     this.setState({
-      [e.target.name]: e.target.value,
+      comments: e.target.value,
     });
   };
-  onSubmit = (e) => {
+  onSubmit = (e, name) => {
     e.preventDefault();
     // const newComment = this.props.itineraries.comments;
     const email = this.props.user.email;
-    const newComments = this.state.comments;
+    const comments = this.state.comments;
+    console.log("comments", comments);
+    // const name = this.props.match.params.name;
+
     //////add comments
-    this.props.addComments(email);
+    this.props.addComments(comments, name, email);
     ///////////close modal
     this.toggle();
   };
@@ -43,7 +46,7 @@ class AddComments extends Component {
   //   const handleShow = () => setShow(true);
 
   render() {
-    const newComments = this.props.itineraries.comments;
+    const comments = this.props.itineraries.comments;
     const itinerary = this.props.itineraries;
     return (
       <div>
@@ -62,7 +65,7 @@ class AddComments extends Component {
                   <Label for="comments">Comments </Label>
                   <Input
                     type="text"
-                    name="comments"
+                    // name="comments"
                     id="comments"
                     onChange={this.onChange}
                   />
@@ -89,6 +92,7 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 const mapDispatchToProps = (dispatch) => ({
-  addComments: (name, email) => dispatch(addComments(email, name)),
+  addComments: (comments, name, email) =>
+    dispatch(addComments(comments, name, email)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(AddComments);

@@ -28,7 +28,18 @@ export const register = (newUser) => {
         console.log("response", res);
         if (res.status === 200) {
           //send the user to his account page
-          // dispatch({ type: "REGISTER_SUCCESS", payload: res });
+          const token = res.data.token;
+          localStorage.setItem("token", token);
+          console.log("token", token);
+          const decoded = jwt_decode(token); // decode your token here
+
+          console.log("decoded", decoded);
+
+          // dispatch({
+          //   type: "REGISTER_SUCCESS",
+          //   payload: decoded,
+          //   token: token,
+          // });
           window.location = "/UserAccount";
         }
       })
@@ -89,4 +100,32 @@ export const login = (userData) => {
   };
 };
 
-///////////////////add favorite to the user
+// ///////////////////add comments to the user
+// export const addComments = (comments, name, email) => {
+//   console.log("name", name);
+//   return (dispatch) => {
+//     axios
+//       .post(`http://localhost:5000/api/users/${name}/comments`, {
+//         comments: comments,
+//         email,
+//       })
+//       .then((res) => {
+//         console.log("response", res);
+//         if (res.status === 200) {
+//           //send the user to his account page
+//           dispatch({ type: "ADD_COMMENTS", payload: res.payload });
+//         }
+//       })
+//       .catch((error) => {
+//         console.log("error" + error.response);
+//         if (error.response) {
+//           if (error.response.status === 409) {
+//             alert("problem with email");
+//           } else {
+//             //alert with something else
+//             alert("Be Sure From Your email and link");
+//           }
+//         }
+//       });
+//   };
+// };

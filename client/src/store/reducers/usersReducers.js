@@ -16,11 +16,13 @@ function usersReducers(state = initialState, action) {
     // case "REGISTER_SUCCESS":
     //   return {
     //     ...state,
-    //     users: action.payload,
+    //     token: action.token,
+    //     users: action.payload.name,
+    //     email: action.payload.email,
     //     isLoggedin: true,
     //   };
     case "FETCH_USERS_ERROR":
-      console.log("FETCH_ITINERARIES_ERROR", action);
+      console.log("FETCH_USERS_ERROR", action);
       return { ...state, err: action.payload.data };
     case "LOGIN_SUCCESS":
       return {

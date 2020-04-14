@@ -46,6 +46,27 @@ router.post("/register", async (req, res) => {
           password: hash,
           picture: req.body.picture,
         });
+        const payload = {
+          id: user.id,
+          // name: user.name,
+          email: user.email,
+        };
+
+        // Sign token
+        jwt.sign(
+          payload,
+          keys.secretOrKey,
+          {
+            expiresIn: 31556926, // 1 year in seconds
+          },
+
+          (err, token) => {
+            res.json({
+              success: true,
+              token: "Bearer " + token,
+            });
+          }
+        );
         await user.save();
         console.log("user saved");
         res.send(user);
@@ -203,6 +224,19 @@ router.delete("/:name/favorites", (req, res) => {
   userModel.findOne({ email: email }).then((user) => {
     let index = user.favorites.indexOf(name);
     user.favorites.splice(index, 1);
+    user.save().then((saveduser) => {
+      res.status(200).send(saveduser);
+    });
+  });
+});
+
+///////////Add comments
+router.post("/:name/comments", (req, res) => {
+  let name = req.params.name;
+  let comments = req.body.comments;
+  let email = req.body.email;
+  userModel.findOne({ email: email }).then((user) => {
+    user.comments.push(comments, name);
     user.save().then((saveduser) => {
       res.status(200).send(saveduser);
     });
