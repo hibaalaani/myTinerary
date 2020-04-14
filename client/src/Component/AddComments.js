@@ -15,7 +15,7 @@ import { addComments } from "../store/actions/itineraryActions";
 class AddComments extends Component {
   state = {
     modal: false,
-    comments: [],
+    comments: "",
   };
   toggle = () => {
     this.setState({
@@ -27,15 +27,16 @@ class AddComments extends Component {
       comments: e.target.value,
     });
   };
-  onSubmit = (e, name) => {
-    e.preventDefault();
+  onSubmit = (name) => {
     // const newComment = this.props.itineraries.comments;
+
     const email = this.props.user.email;
     const comments = this.state.comments;
     console.log("comments", comments);
     // const name = this.props.match.params.name;
 
     //////add comments
+
     this.props.addComments(comments, name, email);
     ///////////close modal
     this.toggle();
@@ -46,8 +47,8 @@ class AddComments extends Component {
   //   const handleShow = () => setShow(true);
 
   render() {
-    const comments = this.props.itineraries.comments;
-    const itinerary = this.props.itineraries;
+    const email = this.props.user.email;
+    const itinerary = this.props.itinerary;
     return (
       <div>
         <>
@@ -60,7 +61,7 @@ class AddComments extends Component {
               Add comment to the itinerary
             </ModalHeader>
             <ModalBody>
-              <Form onSubmit={() => this.onSubmit(itinerary.name)}>
+              <Form>
                 <FormGroup>
                   <Label for="comments">Comments </Label>
                   <Input
@@ -69,7 +70,12 @@ class AddComments extends Component {
                     id="comments"
                     onChange={this.onChange}
                   />
-                  <Button color="dark" block style={{ marginTop: "2rem" }}>
+                  <Button
+                    color="dark"
+                    block
+                    style={{ marginTop: "2rem" }}
+                    onClick={() => this.onSubmit(itinerary.name)}
+                  >
                     Add Comments
                   </Button>
                 </FormGroup>

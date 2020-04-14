@@ -8,7 +8,7 @@ class Cities extends Component {
     super();
     this.state = {
       cities: [],
-      search: ""
+      search: "",
     };
   }
 
@@ -20,10 +20,10 @@ class Cities extends Component {
       return index < 15;
     });
   }
-  handleChange = e => {
+  handleChange = (e) => {
     console.log("event from handel change", e.target.value);
     this.setState({
-      search: e.target.value
+      search: e.target.value,
     });
   };
   filter() {
@@ -65,7 +65,7 @@ class Cities extends Component {
           filterList.map((city, index) => (
             <Link to={"itineraries/" + city.name}>
               <div key={index} city={city}>
-                <div className="card">
+                <div className="cardImg">
                   <h3 className="card-title">{city.name}</h3>
                   <img className="card-img " src={city.picture} alt="" />
                 </div>
@@ -80,10 +80,10 @@ const mapStateToProps = (state, ownProps) => {
   console.log("mamToState", state);
 
   return {
-    cities: state.cities.cities
+    cities: state.cities.cities,
   };
 };
-const mapDispatchToProps = dispatch => ({
-  fetchCitiesAction: city => dispatch(fetchCitiesAction(city))
+const mapDispatchToProps = (dispatch) => ({
+  fetchCitiesAction: (city) => dispatch(fetchCitiesAction(city)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Cities);

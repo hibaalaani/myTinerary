@@ -74,7 +74,7 @@ body {
   margin-top: 10%;
 }
 
-.card {
+.cardImg {
   width: 18rem;
   position: fixed;
   height: 18rem;
@@ -122,8 +122,6 @@ body header {
 
 .container-for-header-text {
   text-align: center;
-
-
 }
 
 .header-text-wrapper {
@@ -146,4 +144,10 @@ body header {
   font: normal 2.4em "Patua One", serif;
   color: #cc350f;
 
+}
+
+.textColor {
+  color: #282c34;
+  display: inline-block;
+  justify-content: center;
 }

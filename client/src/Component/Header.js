@@ -41,7 +41,9 @@ class Header extends Component {
     return (
       <div>
         <Navbar color="dark" dark expand="sm">
-          <NavbarBrand href="/">MyItenarary</NavbarBrand>
+          <Link to="/">
+            <NavbarBrand>MyItenarary</NavbarBrand>
+          </Link>
           <NavbarToggler
             onClick={() => this.setState({ isOpen: !this.state.isOpen })}
           />

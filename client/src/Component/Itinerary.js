@@ -10,7 +10,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
-import { Button } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 const green = "#ffff00";
 const red = "#FF0000";
 class Itinerary extends Component {
@@ -44,6 +44,8 @@ class Itinerary extends Component {
   };
   handelFavorite = (name) => {
     const emailAdded = this.props.user.email;
+    //////////// if (this.props.user.logged)
+
     this.props.fetchItinerariesFavorite(emailAdded, name);
   };
   handelDeleteFavorite = (name) => {
@@ -107,17 +109,54 @@ class Itinerary extends Component {
                     }
                   />
 
-                  <AddComments />
+                  <AddComments itinerary={itinerary} />
+                </div>
+                <div>
+                  <div>
+                    {itinerary.comments &&
+                      itinerary.comments.map((comment) => {
+                        return (
+                          <div>
+                            <Card
+                              className="col-sm-4"
+                              border="warning"
+                              variant="primary"
+                              style={{ width: "12rem" }}
+                            >
+                              <Card.Title className="textColor">
+                                {comment.email}
+                              </Card.Title>
+                              <Card.Body>
+                                <Card.Text className="textColor">
+                                  {comment.msg}
+                                </Card.Text>
+                                <Button variant="primary">
+                                  Delete Comment
+                                </Button>
+                              </Card.Body>
+                            </Card>
+                            {/* {" "} */}
+                            {/* <div className="row">
+                            <div className="col">{comment.email}</div>
+                            <div className="col">{comment.msg}</div>
+                          </div> */}
+                            {/* <Card style={{ width: "10rem" }}>
+                            <Card.Body>
+                              <Card.Title>{comment.email}</Card.Title>
+                              <Card.Text>{comment.msg}</Card.Text>
+                              <Button variant="primary">Delete Comment</Button>
+                            </Card.Body>
+                          </Card> */}
+                            {/* <h2>{comment.msg}</h2>
+                          <p>{comment.email}</p> */}
+                          </div>
+                        );
+                      })}
+                  </div>
                 </div>
               </div>
             </div>
           ))}
-        {/* <FontAwesomeIcon
-          icon={faHeart}
-          className="mr-2 "
-          style={{ background: this.state.favColor }}
-          onClick={this.handelChange}
-        /> */}
       </div>
     );
   }

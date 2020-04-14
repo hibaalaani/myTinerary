@@ -91,18 +91,19 @@ export const fetchItinerariesDeleteFavorite = (emailAdded, name) => {
   };
 };
 ////////////////Add comments to the itinerary by user
-export const addComments = (comments, name) => {
+export const addComments = (comments, name, email) => {
   console.log("name", name);
   return (dispatch) => {
     axios
       .post(`http://localhost:5000/api/itineraries/${name}/comments`, {
         comments: comments,
+        email,
       })
       .then((res) => {
         console.log("response", res);
         if (res.status === 200) {
           //send the user to his account page
-          dispatch({ type: "ADD_COMMENTS", payload: res.payload });
+          dispatch({ type: "ADD_COMMENTS" });
           dispatch(fetchItinerariesByCityName(name));
         }
       })

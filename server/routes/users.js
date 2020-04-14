@@ -152,27 +152,40 @@ router.get(
   "/auth/google/callback",
   passport.authenticate("google", { failureRedirect: "/login" }),
   function (req, res) {
+    const user = req.user;
     console.log(req.user);
 
     ///////////////////////////////generate token
     //Sign token
+
     const payload = {
-      id: req.user.id,
-      name: req.user.name,
-      // email: req.user.email,
-    };
-    const token = (user) => {
-      console.log(" is: ", user);
-      return jwt.sign({ user }, keys.secretOrKey, {
-        user,
-        expiresIn: 31556926,
-      });
+      id: user.id,
+      name: user.name,
+      email: user.email,
     };
 
+    // Sign token
+    jwt.sign(
+      payload,
+      keys.secretOrKey,
+      {
+        expiresIn: 31556926, // 1 year in seconds
+      },
+
+      (err, token) => {
+        res.json({
+          success: true,
+          token: "Bearer " + token,
+        });
+      }
+    );
     // Successful authentication, redirect home.with query code
     res.redirect("http://localhost:3000/?code=" + token);
   }
 );
+
+// };
+
 ///////////////add route for users favoriate//////////
 router.get("/logout", (req, res) => {
   userModel.findOne(req.body.email).then((user) => {

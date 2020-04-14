@@ -2,7 +2,6 @@ const initialState = {
   itineraries: [],
   err: "",
   favorites: [],
-  comments: [],
 };
 
 //you had some issues acting the payload to pass data from your action to your reducer
@@ -27,7 +26,7 @@ function itineraryReducer(state = initialState, action) {
     case "ADD_COMMENTS":
       console.log("ADD_COMMENTS", action);
 
-      return { ...state, comments: action.payload };
+      return { ...state };
     default:
       return state;
   }

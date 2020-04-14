@@ -58,23 +58,29 @@ router.delete("/:name/favorites", (req, res) => {
 /////////////post comment to the itenerary
 router.post("/:name/comments", (req, res, next) => {
   const name = req.params.name;
-  let comments = req.body.comments;
+  let comments = { msg: req.body.comments, email: req.body.email };
+
   itineraryModel.findOne({ name: name }).then((itinerary) => {
     itinerary.comments.push(comments);
     itinerary.save().then((saveditinerary) => {
       res.status(200).send(saveditinerary);
     });
   });
+});
 
-  // let comments = req.body.comments;
-  // let email = req.body.email;
-  // let name = req.params.name;
-  // itineraryModel.findOne({ name: name }).then((itinerary) => {
-  //   itinerary.comments.push(comments);
-  //   itinerary.save().then((saveditinerary) => {
-  //     res.status(200).send(saveditinerary);
-  //   });
-  // });
+/////////////delete  comment from the itenerary
+router.delete("/:name/comments", (req, res, next) => {
+  const name = req.params.name;
+  let comments = { msg: req.body.comments, email: req.body.email };
+
+  itineraryModel.findOne({ name: name }).then((itinerary) => {
+    let index = itinerary.comments.indexOf(comments);
+    itinerary.comments.splice(index, 1);
+
+    itinerary.save().then((saveditinerary) => {
+      res.status(200).send(saveditinerary);
+    });
+  });
 });
 router.get("/test", (req, res) => {
   res.send({ msg: "itinerary test route." });
