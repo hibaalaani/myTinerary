@@ -24,11 +24,6 @@ router.get("/all", (_req, res) => {
 
 router.post("/register", async (req, res) => {
   console.log(req.body);
-  // const { errors, isValid } = validateRegisterInput(req.body);
-  // // Check validation
-  // if (!isValid) {
-  //   return res.status(400).json(errors);
-  // }
 
   //Check if this user already exisits
   let user = await userModel.findOne({ email: req.body.email });
@@ -81,12 +76,7 @@ router.post("/register", async (req, res) => {
 ////////////////////////////////login user
 router.post("/login", async (req, res) => {
   console.log(req.body);
-  // Form validation
-  // const { errors, isValid } = validateLoginInput(req.body);
-  // // Check validation
-  // if (!isValid) {
-  //   return res.status(400).json(errors);
-  // }
+
   const email = req.body.email;
   const password = req.body.password;
   // Find user by email
@@ -220,16 +210,6 @@ router.post("/:name/favorites", (req, res) => {
   });
 });
 
-///////////////////get favourite
-// router.get("/:favourite", (req, res) => {
-//   let favItinerary = req.params.favourite;
-//   userModel
-//     .findOne({ favourite: favItinerary })
-//     .then((itinerary) => {
-//       res.send(itinerary);
-//     })
-//     .catch((err) => console.log(err));
-// });
 /////////////delete favourite
 router.delete("/:name/favorites", (req, res) => {
   let name = req.params.name;

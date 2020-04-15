@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import AddComments from "../Component/AddComments";
-import { login } from "../store/actions/usersAction";
 import { fetchItinerariesByCityName } from "../store/actions/itineraryActions";
 import {
   fetchItinerariesFavorite,
   fetchItinerariesDeleteFavorite,
+  fetchDeleteComment,
 } from "../store/actions/itineraryActions";
+import AddCity from "../Component/AddCity";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
@@ -22,7 +23,6 @@ class Itinerary extends Component {
       favColor: green,
       comments: [],
     };
-    this.handelChange = this.handelChange.bind(this);
   }
   componentDidMount() {
     const city = this.props.match.params.city;
@@ -33,14 +33,6 @@ class Itinerary extends Component {
     console.log(e);
     const newColor = this.state.favColor == green ? red : green;
     this.setState({ favColor: newColor });
-    // this.setState({
-    ///change the button color
-    /////post the favourite to the user
-
-    // this.props.login(newFavorite);
-
-    // this.props.fetchItinerariesFavorite(emailAdded);
-    // console.log("emailAdded", emailAdded);
   };
   handelFavorite = (name) => {
     const emailAdded = this.props.user.email;
@@ -51,6 +43,13 @@ class Itinerary extends Component {
   handelDeleteFavorite = (name) => {
     const emailAdded = this.props.user.email;
     this.props.fetchItinerariesDeleteFavorite(emailAdded, name);
+  };
+  handelDeleteComment = (name) => {
+    const email = this.props.user.email;
+    const comments = this.props.itineraries.comments;
+    console.log("comment", comments);
+    console.log("nameItiner", name);
+    this.props.fetchDeleteComment(comments, email, name);
   };
   filter() {
     if (this.props.itineraries) {
@@ -71,7 +70,7 @@ class Itinerary extends Component {
     return (
       <div>
         <h1>Our Itineraries</h1>
-        {filterList &&
+        {filterList ? (
           filterList.map((itinerary, index) => (
             <div
               className="container  itinerary"
@@ -117,7 +116,31 @@ class Itinerary extends Component {
                       itinerary.comments.map((comment) => {
                         return (
                           <div>
-                            <Card
+                            <Card style={{ width: "18rem" }}>
+                              <Card.Header>What Other Said</Card.Header>
+                              <Card.Body>
+                                <Card.Text className="textColor">
+                                  {comment.msg}
+                                </Card.Text>
+                                <footer className="blockquote-footer">
+                                  <cite title="Source Title">Written by</cite>{" "}
+                                  {comment.email}{" "}
+                                </footer>
+                                <Button
+                                  variant="primary"
+                                  onClick={() =>
+                                    comment.email &&
+                                    comment.email.includes(email)
+                                      ? this.handelDeleteComment(itinerary.name)
+                                      : this.handelChange
+                                  }
+                                >
+                                  Delete Comment
+                                </Button>
+                              </Card.Body>
+                            </Card>
+
+                            {/* <Card
                               className="col-sm-4"
                               border="warning"
                               variant="primary"
@@ -134,21 +157,7 @@ class Itinerary extends Component {
                                   Delete Comment
                                 </Button>
                               </Card.Body>
-                            </Card>
-                            {/* {" "} */}
-                            {/* <div className="row">
-                            <div className="col">{comment.email}</div>
-                            <div className="col">{comment.msg}</div>
-                          </div> */}
-                            {/* <Card style={{ width: "10rem" }}>
-                            <Card.Body>
-                              <Card.Title>{comment.email}</Card.Title>
-                              <Card.Text>{comment.msg}</Card.Text>
-                              <Button variant="primary">Delete Comment</Button>
-                            </Card.Body>
-                          </Card> */}
-                            {/* <h2>{comment.msg}</h2>
-                          <p>{comment.email}</p> */}
+                            </Card> */}
                           </div>
                         );
                       })}
@@ -156,7 +165,10 @@ class Itinerary extends Component {
                 </div>
               </div>
             </div>
-          ))}
+          ))
+        ) : (
+          <AddCity />
+        )}
       </div>
     );
   }
@@ -176,6 +188,8 @@ const mapDispatchToProps = (dispatch) => ({
 
   fetchItinerariesFavorite: (emailAdded, name) =>
     dispatch(fetchItinerariesFavorite(emailAdded, name)),
+  fetchDeleteComment: (comments, email, name) =>
+    dispatch(fetchDeleteComment(comments, email, name)),
   fetchItinerariesDeleteFavorite: (emailAdded, name) =>
     dispatch(fetchItinerariesDeleteFavorite(emailAdded, name)),
 });

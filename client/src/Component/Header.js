@@ -73,19 +73,10 @@ class Header extends Component {
                   <DropdownItem>
                     <Link to="/Users">Sign Up </Link>
                   </DropdownItem>
-                  {/* <DropdownItem divider /> */}
-                  {/* <DropdownItem>Reset</DropdownItem> */}
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
             <Form inline>
-              {/* <FormControl
-                value={this.state.search}
-                onChange={this.handleChangeChild}
-                type="text"
-                placeholder="Search"
-                className="mr-sm-2"
-              />*/}
               <Button variant="outline-success ">
                 {this.props.user.isLoggedin ? (
                   <p> Hello {this.props.user.users}</p>

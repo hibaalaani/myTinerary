@@ -28,8 +28,6 @@ class AddComments extends Component {
     });
   };
   onSubmit = (name) => {
-    // const newComment = this.props.itineraries.comments;
-
     const email = this.props.user.email;
     const comments = this.state.comments;
     console.log("comments", comments);
@@ -41,10 +39,6 @@ class AddComments extends Component {
     ///////////close modal
     this.toggle();
   };
-  //   const [show, setShow] = useState(false);
-
-  //   const handleClose = () => setShow(false);
-  //   const handleShow = () => setShow(true);
 
   render() {
     const email = this.props.user.email;

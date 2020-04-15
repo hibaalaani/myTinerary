@@ -120,3 +120,32 @@ export const addComments = (comments, name, email) => {
       });
   };
 };
+export const fetchDeleteComment = (comments, email, name) => {
+  console.log("name", name);
+  return (dispatch) => {
+    axios
+      .delete(`http://localhost:5000/api/itineraries/${name}/comments`, {
+        comments: comments,
+        email,
+      })
+      .then((res) => {
+        console.log("response", res);
+        if (res.status === 200) {
+          //send the user to his account page
+          dispatch({ type: "DELETE_COMMENTS" });
+          dispatch(fetchItinerariesByCityName(name));
+        }
+      })
+      .catch((error) => {
+        console.log("error" + error.response);
+        if (error.response) {
+          if (error.response.status === 409) {
+            alert("problem with email");
+          } else {
+            //alert with something else
+            alert("Be Sure From Your email and link");
+          }
+        }
+      });
+  };
+};

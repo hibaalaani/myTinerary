@@ -74,14 +74,13 @@ body {
   margin-top: 10%;
 }
 
-.cardImg {
+.card {
   width: 18rem;
-  position: fixed;
+  position: absolute;
   height: 18rem;
   float: left;
   background-color: #d2dbe7;
-
-  /* display: inline-block; */
+  display: inline-block;
   margin: 3%;
   text-align: center;
 }
@@ -103,19 +102,12 @@ body {
   text-align: center;
 }
 
-/* .background {
-
-  background-size: cover;
-  width: 100%;
-  background-color: #61dafb;
-} */
 body header {
   background-image: url("./Component/PhotoWithCamera.jpg");
   background-position: 50% 80%;
   background-size: 100%;
   background-repeat: no-repeat;
   height: 700px;
-
   margin: 0 auto;
 
 }
@@ -130,8 +122,6 @@ body header {
   /* width: 80%; */
   float: none;
 }
-
-
 
 .container-for-header-text p {
   margin-top: 10%;

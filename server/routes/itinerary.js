@@ -82,6 +82,27 @@ router.delete("/:name/comments", (req, res, next) => {
     });
   });
 });
+/////////Add itinerary
+router.post("/additinerary", (req, res) => {
+  const newItinerary = new itineraryModel({
+    name: req.body.name,
+    profile: req.body.picture,
+    hashtags: req.body.hashtags,
+    price: req.body.price,
+    rating: req.body.rating,
+    duration: req.body.duration,
+    activities: req.body.activities,
+  });
+  newItinerary
+    .save()
+    .then((itinerary) => {
+      res.send(itinerary);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send("Server error");
+    });
+});
 router.get("/test", (req, res) => {
   res.send({ msg: "itinerary test route." });
 });

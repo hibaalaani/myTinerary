@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { fetchCitiesAction } from "../store/actions/cityActions";
+import { fetchCitiesAction, fetchAddCity } from "../store/actions/cityActions";
 import { connect } from "react-redux";
 
 class AddCity extends Component {
@@ -8,24 +8,27 @@ class AddCity extends Component {
     this.state = {
       name: null,
       country: null,
-      picture: null
+      picture: null,
     };
   }
-  handelChange = e => {
+  componentDidMount() {
+    const city = this.props.cities;
+    this.props.fetchCitiesAction(city);
+  }
+  handelChange = (e) => {
     this.setState({
-      [e.target.id]: e.target.value
+      [e.target.id]: e.target.value,
     });
   };
-  handelSubmit = e => {
+  handelSubmit = (e) => {
     e.preventDefault();
     console.log(e);
-    // let cities = this.props.cities;
-    // this.props.addNinja(this.state);
-    this.props.fetchCitiesAction(this.state.cities);
-    // let cities = { ...this.state.cities, cities };
-    // this.setState({
-    //   cities: cities
-    // });
+
+    const name = this.state.name;
+    const country = this.state.country;
+    const picture = this.state.picture;
+
+    this.props.fetchAddCity(name, country, picture);
     console.log("submit", this.state);
   };
   render() {
@@ -57,16 +60,18 @@ class AddCity extends Component {
     );
   }
 }
-const mapDispatchToParops = dispatch => {
-  return {
-    fetchCitiesAction: city => dispatch(fetchCitiesAction(city))
-  };
-};
+
 const mapStateToProps = (state, ownProps) => {
-  console.log(state);
+  console.log("mapStateToState", state);
 
   return {
-    cities: state.cities.cities
+    cities: state.cities.cities,
   };
 };
-export default connect(mapStateToProps, mapDispatchToParops)(AddCity);
+const mapDispatchToProps = (dispatch) => ({
+  fetchAddCity: (name, country, picture) =>
+    dispatch(fetchAddCity(name, country, picture)),
+  fetchCitiesAction: (city) => dispatch(fetchCitiesAction(city)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddCity);

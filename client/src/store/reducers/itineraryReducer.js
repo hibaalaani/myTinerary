@@ -27,6 +27,9 @@ function itineraryReducer(state = initialState, action) {
       console.log("ADD_COMMENTS", action);
 
       return { ...state };
+    case "DELETE_COMMENTS":
+      return { ...state };
+
     default:
       return state;
   }

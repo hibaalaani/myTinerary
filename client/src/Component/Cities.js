@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import { Card, CardGroup } from "reactstrap";
 import { connect } from "react-redux";
 import { fetchCitiesAction } from "../store/actions/cityActions";
 import { Link } from "react-router-dom";
@@ -38,13 +37,7 @@ class Cities extends Component {
       return filterCity;
     } else return [];
   }
-  // addNinja = city => {
-  //   // city.id = Math.random();
-  //   let cities = [...this.state.cities, city];
-  //   this.setState({
-  //     cities: cities
-  //   });
-  // };
+
   render() {
     const filterList = this.filter();
     const { cities } = this.props;
@@ -52,20 +45,24 @@ class Cities extends Component {
     console.log("cities from citues", cities);
     return (
       <div>
-        <label htmlFor="filter">Filter by City: </label>
-        <input
-          className=""
-          type="search"
-          id="filter"
-          value={this.state.search}
-          onChange={this.handleChange}
-        />
-
+        <div className="justify-content-around">
+          <label htmlFor="filter">Search for City: </label>
+          <input
+            className="btn btn-outline-info mr-2"
+            type="search"
+            id="filter"
+            value={this.state.search}
+            onChange={this.handleChange}
+          />
+          <Link to="/AddCity">
+            <button className="btn btn-outline-info">Add city you like</button>
+          </Link>
+        </div>
         {filterList &&
           filterList.map((city, index) => (
             <Link to={"itineraries/" + city.name}>
               <div key={index} city={city}>
-                <div className="cardImg">
+                <div className="card border-info">
                   <h3 className="card-title">{city.name}</h3>
                   <img className="card-img " src={city.picture} alt="" />
                 </div>
