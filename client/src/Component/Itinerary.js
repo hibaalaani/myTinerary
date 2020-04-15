@@ -1,12 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import axios from "axios";
-import { useHistory } from "react-router-dom";
+import AddComments from "../Component/AddComments";
 import { fetchItinerariesByCityName } from "../store/actions/itineraryActions";
+import {
+  fetchItinerariesFavorite,
+  fetchItinerariesDeleteFavorite,
+  fetchDeleteComment,
+} from "../store/actions/itineraryActions";
+import AddCity from "../Component/AddCity";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
-import { Button } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 const green = "#ffff00";
 const red = "#FF0000";
 class Itinerary extends Component {
@@ -14,10 +19,10 @@ class Itinerary extends Component {
     super();
     this.state = {
       itineraries: [],
-      favourite: "",
+      favorites: [],
       favColor: green,
+      comments: [],
     };
-    this.handelChange = this.handelChange.bind(this);
   }
   componentDidMount() {
     const city = this.props.match.params.city;
@@ -28,44 +33,23 @@ class Itinerary extends Component {
     console.log(e);
     const newColor = this.state.favColor == green ? red : green;
     this.setState({ favColor: newColor });
-    // this.setState({
-    ///change the button color
-    /////post the favourite to the user
-    // const newFavourite = this.props.match.params.name;
-    const newFavourite = this.props.itineraries;
-    console.log("newFavourite", newFavourite);
-    axios
-      .post("http://localhost:5000/api/users/favourite", newFavourite)
-      .then((res) => {
-        console.log("response", res);
-        if (res.status === 200) {
-          //send the user to his account page
-          let history = useHistory();
-          history.push("/home");
-        }
-        if (this.state.favourite != newFavourite) {
-          this.setState({
-            users: [...this.state.favourite, newFavourite],
-          });
-        } else {
-          this.setState({
-            users: [...this.state.favourite, ""],
-          });
-        }
-      })
-      .catch((error) => {
-        console.log("error " + error.response);
-        if (error.response) {
-          console.log(error.response.status);
-          if (error.response.status === 409) {
-            alert("This email is already in use");
-          } else {
-            //alert with something else
-            alert("you add this itinerary");
-          }
-        }
-      });
-    // });
+  };
+  handelFavorite = (name) => {
+    const emailAdded = this.props.user.email;
+    //////////// if (this.props.user.logged)
+
+    this.props.fetchItinerariesFavorite(emailAdded, name);
+  };
+  handelDeleteFavorite = (name) => {
+    const emailAdded = this.props.user.email;
+    this.props.fetchItinerariesDeleteFavorite(emailAdded, name);
+  };
+  handelDeleteComment = (name) => {
+    const email = this.props.user.email;
+    const comments = this.props.itineraries.comments;
+    console.log("comment", comments);
+    console.log("nameItiner", name);
+    this.props.fetchDeleteComment(comments, email, name);
   };
   filter() {
     if (this.props.itineraries) {
@@ -81,11 +65,12 @@ class Itinerary extends Component {
   }
   render() {
     const filterList = this.filter();
+    const email = this.props.user.email;
     // const { itineraries } = this.props;
     return (
       <div>
         <h1>Our Itineraries</h1>
-        {filterList &&
+        {filterList ? (
           filterList.map((itinerary, index) => (
             <div
               className="container  itinerary"
@@ -109,35 +94,81 @@ class Itinerary extends Component {
                 <div className="row justify-content-around">
                   <FontAwesomeIcon
                     icon={faHeart}
-                    className="col-sm-4"
                     size="3x"
-                    style={{ color: this.state.favColor }}
-                    onClick={this.handelChange}
+                    style={
+                      itinerary.favorites.includes(email)
+                        ? { color: "red" }
+                        : { color: "green" }
+                    }
+                    // onClick={() => this.handelFavorite(itinerary.name)}
+                    onClick={() =>
+                      itinerary.favorites.includes(email)
+                        ? this.handelDeleteFavorite(itinerary.name)
+                        : this.handelFavorite(itinerary.name)
+                    }
                   />
-                  <Button
-                    color="danger"
-                    className="col-sm-4"
-                    size="lg"
-                    onClick={(id) => {
-                      this.setState(() => ({
-                        itineraries: this.state.itineraries.filter(
-                          (itinerary) => itinerary.id != id
-                        ),
-                      }));
-                    }}
-                  >
-                    &times;
-                  </Button>
+
+                  <AddComments itinerary={itinerary} />
+                </div>
+                <div>
+                  <div>
+                    {itinerary.comments &&
+                      itinerary.comments.map((comment) => {
+                        return (
+                          <div>
+                            <Card style={{ width: "18rem" }}>
+                              <Card.Header>What Other Said</Card.Header>
+                              <Card.Body>
+                                <Card.Text className="textColor">
+                                  {comment.msg}
+                                </Card.Text>
+                                <footer className="blockquote-footer">
+                                  <cite title="Source Title">Written by</cite>{" "}
+                                  {comment.email}{" "}
+                                </footer>
+                                <Button
+                                  variant="primary"
+                                  onClick={() =>
+                                    comment.email &&
+                                    comment.email.includes(email)
+                                      ? this.handelDeleteComment(itinerary.name)
+                                      : this.handelChange
+                                  }
+                                >
+                                  Delete Comment
+                                </Button>
+                              </Card.Body>
+                            </Card>
+
+                            {/* <Card
+                              className="col-sm-4"
+                              border="warning"
+                              variant="primary"
+                              style={{ width: "12rem" }}
+                            >
+                              <Card.Title className="textColor">
+                                {comment.email}
+                              </Card.Title>
+                              <Card.Body>
+                                <Card.Text className="textColor">
+                                  {comment.msg}
+                                </Card.Text>
+                                <Button variant="primary">
+                                  Delete Comment
+                                </Button>
+                              </Card.Body>
+                            </Card> */}
+                          </div>
+                        );
+                      })}
+                  </div>
                 </div>
               </div>
             </div>
-          ))}
-        {/* <FontAwesomeIcon
-          icon={faHeart}
-          className="mr-2 "
-          style={{ background: this.state.favColor }}
-          onClick={this.handelChange}
-        /> */}
+          ))
+        ) : (
+          <AddCity />
+        )}
       </div>
     );
   }
@@ -147,10 +178,19 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     itineraries: state.itineraries.itineraries,
+    user: state.users,
+    favorites: state.itineraries.favorites,
   };
 };
 const mapDispatchToProps = (dispatch) => ({
   fetchItinerariesByCityName: (city) =>
     dispatch(fetchItinerariesByCityName(city)),
+
+  fetchItinerariesFavorite: (emailAdded, name) =>
+    dispatch(fetchItinerariesFavorite(emailAdded, name)),
+  fetchDeleteComment: (comments, email, name) =>
+    dispatch(fetchDeleteComment(comments, email, name)),
+  fetchItinerariesDeleteFavorite: (emailAdded, name) =>
+    dispatch(fetchItinerariesDeleteFavorite(emailAdded, name)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Itinerary);

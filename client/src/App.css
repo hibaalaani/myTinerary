@@ -76,12 +76,11 @@ body {
 
 .card {
   width: 18rem;
-  position: fixed;
+  position: absolute;
   height: 18rem;
   float: left;
   background-color: #d2dbe7;
-
-  /* display: inline-block; */
+  display: inline-block;
   margin: 3%;
   text-align: center;
 }
@@ -103,35 +102,26 @@ body {
   text-align: center;
 }
 
-/* .background {
-
-  background-size: cover;
-  width: 100%;
-  background-color: #61dafb;
-} */
 body header {
   background-image: url("./Component/PhotoWithCamera.jpg");
   background-position: 50% 80%;
   background-size: 100%;
   background-repeat: no-repeat;
-  height: 400px;
+  height: 700px;
+  margin: 0 auto;
 
 }
 
 .container-for-header-text {
   text-align: center;
-
-
 }
 
 .header-text-wrapper {
-  padding: 20%;
-  margin: auto;
+  /* padding: 20%; */
+  margin: 20% auto;
   /* width: 80%; */
   float: none;
 }
-
-
 
 .container-for-header-text p {
   margin-top: 10%;
@@ -144,4 +134,10 @@ body header {
   font: normal 2.4em "Patua One", serif;
   color: #cc350f;
 
+}
+
+.textColor {
+  color: #282c34;
+  display: inline-block;
+  justify-content: center;
 }

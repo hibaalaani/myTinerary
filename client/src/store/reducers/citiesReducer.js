@@ -18,6 +18,7 @@ function citiesReducer(state = initialState, action) {
 
     case "ADD_CITY":
       return { ...state, cities: [...state.cities, action.payload] };
+
     default:
       return state;
   }

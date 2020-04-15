@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { fetchAddCity } from "../store/actions/cityActions";
+import { fetchCitiesAction, fetchAddCity } from "../store/actions/cityActions";
 import { connect } from "react-redux";
 
 class AddCity extends Component {
@@ -11,6 +11,13 @@ class AddCity extends Component {
       picture: null,
     };
   }
+
+
+  componentDidMount() {
+    const city = this.props.cities;
+    this.props.fetchCitiesAction(city);
+  }
+
   handelChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value,
@@ -19,6 +26,7 @@ class AddCity extends Component {
   handelSubmit = (e) => {
     e.preventDefault();
     console.log(e);
+
     // let cities = this.props.cities;
     // this.props.addNinja(this.state);
     // retrieve token from local storage and send it to the add city action
@@ -27,6 +35,8 @@ class AddCity extends Component {
     // this.setState({
     //   cities: cities
     // });
+
+
     console.log("submit", this.state);
   };
   render() {
@@ -58,16 +68,16 @@ class AddCity extends Component {
     );
   }
 }
-const mapDispatchToParops = (dispatch) => {
-  return {
-    fetchAddCity: (city) => dispatch(fetchAddCity(city)),
-  };
-};
 const mapStateToProps = (state, ownProps) => {
-  console.log(state);
+  console.log("mapStateToState", state);
 
   return {
     cities: state.cities.cities,
   };
 };
-export default connect(mapStateToProps, mapDispatchToParops)(AddCity);
+const mapDispatchToProps = (dispatch) => ({
+  fetchAddCity: (city) => dispatch(fetchAddCity(city)),
+  fetchCitiesAction: (city) => dispatch(fetchCitiesAction(city)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddCity);

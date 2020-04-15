@@ -15,25 +15,32 @@ export const fetchCitiesAction = () => {
       .catch((err) => {
         dispatch({ type: "FETCH_CITIES_ERROR", payload: err });
       });
-    //       .then(handleErrors)
-
-    //       .then(res => res.json())
-    //       .then(json => {
-    //         dispatch(fetchCitiesSuccess(json.cities));
-    //         return json.cities;
-    //       })
-
-    //       .catch(error => dispatch(fetchCitiesFailure(error)));
   };
-  //   fetch("http://localhost:5000/api/cities/all")
-  //     .then(res => {
-  //       return res.json();
-  //     })
-  //     .then(result => {
-  //       console.log("result :", result);
-  //       this.setState({ cities: result });
-  //       console.log(this.state.cities);
-  //     });
+};
+export const fetchAddCity = (name, country, picture) => {
+  return (dispatch) => {
+    axios
+      .post("http://localhost:5000/api/cities/", name, country, picture)
+      .then((res) => {
+        console.log("response", res);
+        if (res.status === 200) {
+          //send the user to his account page
+          dispatch({ type: "ADD_CITY" });
+          dispatch(fetchCitiesAction());
+        }
+      })
+      .catch((error) => {
+        console.log("error" + error.response);
+        if (error.response) {
+          if (error.response.status === 409) {
+            alert("problem with email");
+          } else {
+            //alert with something else
+            alert("Be Sure From Your email and link");
+          }
+        }
+      });
+  };
 };
 // add the token to the headers of the axios request
 export const fetchAddCity = (city) => {

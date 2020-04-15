@@ -8,29 +8,25 @@ import { Button } from "reactstrap";
 class Login extends Component {
   state = {
     email: "",
-    password: ""
+    password: "",
   };
-  handelChange = e => {
+  handelChange = (e) => {
     this.setState({
-      [e.target.id]: e.target.value
+      [e.target.id]: e.target.value,
     });
   };
-  handelSubmit = e => {
+  handelSubmit = (e) => {
     e.preventDefault();
     if (this.state.email === "" || this.state.password === "") {
       return alert("you need to fill both field");
     } else {
       const userData = {
         email: this.state.email,
-        password: this.state.password
+        password: this.state.password,
       };
       console.log(userData);
       this.props.login(userData);
     }
-    // this.setState({
-    //   email: "",
-    //   password: ""
-    // });
   };
   render() {
     console.log("this.props :", this.props);
@@ -40,6 +36,7 @@ class Login extends Component {
         {this.props.user.isLoggedin ? (
           <p>{this.props.user.token}</p>
         ) : (
+          // <p>{this.props.users}</p>
           <form className="form-horizontal" onSubmit={this.handelSubmit}>
             <div className="form-group">
               <label
@@ -89,14 +86,14 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   console.log("mapToState", state);
   return {
-    user: state.users
+    user: state.users,
   };
 };
-const mapDispatchToProps = dispatch => ({
-  login: userData => dispatch(login(userData))
+const mapDispatchToProps = (dispatch) => ({
+  login: (userData) => dispatch(login(userData)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

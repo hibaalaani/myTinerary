@@ -30,27 +30,20 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    const user = {
-      userName: this.state.user,
+    const userData = {
+      user: this.state.user,
     };
-    this.props.login(user);
+    console.log(userData);
+    this.props.login(userData);
   }
-  // handleChangeChild = e => {
-  //   console.log("e from header", e);
-
-  //   // const user = this.props.user.token;
-  //   //console.log("this.props", this.props);
-  //   // this.props.callbackFromParent(e);
-  //   // this.props.login(user);
-  // };
-
   render() {
-    console.log(this.props.user);
     //toggle = () => this.setState({ isOpen: !isOpen });
     return (
       <div>
         <Navbar color="dark" dark expand="sm">
-          <NavbarBrand href="/">MyItenarary</NavbarBrand>
+          <Link to="/">
+            <NavbarBrand>MyItenarary</NavbarBrand>
+          </Link>
           <NavbarToggler
             onClick={() => this.setState({ isOpen: !this.state.isOpen })}
           />
@@ -80,24 +73,15 @@ class Header extends Component {
                   <DropdownItem>
                     <Link to="/Users">Sign Up </Link>
                   </DropdownItem>
-                  {/* <DropdownItem divider /> */}
-                  {/* <DropdownItem>Reset</DropdownItem> */}
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
             <Form inline>
-              {/* <FormControl
-                value={this.state.search}
-                onChange={this.handleChangeChild}
-                type="text"
-                placeholder="Search"
-                className="mr-sm-2"
-              />*/}
               <Button variant="outline-success ">
                 {this.props.user.isLoggedin ? (
-                  <p>{this.props.user.id}</p>
+                  <p> Hello {this.props.user.users}</p>
                 ) : (
-                  <p>LogIn</p>
+                  <Link to="/Login">Login </Link>
                 )}
               </Button>
             </Form>
@@ -115,6 +99,6 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 const mapDispatchToProps = (dispatch) => ({
-  login: (user) => dispatch(login(user)),
+  login: (userData) => dispatch(login(userData)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
