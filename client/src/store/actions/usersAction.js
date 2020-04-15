@@ -50,16 +50,16 @@ export const login = (user) => {
     axios
       .post("http://localhost:5000/api/users/login", user)
       .then((res) => {
-        console.log("response", res);
+        console.log("response", res.data.token);
         if (res.status === 200) {
           // decode the token
-          console.log(res);
+          console.log("response", res);
           //send the user to his account page
           dispatch({
             type: "LOGIN_SUCCESS",
             payload: res, //send the decoded token instead
           });
-
+          localStorage.setItem("token", res.data.token);
           // window.location = "/UserAccount";
         }
       })

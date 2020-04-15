@@ -137,31 +137,36 @@ router.get(
       id: req.user.id,
       name: req.user.name,
     };
-    // const token = jwt.sign(
-    //   payload,
-    //   keys.secretOrKey,
-    //   {
-    //     expiresIn: 31556926 // 1 year in seconds
-    //   },
-    //   (err, token) => {
-    //     res.json({
-    //       success: true,
-    //       token: "Bearer " + token
-    //     });
-    //   }
-    // );
-
-    const token = (user) => {
-      console.log(" is: ", user);
-      return jwt.sign({ user }, keys.secretOrKey, {
-        user,
-        expiresIn: 31556926,
-      });
-    };
-    // Successful authentication, redirect home.with query code
-    res.redirect("http://localhost:3000/?code=" + token);
+    jwt.sign(
+      payload,
+      keys.secretOrKey,
+      {
+        expiresIn: 31556926, // 1 year in seconds
+      },
+      (err, token) => {
+        // Successful authentication, redirect home.with query code
+        res.redirect("http://localhost:3000/?code=" + token);
+      }
+    );
   }
 );
+
+// const token = async (payload) => {
+//   console.log(" is: ", payload);
+//   const myToken = null;
+//   jwt.sign(
+//     payload,
+//     keys.secretOrKey,
+//     {
+//       expiresIn: 56926,
+//     },
+//     (err, token) => {
+//       myToken = token;
+//     }
+//   );
+//   console.log("token", myToken);
+//   return myToken;
+// };
 // router.get("/redirect", (req, res) => {});
 ///////////////add route for users favoriate//////////
 router.get("/logout", (req, res) => {
@@ -175,18 +180,24 @@ router.get("/logout", (req, res) => {
 });
 
 ///////////Add Favourite
-router.post("/:userID/favourite", (req, res) => {
-  let currentUser = userModel.findOne({ email: req.body.email });
-  currentUser.favorites.push(req.body.favourite);
-  currentUser.save();
+router.post("/:userID/favorites", (req, res) => {
+  console.log(req.params);
+  let currentUser = userModel
+    .findOne({ _id: req.params.userID })
+    .then((user) => {
+      console.log("currentUser", user);
+      user.favorites.push(req.body.favourite);
+      user.save();
+    });
+
   // const favourite = new userModel({
   //   favourite: req.body.favourite,
   // });
-  favourite.save();
-  console.log("favourite saved");
-  res.send("favourite Added", favourite).catch(error);
-  console.log("in catch block");
-  res.send(error);
+  // favourite.save();
+  // console.log("favourite saved");
+  // res.send("favourite Added", favourite).catch(error);
+  // console.log("in catch block");
+  // res.send(error);
 });
 ///////////////////get favourite
 router.get("/:favourite", (req, res) => {

@@ -1,6 +1,6 @@
 const initialState = {
   cities: [],
-  err: ""
+  err: "",
 };
 
 //you had some issues acting the payload to pass data from your action to your reducer
@@ -15,6 +15,9 @@ function citiesReducer(state = initialState, action) {
     case "FETCH_CITIES_ERROR":
       console.log("FETCH_CITIES_ERROR", action);
       return { ...state, err: action.payload };
+
+    case "ADD_CITY":
+      return { ...state, cities: [...state.cities, action.payload] };
     default:
       return state;
   }
