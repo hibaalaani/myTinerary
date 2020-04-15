@@ -12,7 +12,6 @@ class AddCity extends Component {
     };
   }
 
-
   componentDidMount() {
     const city = this.props.cities;
     this.props.fetchCitiesAction(city);
@@ -27,22 +26,14 @@ class AddCity extends Component {
     e.preventDefault();
     console.log(e);
 
-    // let cities = this.props.cities;
-    // this.props.addNinja(this.state);
-    // retrieve token from local storage and send it to the add city action
-    this.props.fetchAddCity(this.state.cities);
-    // let cities = { ...this.state.cities, cities };
-    // this.setState({
-    //   cities: cities
-    // });
-
+    // retrieve token from local storage and send it to the add city action0DEFFF
+    const token = storage.getItem(token);
+    // const token = this.props.user.token;
+    this.props.fetchAddCity(this.state.cities, token);
 
     console.log("submit", this.state);
   };
   render() {
-    // const cities = this.props.fetchCitiesAction;
-    // console.log(cities);
-    // console.log("cities from addCity", cities);
     return (
       <div>
         <form onSubmit={this.handelSubmit}>
@@ -73,10 +64,11 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     cities: state.cities.cities,
+    user: state.users,
   };
 };
 const mapDispatchToProps = (dispatch) => ({
-  fetchAddCity: (city) => dispatch(fetchAddCity(city)),
+  fetchAddCity: (city) => dispatch(fetchAddCity(city, token)),
   fetchCitiesAction: (city) => dispatch(fetchCitiesAction(city)),
 });
 

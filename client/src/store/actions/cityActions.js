@@ -1,5 +1,6 @@
 import axios from "axios";
-export const FITCH_CITY = "FITCH_CITY";
+// export const FITCH_CITY = "FITCH_CITY";
+import jwt_decode from "jwt-decode";
 // I cleaned a bit your action, It was almost good, just a few probem with the .json() convertion and handeling the payload
 //it shuld work now ;)
 export const fetchCitiesAction = () => {
@@ -17,15 +18,25 @@ export const fetchCitiesAction = () => {
       });
   };
 };
-export const fetchAddCity = (name, country, picture) => {
+export const fetchAddCity = (name, country, picture, token) => {
   return (dispatch) => {
     axios
-      .post("http://localhost:5000/api/cities/", name, country, picture)
+      .post("http://localhost:5000/api/cities/", name, country, picture, {
+        headers: {
+          Authorization: `Basic ${token}`,
+        },
+      })
       .then((res) => {
         console.log("response", res);
         if (res.status === 200) {
+          const token = res.data.token;
+          localStorage.setItem("token", token);
+          console.log("token", token);
+          const decoded = jwt_decode(token); // decode your token here
+
+          console.log("decoded", decoded);
           //send the user to his account page
-          dispatch({ type: "ADD_CITY" });
+          dispatch({ type: "ADD_CITY", token });
           dispatch(fetchCitiesAction());
         }
       })
@@ -43,28 +54,3 @@ export const fetchAddCity = (name, country, picture) => {
   };
 };
 // add the token to the headers of the axios request
-export const fetchAddCity = (city) => {
-  return (dispatch) => {
-    axios
-      .post("http://localhost:5000/api/cities/", city)
-      .then((res) => {
-        console.log("response", res);
-        if (res.status === 200) {
-          //send the user to his account page
-          dispatch({ type: "ADD_CITY", payload: res });
-          // dispatch(fetchCitiesAction());
-        }
-      })
-      .catch((error) => {
-        console.log("error" + error.response);
-        if (error.response) {
-          if (error.response.status === 409) {
-            alert("problem with email");
-          } else {
-            //alert with something else
-            alert("Be Sure From Your email and link");
-          }
-        }
-      });
-  };
-};
