@@ -63,26 +63,32 @@ export const login = (userData) => {
     axios
       .post("http://localhost:5000/api/users/login", userData)
       .then((res) => {
-        console.log("response", res);
+        console.log("response", res.data.token);
         if (res.status === 200) {
           // decode the token
 
+          console.log("response", res);
+
           const token = res.data.token;
-          localStorage.setItem("token", token);
+          localStorage.setItem("token", res.data.token);
+
           console.log("token", token);
           const decoded = jwt_decode(token); // decode your token here
 
           console.log("decoded", decoded);
           console.log("res", res);
+
           //send the user to his account page
           dispatch({
             type: "LOGIN_SUCCESS",
             payload: decoded,
-            token: token,
+            token: res.data.token,
             //  payload: token,
             //   user: decoded.name,
             //send the decoded token instead
           });
+
+
         }
         // window.location = "/UserAccount ";
       })
@@ -100,42 +106,4 @@ export const login = (userData) => {
   };
 };
 
-////////login eith google
-export const loginWithGoogle = () => {
-  return (dispatch) => {
-    axios
-      .post("http://localhost:5000/api/users/auth/google")
-      .then((res) => {
-        console.log("response", res);
-        if (res.status === 200) {
-          // decode the token
 
-          const token = res.data.token;
-          localStorage.setItem("token", token);
-          console.log("token", token);
-          const decoded = jwt_decode(token); // decode your token here
-
-          console.log("decoded", decoded);
-          console.log("res", res);
-          //send the user to his account page
-          dispatch({
-            type: "LOGIN_GOOGLE_SUCCESS",
-            payload: decoded,
-            token: token,
-          });
-        }
-        // window.location = "/UserAccount ";
-      })
-      .catch((error) => {
-        console.log("error" + error);
-        if (error.response) {
-          if (error.response.status === 409) {
-            alert("loggin error");
-          } else {
-            //alert with something else
-          }
-        }
-      });
-    //add the full url of your back end
-  };
-};

@@ -11,10 +11,13 @@ class AddCity extends Component {
       picture: null,
     };
   }
+
+
   componentDidMount() {
     const city = this.props.cities;
     this.props.fetchCitiesAction(city);
   }
+
   handelChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value,
@@ -24,17 +27,22 @@ class AddCity extends Component {
     e.preventDefault();
     console.log(e);
 
-    const name = this.state.name;
-    const country = this.state.country;
-    const picture = this.state.picture;
+    // let cities = this.props.cities;
+    // this.props.addNinja(this.state);
+    // retrieve token from local storage and send it to the add city action
+    this.props.fetchAddCity(this.state.cities);
+    // let cities = { ...this.state.cities, cities };
+    // this.setState({
+    //   cities: cities
+    // });
 
-    this.props.fetchAddCity(name, country, picture);
+
     console.log("submit", this.state);
   };
   render() {
-    const cities = this.props.fetchCitiesAction;
-    console.log(cities);
-    console.log("cities from addCity", cities);
+    // const cities = this.props.fetchCitiesAction;
+    // console.log(cities);
+    // console.log("cities from addCity", cities);
     return (
       <div>
         <form onSubmit={this.handelSubmit}>
@@ -60,7 +68,6 @@ class AddCity extends Component {
     );
   }
 }
-
 const mapStateToProps = (state, ownProps) => {
   console.log("mapStateToState", state);
 
@@ -69,8 +76,7 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 const mapDispatchToProps = (dispatch) => ({
-  fetchAddCity: (name, country, picture) =>
-    dispatch(fetchAddCity(name, country, picture)),
+  fetchAddCity: (city) => dispatch(fetchAddCity(city)),
   fetchCitiesAction: (city) => dispatch(fetchCitiesAction(city)),
 });
 

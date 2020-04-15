@@ -15,8 +15,10 @@ function citiesReducer(state = initialState, action) {
     case "FETCH_CITIES_ERROR":
       console.log("FETCH_CITIES_ERROR", action);
       return { ...state, err: action.payload };
+
     case "ADD_CITY":
-      return { ...state };
+      return { ...state, cities: [...state.cities, action.payload] };
+
     default:
       return state;
   }

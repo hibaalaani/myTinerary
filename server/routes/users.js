@@ -149,12 +149,15 @@ router.get(
     //Sign token
 
     const payload = {
+
+
       id: user.id,
       name: user.name,
       email: user.email,
     };
 
     // Sign token
+
     jwt.sign(
       payload,
       keys.secretOrKey,
@@ -163,18 +166,14 @@ router.get(
       },
 
       (err, token) => {
-        res.json({
-          success: true,
-          token: "Bearer " + token,
-        });
+        // Successful authentication, redirect home.with query code
+        res.redirect("http://localhost:3000/?code=" + token);
       }
     );
-    // Successful authentication, redirect home.with query code
-    res.redirect("http://localhost:3000/?code=" + token);
   }
 );
 
-// };
+
 
 ///////////////add route for users favoriate//////////
 router.get("/logout", (req, res) => {
@@ -186,9 +185,36 @@ router.get("/logout", (req, res) => {
     props.history.push("/login");
   });
 });
+
+
+///////////Add Favourite
+router.post("/:userID/favorites", (req, res) => {
+  console.log(req.params);
+  let currentUser = userModel
+    .findOne({ _id: req.params.userID })
+    .then((user) => {
+      console.log("currentUser", user);
+      user.favorites.push(req.body.favourite);
+      user.save();
+    });
+
+  // const favourite = new userModel({
+  //   favourite: req.body.favourite,
+  // });
+  // favourite.save();
+  // console.log("favourite saved");
+  // res.send("favourite Added", favourite).catch(error);
+  // console.log("in catch block");
+  // res.send(error);
+});
+///////////////////get favourite
+router.get("/:favourite", (req, res) => {
+  let favItinerary = req.params.favourite;});
+
 ///////////////get one user
 router.get("/:id", (req, res) => {
   let userId = req.params.id;
+
   userModel
     .findOne({ id: userId })
     .then((user) => {
