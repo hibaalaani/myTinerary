@@ -100,32 +100,42 @@ export const login = (userData) => {
   };
 };
 
-// ///////////////////add comments to the user
-// export const addComments = (comments, name, email) => {
-//   console.log("name", name);
-//   return (dispatch) => {
-//     axios
-//       .post(`http://localhost:5000/api/users/${name}/comments`, {
-//         comments: comments,
-//         email,
-//       })
-//       .then((res) => {
-//         console.log("response", res);
-//         if (res.status === 200) {
-//           //send the user to his account page
-//           dispatch({ type: "ADD_COMMENTS", payload: res.payload });
-//         }
-//       })
-//       .catch((error) => {
-//         console.log("error" + error.response);
-//         if (error.response) {
-//           if (error.response.status === 409) {
-//             alert("problem with email");
-//           } else {
-//             //alert with something else
-//             alert("Be Sure From Your email and link");
-//           }
-//         }
-//       });
-//   };
-// };
+////////login eith google
+export const loginWithGoogle = () => {
+  return (dispatch) => {
+    axios
+      .post("http://localhost:5000/api/users/auth/google")
+      .then((res) => {
+        console.log("response", res);
+        if (res.status === 200) {
+          // decode the token
+
+          const token = res.data.token;
+          localStorage.setItem("token", token);
+          console.log("token", token);
+          const decoded = jwt_decode(token); // decode your token here
+
+          console.log("decoded", decoded);
+          console.log("res", res);
+          //send the user to his account page
+          dispatch({
+            type: "LOGIN_GOOGLE_SUCCESS",
+            payload: decoded,
+            token: token,
+          });
+        }
+        // window.location = "/UserAccount ";
+      })
+      .catch((error) => {
+        console.log("error" + error);
+        if (error.response) {
+          if (error.response.status === 409) {
+            alert("loggin error");
+          } else {
+            //alert with something else
+          }
+        }
+      });
+    //add the full url of your back end
+  };
+};
