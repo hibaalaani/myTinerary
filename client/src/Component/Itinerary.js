@@ -7,11 +7,12 @@ import {
   fetchItinerariesDeleteFavorite,
   fetchDeleteComment,
 } from "../store/actions/itineraryActions";
-import AddCity from "../Component/AddCity";
+import AddItinerary from "../Component/AddItinerary";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { Button, Card } from "react-bootstrap";
+
 const green = "#ffff00";
 const red = "#FF0000";
 class Itinerary extends Component {
@@ -139,25 +140,6 @@ class Itinerary extends Component {
                                 </Button>
                               </Card.Body>
                             </Card>
-
-                            {/* <Card
-                              className="col-sm-4"
-                              border="warning"
-                              variant="primary"
-                              style={{ width: "12rem" }}
-                            >
-                              <Card.Title className="textColor">
-                                {comment.email}
-                              </Card.Title>
-                              <Card.Body>
-                                <Card.Text className="textColor">
-                                  {comment.msg}
-                                </Card.Text>
-                                <Button variant="primary">
-                                  Delete Comment
-                                </Button>
-                              </Card.Body>
-                            </Card> */}
                           </div>
                         );
                       })}
@@ -167,8 +149,9 @@ class Itinerary extends Component {
             </div>
           ))
         ) : (
-          <AddCity />
+          <div>Add your Itinerary</div>
         )}
+        <AddItinerary />
       </div>
     );
   }

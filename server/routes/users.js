@@ -149,8 +149,6 @@ router.get(
     //Sign token
 
     const payload = {
-
-
       id: user.id,
       name: user.name,
       email: user.email,
@@ -173,19 +171,16 @@ router.get(
   }
 );
 
-
-
 ///////////////add route for users favoriate//////////
 router.get("/logout", (req, res) => {
   userModel.findOne(req.body.email).then((user) => {
     // Check if user exists
     console.log("user", user);
-    Auth.signOut();
+    //  getItem(token);
 
     props.history.push("/login");
   });
 });
-
 
 ///////////Add Favourite
 router.post("/:userID/favorites", (req, res) => {
@@ -209,7 +204,8 @@ router.post("/:userID/favorites", (req, res) => {
 });
 ///////////////////get favourite
 router.get("/:favourite", (req, res) => {
-  let favItinerary = req.params.favourite;});
+  let favItinerary = req.params.favourite;
+});
 
 ///////////////get one user
 router.get("/:id", (req, res) => {

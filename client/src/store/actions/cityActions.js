@@ -20,10 +20,11 @@ export const fetchCitiesAction = () => {
 };
 export const fetchAddCity = (name, country, picture, token) => {
   return (dispatch) => {
+    // var token = localStorage.getItem("token");
     axios
       .post("http://localhost:5000/api/cities/", name, country, picture, {
         headers: {
-          Authorization: `Basic ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((res) => {

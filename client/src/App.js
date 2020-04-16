@@ -16,6 +16,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Notfound from "./Component/Notfound";
 import Header from "./Component/Header";
 import UserAccount from "./Component/UserAccount";
+import LogOut from "./Component/LogOut";
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
         <Link to="/Users"></Link>
         <Link to="/UserAccount"></Link>
         <Link to="/login"></Link>
-
+        <Link to="/LogOut"></Link>
         <Link to="/Cities"></Link>
         <Link to="/Itineraries"></Link>
         <Link to="/AddCity"></Link>
@@ -37,6 +38,7 @@ function App() {
           <Route exact path="/Users" component={Users} />
           <Route path="/UserAccount" component={UserAccount} />
           <Route exact path="/Login" component={Login} />
+          <Route path="/LogOut" component={LogOut} />
           <Route exact path="/Cities" component={Cities} />
           <Route exact path="/AddCity" component={AddCity} />
           <Route exact path="/Itineraries" component={Itinerary} />

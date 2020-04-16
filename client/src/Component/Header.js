@@ -61,20 +61,26 @@ class Header extends Component {
                   <Link to="/AddCity">New City </Link>
                 </NavLink>
               </NavItem>
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  Sign
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>
-                    {" "}
-                    <Link to="/Login">Login </Link>
-                  </DropdownItem>
-                  <DropdownItem>
-                    <Link to="/Users">Sign Up </Link>
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
+              {this.props.user.isLoggedin ? (
+                <NavLink>
+                  <Link to="/LogOut"> LogOut</Link>
+                </NavLink>
+              ) : (
+                <UncontrolledDropdown nav inNavbar>
+                  <DropdownToggle nav caret>
+                    Sign
+                  </DropdownToggle>
+                  <DropdownMenu right>
+                    <DropdownItem>
+                      {" "}
+                      <Link to="/Login">Login </Link>
+                    </DropdownItem>
+                    <DropdownItem>
+                      <Link to="/Users">Sign Up </Link>
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
+              )}
             </Nav>
             <Form inline>
               <Button variant="outline-success ">

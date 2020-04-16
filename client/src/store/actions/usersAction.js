@@ -2,6 +2,7 @@
 //it shuld work now ;)
 import axios from "axios";
 import jwt_decode from "jwt-decode"; // import dependency
+import { Link } from "react-router-dom";
 
 // const jwtDecode = require("jwt-decode");
 export const fetchUsersAction = () => {
@@ -83,14 +84,10 @@ export const login = (userData) => {
             type: "LOGIN_SUCCESS",
             payload: decoded,
             token: res.data.token,
-            //  payload: token,
-            //   user: decoded.name,
+
             //send the decoded token instead
           });
-
-
         }
-        // window.location = "/UserAccount ";
       })
       .catch((error) => {
         console.log("error" + error);
@@ -105,5 +102,11 @@ export const login = (userData) => {
     //add the full url of your back end
   };
 };
-
-
+//////////////log out
+export const logUserOut = () => {
+  return (dispatch) => {
+    axios.get("http://localhost:3000/Landing");
+    localStorage.removeItem("token");
+    dispatch({ type: "LOGED_OUT" });
+  };
+};

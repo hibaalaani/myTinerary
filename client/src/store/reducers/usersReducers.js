@@ -33,6 +33,12 @@ function usersReducers(state = initialState, action) {
         email: action.payload.email,
         isLoggedin: true,
       };
+    case "LOGED_OUT":
+      return {
+        ...state,
+        isLoggedin: false,
+        token: null,
+      };
 
     default:
       return state;

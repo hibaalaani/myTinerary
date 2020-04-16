@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Spinner } from "react-bootstrap";
 import { fetchCitiesAction } from "../store/actions/cityActions";
 import { Link } from "react-router-dom";
 class Cities extends Component {
@@ -58,6 +59,12 @@ class Cities extends Component {
             <button className="btn btn-outline-info">Add city you like</button>
           </Link>
         </div>
+        {!filterList && (
+          <Spinner animation="border" role="status">
+            <span className="sr-only">Loading...</span>
+          </Spinner>
+        )}
+
         {filterList &&
           filterList.map((city, index) => (
             <Link to={"itineraries/" + city.name}>

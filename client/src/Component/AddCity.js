@@ -27,8 +27,8 @@ class AddCity extends Component {
     console.log(e);
 
     // retrieve token from local storage and send it to the add city action0DEFFF
-    const token = storage.getItem(token);
-    // const token = this.props.user.token;
+    //where to write condition for user login?
+    var token = localStorage.getItem("token");
     this.props.fetchAddCity(this.state.cities, token);
 
     console.log("submit", this.state);
@@ -68,7 +68,7 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 const mapDispatchToProps = (dispatch) => ({
-  fetchAddCity: (city) => dispatch(fetchAddCity(city, token)),
+  fetchAddCity: (city, token) => dispatch(fetchAddCity(city, token)),
   fetchCitiesAction: (city) => dispatch(fetchCitiesAction(city)),
 });
 
