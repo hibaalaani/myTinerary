@@ -10,19 +10,10 @@ class Landing extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cities: null
+      cities: null,
     };
   }
   componentDidMount() {
-    // fetch("http://localhost:5000/api/cities/all")
-    //   .then(res => {
-    //     return res.json();
-    //   })
-    //   .then(result => {
-    //     console.log("result :", result);
-    //     this.setState({ cities: result });
-    //     console.log("from landing page ", this.state.cities);
-    //   });
     this.props.fetchCitiesAction();
   }
   render() {
@@ -62,10 +53,10 @@ class Landing extends Component {
 const mapStateToProps = (state, ownProps) => {
   console.log("mamatoSTte", state);
   return {
-    cities: state.cities.cities
+    cities: state.cities.cities,
   };
 };
-const mapDispatchToProps = dispatch => ({
-  fetchCitiesAction: city => dispatch(fetchCitiesAction(city))
+const mapDispatchToProps = (dispatch) => ({
+  fetchCitiesAction: (city) => dispatch(fetchCitiesAction(city)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Landing);

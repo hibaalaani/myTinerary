@@ -69,7 +69,7 @@ class Itinerary extends Component {
     const email = this.props.user.email;
     // const { itineraries } = this.props;
     return (
-      <div>
+      <div className="container">
         <h1>Our Itineraries</h1>
         {filterList ? (
           filterList.map((itinerary, index) => (
@@ -149,8 +149,13 @@ class Itinerary extends Component {
             </div>
           ))
         ) : (
+          //  <AddItinerary />
           <div>Add your Itinerary</div>
         )}
+        {this.props.itineraries.map((itinerary, index) => (
+          <div>no itinerary yet in {itinerary.name}</div>
+        ))}
+
         <AddItinerary />
       </div>
     );

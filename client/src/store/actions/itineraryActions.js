@@ -170,6 +170,7 @@ export const fetchNewItinerary = (newitinerary, token) => {
           console.log("decoded", decoded);
           //send the user to his account page
           dispatch({ type: "ADD_ITINERARY", token });
+          dispatch(fetchItinerariesByCityName(newitinerary.name));
         }
       })
       .catch((error) => {
@@ -179,7 +180,7 @@ export const fetchNewItinerary = (newitinerary, token) => {
             alert("problem with email");
           } else {
             //alert with something else
-            alert("BE SURE YOUR ARE LOG IN");
+            alert("error from action itinerary");
           }
         }
       });

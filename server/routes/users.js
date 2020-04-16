@@ -183,28 +183,28 @@ router.get("/logout", (req, res) => {
 });
 
 ///////////Add Favourite
-router.post("/:userID/favorites", (req, res) => {
+router.post("/:favorites", (req, res) => {
   console.log(req.params);
-  let currentUser = userModel
-    .findOne({ _id: req.params.userID })
-    .then((user) => {
-      console.log("currentUser", user);
-      user.favorites.push(req.body.favourite);
-      user.save();
-    });
-
-  // const favourite = new userModel({
-  //   favourite: req.body.favourite,
-  // });
-  // favourite.save();
-  // console.log("favourite saved");
-  // res.send("favourite Added", favourite).catch(error);
-  // console.log("in catch block");
-  // res.send(error);
+  let id = req.body.id;
+  let favorite = req.params.favorites;
+  userModel.findOne({ _id: id }).then((user) => {
+    console.log("currentUser", user);
+    user.favorites.push(favorite);
+    user.save();
+    res.send(user);
+  });
 });
 ///////////////////get favourite
-router.get("/:favourite", (req, res) => {
-  let favItinerary = req.params.favourite;
+router.get("/:favorites", (req, res) => {
+  let favorite = req.params.favorites;
+  let id = req.body.id;
+
+  userModel
+    .findOne({ _id: id, favorites: favorite })
+    .then((favorite) => {
+      res.json(favorite);
+    })
+    .catch((err) => res.status(404).json({ error: "User does not exist!" }));
 });
 
 ///////////////get one user

@@ -141,3 +141,12 @@ body header {
   display: inline-block;
   justify-content: center;
 }
+
+.card.card-itinerary-add {
+  background-color: #dde5f0;
+  text-align: center;
+  display: inline-block;
+  justify-content: center;
+  float: none;
+  margin: 0 auto;
+}

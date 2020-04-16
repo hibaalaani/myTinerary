@@ -33,26 +33,36 @@ class AddItinerary extends Component {
     if (!this.props.user.isLoggedin) {
       return <Redirect to="/Login" />;
     }
-    const newitinerary = {
-      name: this.state.name,
-      profile: this.state.profile,
-      rating: this.state.rating,
-      hashtags: this.state.hashtags,
-      activities: this.state.activities,
-      duration: this.state.duration,
-      price: this.state.price,
-    };
-    // retrieve token from local storage and send it to the add city action0DEFFF
-    //where to write condition for user login?
-    var token = localStorage.getItem("token");
-    this.props.fetchNewItinerary(newitinerary, token);
-    console.log("itinerary", newitinerary, token);
-
-    console.log("submit", this.state);
+    if (
+      this.state.name === "" ||
+      this.state.profile === "" ||
+      this.state.activities === ""
+    ) {
+      alert("You need to  fill these fields");
+    } else {
+      const newitinerary = {
+        name: this.state.name,
+        profile: this.state.profile,
+        rating: this.state.rating,
+        hashtags: this.state.hashtags,
+        activities: this.state.activities,
+        duration: this.state.duration,
+        price: this.state.price,
+      };
+      // retrieve token from local storage and send it to the add city action0DEFFF
+      //where to write condition for user login?
+      var token = localStorage.getItem("token");
+      this.props.fetchNewItinerary(newitinerary, token);
+      console.log("itinerary", newitinerary, token);
+      console.log("submit", this.state);
+    }
   };
   render() {
     return (
-      <div className="card">
+      <div
+        className="card p-2 card-itinerary-add border-info"
+        style={{ width: "18rem" }}
+      >
         <form onSubmit={this.handelSubmit}>
           <label className="mx-2" htmlFor="name">
             {" "}
@@ -80,11 +90,11 @@ class AddItinerary extends Component {
             hashtags:
           </label>
           <input type="text" id="hashtags" onChange={this.handelChange} />
-          <label className="mx-2" htmlFor="price">
+          <label className="mx-2 " htmlFor="price">
             price:
           </label>
           <input type="text" id="price" onChange={this.handelChange} />
-          <button className="mx-2" type="submit">
+          <button className="mx-2 btn-info" type="submit">
             Add New Itinerary
           </button>
         </form>
