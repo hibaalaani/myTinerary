@@ -1,7 +1,8 @@
 const express = require("express");
 const passport = require("passport");
 const router = express.Router();
-const itineraryModel = require("../model/itineraryModel");
+const itineraryModel = require("../model/userModel");
+const userModel = require("../model/itineraryModel");
 
 /*get all cities*/
 router.get("/all", (_req, res) => {
@@ -27,11 +28,18 @@ router.post("/:name/favorites", (req, res) => {
   let email = req.body.email;
   // console.log(user);
   let name = req.params.name;
+  console.log("name from backend", name);
   itineraryModel.findOne({ name: name }).then((itinerary) => {
     itinerary.favorites.push(email);
     itinerary.save().then((saveditinerary) => {
       res.status(200).send(saveditinerary);
     });
+  });
+  userModel.findOne({ email: email }).then((user) => {
+    console.log("currentUser", user);
+    user.favorites.push(name);
+    user.save();
+    res.send(user);
   });
 });
 ///////////////////delete user from favorite itinerary

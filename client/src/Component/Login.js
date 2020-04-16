@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { Button } from "reactstrap";
+import UserAccount from "./UserAccount";
 class Login extends Component {
   state = {
     email: "",
@@ -29,12 +30,14 @@ class Login extends Component {
     }
   };
   render() {
-    console.log("this.props :", this.props);
     return (
       <div className="container">
         {/* i didint understand this part   ////////////////////////// */}
         {this.props.user.isLoggedin ? (
-          <p>{this.props.user.token}</p>
+          <React.Fragment>
+            <p>{this.props.user.token}</p>
+            <UserAccount />
+          </React.Fragment>
         ) : (
           // <p>{this.props.users}</p>
           <form className="form-horizontal" onSubmit={this.handelSubmit}>
@@ -87,7 +90,6 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log("mapToState", state);
   return {
     user: state.users,
   };

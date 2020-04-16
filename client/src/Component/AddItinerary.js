@@ -68,12 +68,12 @@ class AddItinerary extends Component {
             {" "}
             Name:
           </label>
-          <input type="url" id="name" onChange={this.handelChange} />
+          <input type="text" id="name" onChange={this.handelChange} />
           <label className="mx-2" htmlFor="profile">
             {" "}
             profile
           </label>
-          <input type="text" id="profile" onChange={this.handelChange} />
+          <input type="url" id="profile" onChange={this.handelChange} />
           <label className="mx-2" htmlFor="duration">
             duration:
           </label>
