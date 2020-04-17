@@ -39,45 +39,45 @@ class Login extends Component {
             <UserAccount />
           </React.Fragment>
         ) : (
-          // <p>{this.props.users}</p>
-          <form className="form-horizontal" onSubmit={this.handelSubmit}>
-            <div className="form-group">
-              <label
-                htmlFor="inputEmail3"
-                className="col-sm-2 control-label"
-              ></label>
-              <div className="col-sm-10">
-                <input
-                  type="email"
-                  className="form-control"
-                  id="email"
-                  placeholder="Email"
-                  onChange={this.handelChange}
-                />
+            // <p>{this.props.users}</p>
+            <form className="form-horizontal" onSubmit={this.handelSubmit}>
+              <div className="form-group">
+                <label
+                  htmlFor="inputEmail3"
+                  className="col-sm-2 control-label"
+                ></label>
+                <div className="col-sm-10">
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="email"
+                    placeholder="Email"
+                    onChange={this.handelChange}
+                  />
+                </div>
               </div>
-            </div>
-            <div className="form-group">
-              <label
-                htmlFor="inputPassword3"
-                className="col-sm-2 control-label"
-              ></label>
-              <div className="col-sm-10">
-                <input
-                  type="password"
-                  className="form-control"
-                  id="password"
-                  placeholder="Password"
-                  onChange={this.handelChange}
-                />
+              <div className="form-group">
+                <label
+                  htmlFor="inputPassword3"
+                  className="col-sm-2 control-label"
+                ></label>
+                <div className="col-sm-10">
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="password"
+                    placeholder="Password"
+                    onChange={this.handelChange}
+                  />
+                </div>
               </div>
-            </div>
-            <div className="form-group row">
-              <div className="col-sm-offset-2 col-sm-10 align-items-center">
-                <button>Sign in</button>
+              <div className="form-group row">
+                <div className="col-sm-offset-2 col-sm-10 align-items-center">
+                  <button>Sign in</button>
+                </div>
               </div>
-            </div>
-          </form>
-        )}
+            </form>
+          )}
         <div className="col-sm-offset-2 col-sm-10 align-items-center">
           <Button href="http://localhost:5000/api/users/auth/google">
             <FontAwesomeIcon icon={faGoogle} className="mr-2 " />

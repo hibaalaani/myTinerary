@@ -22,7 +22,6 @@ class UserAccount extends Component {
   }
 }
 const mapStateToProps = (state, ownProps) => {
-  console.log("mamToState", state);
 
   return {
     users: state.users,

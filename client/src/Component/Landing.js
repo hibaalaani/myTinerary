@@ -18,7 +18,6 @@ class Landing extends Component {
   }
   render() {
     const cities = this.props.cities;
-    console.log("cities22", cities);
     return (
       <div className="container-fluid">
         <header className="col-12 header">
@@ -51,7 +50,6 @@ class Landing extends Component {
   }
 }
 const mapStateToProps = (state, ownProps) => {
-  console.log("mamatoSTte", state);
   return {
     cities: state.cities.cities,
   };

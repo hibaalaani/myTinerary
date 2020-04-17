@@ -34,7 +34,6 @@ class Cities extends Component {
         let cityName = city.name.toLowerCase();
         return cityName.startsWith(this.state.search.toLowerCase());
       });
-      console.log(filterCity);
       return filterCity;
     } else return [];
   }
@@ -42,8 +41,6 @@ class Cities extends Component {
   render() {
     const filterList = this.filter();
     const { cities } = this.props;
-    console.log("this.props", this.props.cities);
-    console.log("cities from citues", cities);
     return (
       <div>
         <div className="justify-content-around">
@@ -81,8 +78,6 @@ class Cities extends Component {
   }
 }
 const mapStateToProps = (state, ownProps) => {
-  console.log("mamToState", state);
-
   return {
     cities: state.cities.cities,
   };
