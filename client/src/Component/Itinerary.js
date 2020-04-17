@@ -31,7 +31,6 @@ class Itinerary extends Component {
     this.props.fetchItinerariesByCityName(city);
   }
   handelChange = (e) => {
-    console.log(e);
     const newColor = this.state.favColor == green ? red : green;
     this.setState({ favColor: newColor });
   };
@@ -131,7 +130,7 @@ class Itinerary extends Component {
                                   variant="primary"
                                   onClick={() =>
                                     comment.email &&
-                                    comment.email.includes(email)
+                                      comment.email.includes(email)
                                       ? this.handelDeleteComment(itinerary.name)
                                       : this.handelChange
                                   }
@@ -149,9 +148,9 @@ class Itinerary extends Component {
             </div>
           ))
         ) : (
-          //  <AddItinerary />
-          <div>Add your Itinerary</div>
-        )}
+            //  <AddItinerary />
+            <div>Add your Itinerary</div>
+          )}
         {this.props.itineraries.map((itinerary, index) => (
           <div>no itinerary yet in {itinerary.name}</div>
         ))}
@@ -162,7 +161,7 @@ class Itinerary extends Component {
   }
 }
 const mapStateToProps = (state, ownProps) => {
-  console.log("mamToState", state);
+  console.log("mapToState", state);
 
   return {
     itineraries: state.itineraries.itineraries,

@@ -24,7 +24,7 @@ function App() {
       <Header />
 
       <div className="App">
-        <Link to="/"></Link>
+        {/* <Link to="/"></Link>
 
         <Link to="/Users"></Link>
         <Link to="/UserAccount"></Link>
@@ -32,7 +32,7 @@ function App() {
         <Link to="/LogOut"></Link>
         <Link to="/Cities"></Link>
         <Link to="/Itineraries"></Link>
-        <Link to="/AddCity"></Link>
+        <Link to="/AddCity"></Link> */}
         <Switch>
           <Route exact path="/" component={Landing} />
           <Route exact path="/Users" component={Users} />

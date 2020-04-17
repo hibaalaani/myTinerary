@@ -29,11 +29,11 @@ class AddItinerary extends Component {
   };
   handelSubmit = (e) => {
     e.preventDefault();
-    console.log(e);
     if (!this.props.user.isLoggedin) {
+      console.log('no user logged in')
       return <Redirect to="/Login" />;
     }
-    if (
+    else if (
       this.state.name === "" ||
       this.state.profile === "" ||
       this.state.activities === ""
@@ -103,8 +103,6 @@ class AddItinerary extends Component {
   }
 }
 const mapStateToProps = (state, ownProps) => {
-  console.log("mapStateToState", state);
-
   return {
     cities: state.cities.cities,
     user: state.users,

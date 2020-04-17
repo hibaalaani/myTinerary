@@ -10,7 +10,6 @@ class LogOut extends Component {
   }
 }
 const mapStateToProps = (state) => {
-  console.log("mapToState", state);
   return {
     user: state.users,
   };

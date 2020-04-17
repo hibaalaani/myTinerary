@@ -6,7 +6,6 @@ const initialState = {
 //you had some issues acting the payload to pass data from your action to your reducer
 //I changed a bit the naming too so it makes more sense
 function citiesReducer(state = initialState, action) {
-  console.log("city action", action);
   switch (action.type) {
     case "FETCH_CITIES_SUCCESS":
       console.log("FETCH_CITIES_SUCCESS", action);

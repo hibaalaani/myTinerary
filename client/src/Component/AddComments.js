@@ -83,8 +83,6 @@ class AddComments extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log("mamToState", state);
-
   return {
     comments: state.itineraries.comments,
     itineraries: state.itineraries.itineraries,

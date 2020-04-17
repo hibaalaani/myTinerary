@@ -60,8 +60,6 @@ class AddCity extends Component {
   }
 }
 const mapStateToProps = (state, ownProps) => {
-  console.log("mapStateToState", state);
-
   return {
     cities: state.cities.cities,
     user: state.users,

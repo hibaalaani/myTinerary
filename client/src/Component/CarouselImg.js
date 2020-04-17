@@ -4,7 +4,6 @@ import InfiniteCarousel from "react-leaf-carousel";
 export default class CarouselImg extends Component {
   render() {
     const cities = this.props.cities;
-    console.log("cities", cities);
     return (
       <div>
         <InfiniteCarousel
@@ -33,7 +32,6 @@ export default class CarouselImg extends Component {
           scrollOnDevice={true}
         >
           {cities.map((city, index) => {
-            console.log(city.picture);
             return (
               // <Link to={"/" + city.name}>
               <div key={city.id}>

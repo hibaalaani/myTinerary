@@ -1,8 +1,14 @@
 const express = require("express");
 const passport = require("passport");
 const router = express.Router();
-const itineraryModel = require("../model/userModel");
-const userModel = require("../model/itineraryModel");
+
+
+//HIBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!!!!!
+// const itineraryModel = require("../model/userModel");
+// const userModel = require("../model/itineraryModel");
+
+const userModel = require("../model/userModel");
+const itineraryModel = require("../model/itineraryModel");
 
 /*get all cities*/
 router.get("/all", (_req, res) => {
@@ -16,6 +22,7 @@ router.get("/all", (_req, res) => {
 //this is how you implement a city route by specific city
 router.get("/:name", (req, res) => {
   let itineraryRequested = req.params.name;
+  console.log('itineraryRequested', itineraryRequested)
   itineraryModel
     .find({ name: itineraryRequested })
     .then((itinerary) => {
@@ -91,19 +98,20 @@ router.delete("/:name/comments", (req, res, next) => {
   });
 });
 /////////Add itinerary
-router.post(
-  "/",
+router.post("/add",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log(req.body);
+    console.log(req.body)
+    const { name, profile, hashtags, price, rating, duration, activities } = req.body
+
     const newItinerary = new itineraryModel({
-      name: req.body.name,
-      profile: req.body.picture,
-      hashtags: req.body.hashtags,
-      price: req.body.price,
-      rating: req.body.rating,
-      duration: req.body.duration,
-      activities: req.body.activities,
+      name,
+      profile,
+      hashtags,
+      price,
+      rating,
+      duration,
+      activities,
       //   favorites: req.body.favorites,
       //   comments: req.body.comments,
     });
