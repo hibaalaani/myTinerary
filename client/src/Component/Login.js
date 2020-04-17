@@ -35,7 +35,7 @@ class Login extends Component {
         {/* i didint understand this part   ////////////////////////// */}
         {this.props.user.isLoggedin ? (
           <React.Fragment>
-            <p>{this.props.user.token}</p>
+            {/* <p>{this.props.user.token}</p> */}
             <UserAccount />
           </React.Fragment>
         ) : (

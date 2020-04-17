@@ -1,10 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-export default class UserFavoriteItinerary extends Component {
-  componentDidMount() {
-    this.props.user.favorite;
-  }
-
+class UserFavoriteItinerary extends Component {
   render() {
     return (
       <div>
@@ -14,3 +11,15 @@ export default class UserFavoriteItinerary extends Component {
     );
   }
 }
+const mapStateToProps = (state, ownProps) => {
+  return {
+    itineraries: state.itineraries.itineraries,
+    user: state.users,
+    favorites: state.itineraries.favorites,
+  };
+};
+const mapDispatchToProps = (dispatch) => ({});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserFavoriteItinerary);

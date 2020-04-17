@@ -7,7 +7,7 @@ import {
   fetchItinerariesDeleteFavorite,
   fetchDeleteComment,
 } from "../store/actions/itineraryActions";
-import AddItinerary from "../Component/AddItinerary";
+import AddItinerary from "./AddItinerary";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
@@ -148,13 +148,14 @@ class Itinerary extends Component {
             </div>
           ))
         ) : (
-            //  <AddItinerary />
             <div>Add your Itinerary</div>
           )}
-        {this.props.itineraries.map((itinerary, index) => (
-          <div>no itinerary yet in {itinerary.name}</div>
-        ))}
-
+        <React.Fragment>
+          <div>Add your Itinerary</div>
+          {this.props.itineraries.map((itinerary) => (
+            <div>no itinerary yet in {itinerary.name}</div>
+          ))}
+        </React.Fragment>
         <AddItinerary />
       </div>
     );

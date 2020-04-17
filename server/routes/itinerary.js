@@ -54,16 +54,24 @@ router.post("/:name/favorites", (req, res) => {
 router.delete("/:name/favorites", (req, res) => {
   const name = req.params.name;
   const email = req.body.email;
-  itineraryModel
-    .findOne({ name: name })
-    .then((itinerary) => {
-      ///////apply js
-      let index = itinerary.favorites.indexOf(email);
-      itinerary.favorites.splice(index, 1);
-      itinerary.save().then((saveditinerary) => {
-        res.status(200).send(saveditinerary);
+  itineraryModel.findOne({ name: name }).then((itinerary) => {
+    ///////apply js
+    let index = itinerary.favorites.indexOf(email);
+    itinerary.favorites.splice(index, 1);
+    itinerary.save().then((saveditinerary) => {
+      res.status(200).send(saveditinerary);
+    });
+  });
+  userModel
+    .findOne({ email: email })
+    .then((user) => {
+      let index = user.favorites.indexOf(name);
+      user.favorites.splice(index, 1);
+      user.save().then((saveduser) => {
+        res.status(200).send(saveduser);
       });
     })
+
     .catch((err) => {
       console.log(err);
       res.status(500).send("Server error");

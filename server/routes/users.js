@@ -182,7 +182,7 @@ router.get("/logout", (req, res) => {
   });
 });
 
-///////////Add Favourite
+///////////Add Favourite(not used now)
 router.post("/:favorites", (req, res) => {
   console.log(req.params);
   let id = req.body.id;
@@ -194,7 +194,7 @@ router.post("/:favorites", (req, res) => {
     res.send(user);
   });
 });
-///////////////////get favourite
+///////////////////get favourite(not used now)
 router.get("/:favorites", (req, res) => {
   let favorite = req.params.favorites;
   let id = req.body.id;
@@ -207,7 +207,7 @@ router.get("/:favorites", (req, res) => {
     .catch((err) => res.status(404).json({ error: "User does not exist!" }));
 });
 
-///////////////get one user
+///////////////get one user(not used now)
 router.get("/:id", (req, res) => {
   let userId = req.params.id;
 

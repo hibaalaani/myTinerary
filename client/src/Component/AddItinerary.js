@@ -49,7 +49,7 @@ class AddItinerary extends Component {
         duration: this.state.duration,
         price: this.state.price,
       };
-      // retrieve token from local storage and send it to the add city action0DEFFF
+      // retrieve token from local storage and send it to the add city action
       //where to write condition for user login?
       var token = localStorage.getItem("token");
       this.props.fetchNewItinerary(newitinerary, token);
