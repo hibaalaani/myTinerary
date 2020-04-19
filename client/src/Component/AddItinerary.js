@@ -48,7 +48,6 @@ class AddItinerary extends Component {
       var token = localStorage.getItem("token");
       this.props.fetchNewItinerary(newitinerary, token);
       console.log("itinerary", newitinerary, token);
-      console.log("submit", this.state);
     }
   };
   render() {

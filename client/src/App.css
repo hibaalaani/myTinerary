@@ -103,7 +103,7 @@ body {
 }
 
 body header {
-  background-image: url("./Component/PhotoWithCamera.jpg");
+  background-image: url("./Component/images/PhotoWithCamera.jpg");
   background-position: 50% 80%;
   background-size: 100%;
   background-repeat: no-repeat;

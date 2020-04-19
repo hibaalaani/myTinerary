@@ -30,7 +30,7 @@ router.get("/:name", (req, res) => {
     .catch((err) => console.log(err));
 });
 /////////////post user to the itenerary
-router.post("/:name/favorites", (req, res, next) => {
+router.post("/:name/favorites", (req, res) => {
   let email = req.body.email;
 
   let name = req.params.name;
@@ -49,7 +49,7 @@ router.post("/:name/favorites", (req, res, next) => {
 });
 ///////////////////delete user from favorite itinerary
 
-router.delete("/:name/favorites", (req, res, next) => {
+router.delete("/:name/favorites", (req, res) => {
   const name = req.params.name;
   const email = req.body.email;
   itineraryModel.findOne({ name: name }).then((itinerary) => {
@@ -76,7 +76,7 @@ router.delete("/:name/favorites", (req, res, next) => {
 });
 
 /////////////post comment to the itenerary
-router.post("/:name/comments", (req, res, next) => {
+router.post("/:name/comments", (req, res) => {
   const name = req.params.name;
   let comments = { msg: req.body.comments, email: req.body.email };
 
@@ -89,7 +89,7 @@ router.post("/:name/comments", (req, res, next) => {
 });
 
 /////////////delete  comment from the itenerary
-router.delete("/:name/comments", (req, res, next) => {
+router.delete("/:name/comments", (req, res) => {
   const name = req.params.name;
   let comments = { msg: req.body.comments, email: req.body.email };
 
@@ -107,7 +107,7 @@ router.post(
   "/add",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log(req.body);
+    console.log("console from itineraries/add", req.body);
     const {
       name,
       profile,

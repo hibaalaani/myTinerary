@@ -27,9 +27,14 @@ export const register = (newUser) => {
           localStorage.setItem("token", token);
           console.log("token", token);
           const decoded = jwt_decode(token); // decode your token here
-          console.log("decoded", decoded);
+          // dispatch({
+          //   type: "REGISTER_SUCCESS",
+          //   payload: decoded,
+          //   token: res.data.token,
 
-          // window.location = "/Login";
+          //   //send the decoded token instead
+          // });
+          // // window.location = "/Login";
         }
       })
       .catch((error) => {
@@ -55,17 +60,9 @@ export const login = (userData) => {
         console.log("response", res.data.token);
         if (res.status === 200) {
           // decode the token
-
-          console.log("response", res);
-
           const token = res.data.token;
           localStorage.setItem("token", res.data.token);
-
-          console.log("token", token);
           const decoded = jwt_decode(token); // decode your token here
-
-          console.log("decoded", decoded);
-          console.log("res", res);
           dispatch({
             type: "LOGIN_SUCCESS",
             payload: decoded,

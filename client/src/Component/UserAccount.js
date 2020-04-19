@@ -10,8 +10,8 @@ class UserAccount extends Component {
       <div className="container">
         <h1> you are finish the registration </h1>{" "}
         {this.props.users.favorites &&
-          this.props.users.favorites.map((favorite) => {
-            return <h1>{favorite}</h1>;
+          this.props.users.favorites.map((favorite, index) => {
+            return <h1 key={index}>{favorite}</h1>;
           })}
         {/* <UserFavoriteItinerary /> */}
       </div>

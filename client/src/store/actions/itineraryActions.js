@@ -41,7 +41,7 @@ export const fetchItinerariesFavorite = (emailAdded, name) => {
         if (res.status === 200) {
           //send the user to his account page
           dispatch({ type: "ADD_ITINERARY_FAVORITE" });
-          dispatch(fetchItinerariesByCityName(name));
+          // dispatch(fetchItinerariesByCityName(name));
         }
       })
       .catch((error) => {

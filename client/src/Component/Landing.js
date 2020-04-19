@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../App.css";
-import Circle from "../Circle.png";
+import Circle from "../Component/images/Circle.png";
 import CarouselImg from "./CarouselImg";
 import { Link } from "react-router-dom";
 import { fetchCitiesAction } from "../store/actions/cityActions";
@@ -35,7 +35,7 @@ class Landing extends Component {
             Find your perfect trip ,designed by insiders who know their cities{" "}
           </p>
           <h1 className="textSize mt-4 col-sm-12 ">Start Browing</h1>
-          <Link to="/Cities" pro>
+          <Link to="/Cities">
             <img src={Circle} alt="looking" className="circle" />
           </Link>
           <p className="mt-4 textSize col-sm-12">

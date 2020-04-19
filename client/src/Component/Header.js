@@ -41,7 +41,7 @@ class Header extends Component {
     return (
       <div>
         <Navbar color="dark" dark expand="sm">
-          <Link to="/">
+          <Link to="/" id="RouterNavLink">
             <NavbarBrand>MyItenarary</NavbarBrand>
           </Link>
           <NavbarToggler
@@ -52,18 +52,25 @@ class Header extends Component {
               <NavItem dark="true">
                 <NavLink>
                   {" "}
-                  <Link to="/Cities">Cities We Offer </Link>
+                  <Link to="/Cities" id="RouterNavLink">
+                    Cities We Offer{" "}
+                  </Link>
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink>
                   {" "}
-                  <Link to="/AddCity">New City </Link>
+                  <Link to="/AddCity" id="RouterNavLink">
+                    New City{" "}
+                  </Link>
                 </NavLink>
               </NavItem>
               {this.props.user.isLoggedin ? (
                 <NavLink>
-                  <Link to="/LogOut"> Log out</Link>
+                  <Link to="/LogOut" id="RouterNavLink">
+                    {" "}
+                    Log out
+                  </Link>
                 </NavLink>
               ) : (
                 <UncontrolledDropdown nav inNavbar>

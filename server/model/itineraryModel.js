@@ -4,10 +4,10 @@ const itinerarySchema = new mongoose.Schema({
     type: String,
     required: true,
     // unique: true,
-    _id: {
-      type: Object,
-      unique: true,
-    },
+  },
+  id: {
+    type: Object,
+    unique: true,
   },
 
   profile: {
