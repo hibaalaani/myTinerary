@@ -80,6 +80,7 @@ router.post("/login", async (req, res) => {
   // Find user by email
   userModel.findOne({ email }).then((user) => {
     // Check if user exists
+    console.log("user", user);
     if (!user) {
       return res.status(404).json({ emailnotfound: "Email not found" });
     }

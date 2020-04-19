@@ -27,14 +27,7 @@ export const register = (newUser) => {
           localStorage.setItem("token", token);
           console.log("token", token);
           const decoded = jwt_decode(token); // decode your token here
-          // dispatch({
-          //   type: "REGISTER_SUCCESS",
-          //   payload: decoded,
-          //   token: res.data.token,
-
-          //   //send the decoded token instead
-          // });
-          // // window.location = "/Login";
+          // window.location = "/Login";
         }
       })
       .catch((error) => {
