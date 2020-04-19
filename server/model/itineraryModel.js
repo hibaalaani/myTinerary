@@ -3,8 +3,13 @@ const itinerarySchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    unique: true,
+    // unique: true,
+    _id: {
+      type: Object,
+      unique: true,
+    },
   },
+
   profile: {
     type: String,
     // required: true,

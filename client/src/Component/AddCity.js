@@ -25,11 +25,15 @@ class AddCity extends Component {
   handelSubmit = (e) => {
     e.preventDefault();
     console.log(e);
-
+    const newCity = {
+      name: this.state.name,
+      country: this.state.country,
+      picture: this.state.picture,
+    };
     // retrieve token from local storage and send it to the add city action0DEFFF
     //where to write condition for user login?
     var token = localStorage.getItem("token");
-    this.props.fetchAddCity(this.state.cities, token);
+    this.props.fetchAddCity(newCity, token);
 
     console.log("submit", this.state);
   };

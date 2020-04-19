@@ -2,6 +2,7 @@ const initialState = {
   token: "",
   isLoggedin: false,
   users: [],
+  picture: "",
   err: "",
 };
 
@@ -30,6 +31,7 @@ function usersReducers(state = initialState, action) {
         // token: action.payload.data.token,
         token: action.token,
         users: action.payload.name,
+        picture: action.payload.picture,
         email: action.payload.email,
         isLoggedin: true,
       };

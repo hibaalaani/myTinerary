@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Route, Link, BrowserRouter as Router, Switch } from "react-router-dom";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import Landing from "./Component/Landing";
 import Users from "./Component/Users";
 import Login from "./Component/Login";

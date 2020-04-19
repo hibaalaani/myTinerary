@@ -22,9 +22,7 @@ class Users extends Component {
   };
   handelSubmit = (e) => {
     e.preventDefault();
-    // const users = this.props.params.match.id;
 
-    //finish the condition including all the fields
     if (
       this.state.name === "" ||
       this.state.email === "" ||
@@ -81,8 +79,6 @@ class Users extends Component {
   }
 }
 const mapStateToProps = (state, ownProps) => {
-  console.log("mamToState", state);
-
   return {
     user: state.users,
   };

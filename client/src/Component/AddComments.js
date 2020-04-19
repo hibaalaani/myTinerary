@@ -41,7 +41,6 @@ class AddComments extends Component {
   };
 
   render() {
-    const email = this.props.user.email;
     const itinerary = this.props.itinerary;
     return (
       <div>

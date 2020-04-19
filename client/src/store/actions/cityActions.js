@@ -1,8 +1,4 @@
 import axios from "axios";
-// export const FITCH_CITY = "FITCH_CITY";
-import jwt_decode from "jwt-decode";
-// I cleaned a bit your action, It was almost good, just a few probem with the .json() convertion and handeling the payload
-//it shuld work now ;)
 export const fetchCitiesAction = () => {
   return (dispatch) => {
     //add the full url of your back end
@@ -18,25 +14,19 @@ export const fetchCitiesAction = () => {
       });
   };
 };
-export const fetchAddCity = (name, country, picture, token) => {
+export const fetchAddCity = (newCity, token) => {
   return (dispatch) => {
-    // var token = localStorage.getItem("token");
+    const config = {
+      headers: {
+        Authorization: token,
+      },
+    };
+
     axios
-      .post("http://localhost:5000/api/cities/", name, country, picture, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .post("http://localhost:5000/api/cities/", newCity, config)
       .then((res) => {
         console.log("response", res);
         if (res.status === 200) {
-          const token = res.data.token;
-          localStorage.setItem("token", token);
-          console.log("token", token);
-          const decoded = jwt_decode(token); // decode your token here
-
-          console.log("decoded", decoded);
-          //send the user to his account page
           dispatch({ type: "ADD_CITY", token });
           dispatch(fetchCitiesAction());
         }

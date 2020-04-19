@@ -21,7 +21,6 @@ class Cities extends Component {
     });
   }
   handleChange = (e) => {
-    console.log("event from handel change", e.target.value);
     this.setState({
       search: e.target.value,
     });
@@ -29,8 +28,6 @@ class Cities extends Component {
   filter() {
     if (this.props.cities) {
       const filterCity = this.props.cities.filter((city, index) => {
-        console.log(" our cities  " + city.name);
-        console.log("our search " + this.state.search);
         let cityName = city.name.toLowerCase();
         return cityName.startsWith(this.state.search.toLowerCase());
       });
@@ -40,7 +37,7 @@ class Cities extends Component {
 
   render() {
     const filterList = this.filter();
-    const { cities } = this.props;
+
     return (
       <div>
         <div className="justify-content-around">

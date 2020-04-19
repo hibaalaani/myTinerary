@@ -2,7 +2,6 @@ const express = require("express");
 const passport = require("passport");
 const router = express.Router();
 
-
 //HIBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA!!!!!
 // const itineraryModel = require("../model/userModel");
 // const userModel = require("../model/itineraryModel");
@@ -22,7 +21,7 @@ router.get("/all", (_req, res) => {
 //this is how you implement a city route by specific city
 router.get("/:name", (req, res) => {
   let itineraryRequested = req.params.name;
-  console.log('itineraryRequested', itineraryRequested)
+  console.log("itineraryRequested", itineraryRequested);
   itineraryModel
     .find({ name: itineraryRequested })
     .then((itinerary) => {
@@ -31,11 +30,11 @@ router.get("/:name", (req, res) => {
     .catch((err) => console.log(err));
 });
 /////////////post user to the itenerary
-router.post("/:name/favorites", (req, res) => {
+router.post("/:name/favorites", (req, res, next) => {
   let email = req.body.email;
-  // console.log(user);
+
   let name = req.params.name;
-  console.log("name from backend", name);
+
   itineraryModel.findOne({ name: name }).then((itinerary) => {
     itinerary.favorites.push(email);
     itinerary.save().then((saveditinerary) => {
@@ -43,7 +42,6 @@ router.post("/:name/favorites", (req, res) => {
     });
   });
   userModel.findOne({ email: email }).then((user) => {
-    console.log("currentUser", user);
     user.favorites.push(name);
     user.save();
     res.send(user);
@@ -51,7 +49,7 @@ router.post("/:name/favorites", (req, res) => {
 });
 ///////////////////delete user from favorite itinerary
 
-router.delete("/:name/favorites", (req, res) => {
+router.delete("/:name/favorites", (req, res, next) => {
   const name = req.params.name;
   const email = req.body.email;
   itineraryModel.findOne({ name: name }).then((itinerary) => {
@@ -67,14 +65,13 @@ router.delete("/:name/favorites", (req, res) => {
     .then((user) => {
       let index = user.favorites.indexOf(name);
       user.favorites.splice(index, 1);
-      user.save().then((saveduser) => {
-        res.status(200).send(saveduser);
+      user.save().then((saveditinerary) => {
+        res.status(200).send(saveditinerary);
       });
     })
 
     .catch((err) => {
-      console.log(err);
-      res.status(500).send("Server error");
+      res.status(500).send("Server error", err);
     });
 });
 
@@ -106,11 +103,20 @@ router.delete("/:name/comments", (req, res, next) => {
   });
 });
 /////////Add itinerary
-router.post("/add",
+router.post(
+  "/add",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log(req.body)
-    const { name, profile, hashtags, price, rating, duration, activities } = req.body
+    console.log(req.body);
+    const {
+      name,
+      profile,
+      hashtags,
+      price,
+      rating,
+      duration,
+      activities,
+    } = req.body;
 
     const newItinerary = new itineraryModel({
       name,
@@ -120,8 +126,6 @@ router.post("/add",
       rating,
       duration,
       activities,
-      //   favorites: req.body.favorites,
-      //   comments: req.body.comments,
     });
     newItinerary
       .save()
@@ -134,26 +138,7 @@ router.post("/add",
       });
   }
 );
-// router.post("/additinerary", (req, res) => {
-//   const newItinerary = new itineraryModel({
-//     name: req.body.name,
-//     profile: req.body.picture,
-//     hashtags: req.body.hashtags,
-//     price: req.body.price,
-//     rating: req.body.rating,
-//     duration: req.body.duration,
-//     activities: req.body.activities,
-//   });
-//   newItinerary
-//     .save()
-//     .then((itinerary) => {
-//       res.send(itinerary);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//       res.status(500).send("Server error");
-//     });
-// });
+
 router.get("/test", (req, res) => {
   res.send({ msg: "itinerary test route." });
 });

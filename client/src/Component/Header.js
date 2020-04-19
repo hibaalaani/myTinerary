@@ -49,7 +49,7 @@ class Header extends Component {
           />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="mr-auto" navbar>
-              <NavItem dark>
+              <NavItem dark="true">
                 <NavLink>
                   {" "}
                   <Link to="/Cities">Cities We Offer </Link>
@@ -63,7 +63,7 @@ class Header extends Component {
               </NavItem>
               {this.props.user.isLoggedin ? (
                 <NavLink>
-                  <Link to="/LogOut"> LogOut</Link>
+                  <Link to="/LogOut"> Log out</Link>
                 </NavLink>
               ) : (
                 <UncontrolledDropdown nav inNavbar>
@@ -98,8 +98,6 @@ class Header extends Component {
   }
 }
 const mapStateToProps = (state, ownProps) => {
-  console.log("mamToState", state);
-
   return {
     user: state.users,
   };

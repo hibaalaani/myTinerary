@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { fetchNewItinerary } from "../store/actions/itineraryActions";
 import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 class AddItinerary extends Component {
   constructor() {
@@ -17,11 +17,6 @@ class AddItinerary extends Component {
     };
   }
 
-  //   componentDidMount() {
-  //     const city = this.props.cities;
-  //     this.props.fetchCitiesAction(city);
-  //   }
-
   handelChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value,
@@ -30,10 +25,9 @@ class AddItinerary extends Component {
   handelSubmit = (e) => {
     e.preventDefault();
     if (!this.props.user.isLoggedin) {
-      console.log('no user logged in')
+      alert(" you need to login");
       return <Redirect to="/Login" />;
-    }
-    else if (
+    } else if (
       this.state.name === "" ||
       this.state.profile === "" ||
       this.state.activities === ""

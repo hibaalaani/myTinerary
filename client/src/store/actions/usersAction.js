@@ -1,10 +1,5 @@
-// I cleaned a bit your action, It was almost good, just a few probem with the .json() convertion and handeling the payload
-//it shuld work now ;)
 import axios from "axios";
 import jwt_decode from "jwt-decode"; // import dependency
-import { Link } from "react-router-dom";
-
-// const jwtDecode = require("jwt-decode");
 export const fetchUsersAction = () => {
   return (dispatch) => {
     //add the full url of your back end
@@ -28,20 +23,13 @@ export const register = (newUser) => {
       .then((res) => {
         console.log("response", res);
         if (res.status === 200) {
-          //send the user to his account page
           const token = res.data.token;
           localStorage.setItem("token", token);
           console.log("token", token);
           const decoded = jwt_decode(token); // decode your token here
-
           console.log("decoded", decoded);
 
-          // dispatch({
-          //   type: "REGISTER_SUCCESS",
-          //   payload: decoded,
-          //   token: token,
-          // });
-          window.location = "/UserAccount";
+          // window.location = "/Login";
         }
       })
       .catch((error) => {
@@ -78,8 +66,6 @@ export const login = (userData) => {
 
           console.log("decoded", decoded);
           console.log("res", res);
-
-          //send the user to his account page
           dispatch({
             type: "LOGIN_SUCCESS",
             payload: decoded,

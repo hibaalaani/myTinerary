@@ -31,12 +31,11 @@ class Itinerary extends Component {
     this.props.fetchItinerariesByCityName(city);
   }
   handelChange = (e) => {
-    const newColor = this.state.favColor == green ? red : green;
+    const newColor = this.state.favColor === green ? red : green;
     this.setState({ favColor: newColor });
   };
   handelFavorite = (name) => {
     const emailAdded = this.props.user.email;
-    //////////// if (this.props.user.logged)
 
     this.props.fetchItinerariesFavorite(emailAdded, name);
   };
@@ -70,10 +69,10 @@ class Itinerary extends Component {
     return (
       <div className="container">
         <h1>Our Itineraries</h1>
-        {filterList ? (
+        {filterList &&
           filterList.map((itinerary, index) => (
             <div
-              className="container  itinerary"
+              className="container m-2 itinerary"
               key={index}
               itinerary={itinerary}
             >
@@ -130,7 +129,7 @@ class Itinerary extends Component {
                                   variant="primary"
                                   onClick={() =>
                                     comment.email &&
-                                      comment.email.includes(email)
+                                    comment.email.includes(email)
                                       ? this.handelDeleteComment(itinerary.name)
                                       : this.handelChange
                                   }
@@ -146,24 +145,15 @@ class Itinerary extends Component {
                 </div>
               </div>
             </div>
-          ))
-        ) : (
-            <div>Add your Itinerary</div>
-          )}
-        <React.Fragment>
-          <div>Add your Itinerary</div>
-          {this.props.itineraries.map((itinerary) => (
-            <div>no itinerary yet in {itinerary.name}</div>
           ))}
+        <React.Fragment>
+          <AddItinerary />
         </React.Fragment>
-        <AddItinerary />
       </div>
     );
   }
 }
 const mapStateToProps = (state, ownProps) => {
-  console.log("mapToState", state);
-
   return {
     itineraries: state.itineraries.itineraries,
     user: state.users,

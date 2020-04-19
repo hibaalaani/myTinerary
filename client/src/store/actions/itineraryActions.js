@@ -1,8 +1,4 @@
-// I cleaned a bit your action, I was almost good, just a few probem with the .json() convertion and handeling the payload
-//it shuld work now ;)
 import axios from "axios";
-import jwt_decode from "jwt-decode"; // import dependency
-
 export const fitchItinerariesAction = () => {
   return (dispatch) => {
     //add the full url of your back end
@@ -19,14 +15,14 @@ export const fitchItinerariesAction = () => {
   };
 };
 export const fetchItinerariesByCityName = (city) => {
-  console.log('city', city)
+  console.log("city", city);
   return (dispatch) => {
     fetch("http://localhost:5000/api/itineraries/" + city)
       .then((resp) => {
         return resp.json();
       })
       .then((json) => {
-        console.log('json :', json);
+        console.log("json :", json);
         dispatch({ type: "FETCH_ITINERARIES_SUCCESS", payload: json });
       })
       .catch((err) => {
@@ -35,7 +31,6 @@ export const fetchItinerariesByCityName = (city) => {
   };
 };
 export const fetchItinerariesFavorite = (emailAdded, name) => {
-  console.log("name", name);
   return (dispatch) => {
     axios
       .post(`http://localhost:5000/api/itineraries/${name}/favorites`, {
@@ -65,7 +60,6 @@ export const fetchItinerariesFavorite = (emailAdded, name) => {
 
 ////////////delete email favorite from the itinerary
 export const fetchItinerariesDeleteFavorite = (emailAdded, name) => {
-  console.log("name", name);
   return (dispatch) => {
     axios
       .delete(`http://localhost:5000/api/itineraries/${name}/favorites`, {
@@ -80,13 +74,13 @@ export const fetchItinerariesDeleteFavorite = (emailAdded, name) => {
         }
       })
       .catch((error) => {
-        console.log("error" + error.response);
+        console.log("error " + error.response);
         if (error.response) {
           if (error.response.status === 409) {
             alert("problem with email");
           } else {
             //alert with something else
-            alert("Be Sure From Your email and link");
+            alert("Be Sure From Your email and link at delete fav");
           }
         }
       });
@@ -154,20 +148,18 @@ export const fetchDeleteComment = (comments, email, name) => {
 ////////Add itinerary
 export const fetchNewItinerary = (newitinerary, token) => {
   return (dispatch) => {
-    // var token = localStorage.getItem("token");
-    console.log('newitinerary :', newitinerary);
-    console.log('token', token)
+    console.log("newitinerary :", newitinerary);
+    console.log("token", token);
     const config = {
       headers: {
         Authorization: token,
-      }
+      },
     };
     axios
       .post("http://localhost:5000/api/itineraries/add", newitinerary, config)
       .then((res) => {
         console.log("response", res);
         if (res.status === 200) {
-
           //why are you trying to get a token here? this is just bad copy pasting from other routes
 
           // const token = res.data.token;

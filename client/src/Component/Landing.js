@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "../App.css";
-import PhotoWithCamera from "./PhotoWithCamera.jpg";
 import Circle from "../Circle.png";
 import CarouselImg from "./CarouselImg";
 import { Link } from "react-router-dom";

@@ -23,7 +23,7 @@ router.get("/all", (_req, res) => {
 });
 
 router.post("/register", async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
 
   //Check if this user already exisits
   let user = await userModel.findOne({ email: req.body.email });
@@ -66,7 +66,7 @@ router.post("/register", async (req, res) => {
         console.log("user saved");
         res.send(user);
       } catch (error) {
-        console.log("in catch block");
+        console.log("in catch block", error);
         res.send(error);
       }
     });
@@ -75,8 +75,6 @@ router.post("/register", async (req, res) => {
 
 ////////////////////////////////login user
 router.post("/login", async (req, res) => {
-  console.log(req.body);
-
   const email = req.body.email;
   const password = req.body.password;
   // Find user by email
@@ -95,6 +93,7 @@ router.post("/login", async (req, res) => {
           id: user.id,
           name: user.name,
           email: user.email,
+          picture: user.picture,
         };
 
         // Sign token

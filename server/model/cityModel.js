@@ -3,14 +3,15 @@ const citySchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   country: {
     type: String,
-    required: true
+    required: true,
   },
   picture: {
-    type: String
-  }
+    type: String,
+  },
+  // itineraries: [{ type: mongoose.Schema.Types.ObjectId, ref: "itinerary" }],
 });
 module.exports = mongoose.model("city", citySchema);
