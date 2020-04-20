@@ -30,10 +30,10 @@ export const fetchItinerariesByCityName = (city) => {
       });
   };
 };
-export const fetchItinerariesFavorite = (emailAdded, name) => {
+export const fetchItinerariesFavorite = (emailAdded, id, name) => {
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/itineraries/${name}/favorites`, {
+      .post(`http://localhost:5000/api/itineraries/${id}/favorites`, {
         email: emailAdded,
       })
       .then((res) => {
@@ -41,7 +41,7 @@ export const fetchItinerariesFavorite = (emailAdded, name) => {
         if (res.status === 200) {
           //send the user to his account page
           dispatch({ type: "ADD_ITINERARY_FAVORITE" });
-          // dispatch(fetchItinerariesByCityName(name));
+          dispatch(fetchItinerariesByCityName(name));
         }
       })
       .catch((error) => {
@@ -59,10 +59,10 @@ export const fetchItinerariesFavorite = (emailAdded, name) => {
 };
 
 ////////////delete email favorite from the itinerary
-export const fetchItinerariesDeleteFavorite = (emailAdded, name) => {
+export const fetchItinerariesDeleteFavorite = (emailAdded, id, name) => {
   return (dispatch) => {
     axios
-      .delete(`http://localhost:5000/api/itineraries/${name}/favorites`, {
+      .delete(`http://localhost:5000/api/itineraries/${id}/favorites`, {
         email: emailAdded,
       })
       .then((res) => {
@@ -87,11 +87,11 @@ export const fetchItinerariesDeleteFavorite = (emailAdded, name) => {
   };
 };
 ////////////////Add comments to the itinerary by user
-export const addComments = (comments, name, email) => {
+export const addComments = (comments, name, id, email) => {
   console.log("name", name);
   return (dispatch) => {
     axios
-      .post(`http://localhost:5000/api/itineraries/${name}/comments`, {
+      .post(`http://localhost:5000/api/itineraries/${id}/comments`, {
         comments: comments,
         email,
       })
@@ -116,13 +116,12 @@ export const addComments = (comments, name, email) => {
       });
   };
 };
-export const fetchDeleteComment = (comments, email, name) => {
+export const fetchDeleteComment = (comments, name, id) => {
   console.log("name", name);
   return (dispatch) => {
     axios
-      .delete(`http://localhost:5000/api/itineraries/${name}/comments`, {
+      .delete(`http://localhost:5000/api/itineraries/${id}/comments`, {
         comments: comments,
-        email,
       })
       .then((res) => {
         console.log("response", res);

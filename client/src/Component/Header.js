@@ -53,16 +53,16 @@ class Header extends Component {
                 <NavLink>
                   {" "}
                   <Link to="/Cities" id="RouterNavLink">
-                    Cities We Offer{" "}
+                    Cities We Offer
                   </Link>
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink>
-                  {" "}
-                  <Link to="/AddCity" id="RouterNavLink">
-                    New City{" "}
-                  </Link>
+                <NavLink Component={Link} to="/AddCity">
+                  {/*                   
+                  <Link to="/AddCity" id="RouterNavLink"> */}
+                  New City
+                  {/* </Link> */}
                 </NavLink>
               </NavItem>
               {this.props.user.isLoggedin ? (

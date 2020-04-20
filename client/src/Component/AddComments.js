@@ -27,7 +27,7 @@ class AddComments extends Component {
       comments: e.target.value,
     });
   };
-  onSubmit = (name) => {
+  onSubmit = (name, id) => {
     if (this.props.user.email == null) {
       alert("you need tpo log in");
     } else {
@@ -36,7 +36,7 @@ class AddComments extends Component {
       console.log("comments", comments);
 
       //////add comments
-      this.props.addComments(comments, name, email);
+      this.props.addComments(comments, name, id, email);
       ///////////close modal
       this.toggle();
     }
@@ -47,7 +47,12 @@ class AddComments extends Component {
     return (
       <div>
         <>
-          <Button variant="primary" color="primary" onClick={this.toggle}>
+          <Button
+            variant="primary"
+            color="primary"
+            size="sm"
+            onClick={this.toggle}
+          >
             Add Comment
           </Button>
 
@@ -69,7 +74,7 @@ class AddComments extends Component {
                     color="dark"
                     block
                     style={{ marginTop: "2rem" }}
-                    onClick={() => this.onSubmit(itinerary.name)}
+                    onClick={() => this.onSubmit(itinerary.name, itinerary._id)}
                   >
                     Add Comments
                   </Button>
@@ -91,7 +96,7 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 const mapDispatchToProps = (dispatch) => ({
-  addComments: (comments, name, email) =>
-    dispatch(addComments(comments, name, email)),
+  addComments: (comments, name, id, email) =>
+    dispatch(addComments(comments, name, id, email)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(AddComments);

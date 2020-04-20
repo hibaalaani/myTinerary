@@ -5,10 +5,6 @@ const itinerarySchema = new mongoose.Schema({
     required: true,
     // unique: true,
   },
-  id: {
-    type: Object,
-    unique: true,
-  },
 
   profile: {
     type: String,

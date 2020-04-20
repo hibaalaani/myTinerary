@@ -30,57 +30,52 @@ router.get("/:name", (req, res) => {
     .catch((err) => console.log(err));
 });
 /////////////post user to the itenerary
-router.post("/:name/favorites", (req, res, next) => {
+router.post("/:id/favorites", (req, res, next) => {
   let email = req.body.email;
 
-  let name = req.params.name;
-
-  itineraryModel.findOne({ _id: name.id }).then((itinerary) => {
+  let id = req.params.id;
+  console.log("id", id);
+  itineraryModel.findOne({ _id: id }).then((itinerary) => {
+    console.log(itinerary);
     itinerary.favorites.push(email);
     itinerary.save().then((saveditinerary) => {
-      res.status(200).send(saveditinerary);
+      userModel.findOne({ email: email }).then((user) => {
+        user.favorites.push(id);
+        user.save();
+        res.status(200).send(saveditinerary);
+      });
     });
-  });
-  userModel.findOne({ email: email }).then((user) => {
-    user.favorites.push(name);
-    user.save();
-    res.send(user);
   });
 });
 ///////////////////delete user from favorite itinerary
 
-router.delete("/:name/favorites", (req, res, next) => {
-  const name = req.params.name;
+router.delete("/:id/favorites", (req, res, next) => {
+  const id = req.params.id;
   const email = req.body.email;
-  itineraryModel.findOne({ _id: name.id }).then((itinerary) => {
+  itineraryModel.findOne({ _id: id }).then((itinerary) => {
+    console.log("itinerary:", itinerary);
     ///////apply js
     let index = itinerary.favorites.indexOf(email);
     itinerary.favorites.splice(index, 1);
     itinerary.save().then((saveditinerary) => {
-      res.status(200).send(saveditinerary);
-    });
-  });
-  userModel
-    .findOne({ email: email })
-    .then((user) => {
-      let index = user.favorites.indexOf(name);
-      user.favorites.splice(index, 1);
-      user.save().then((saveditinerary) => {
+      userModel.findOne(email).then((user) => {
+        console.log("user:", user);
+        let index = user.favorites.indexOf(id);
+        console.log("index:", index);
+        user.favorites.splice(index, 1);
+        user.save();
         res.status(200).send(saveditinerary);
       });
-    })
-
-    .catch((err) => {
-      res.status(500).send("Server error", err);
     });
+  });
 });
 
 /////////////post comment to the itenerary
-router.post("/:name/comments", (req, res, next) => {
-  const name = req.params.name;
+router.post("/:id/comments", (req, res, next) => {
+  const id = req.params.id;
   let comments = { msg: req.body.comments, email: req.body.email };
 
-  itineraryModel.findOne({ name: name }).then((itinerary) => {
+  itineraryModel.findOne({ _id: id }).then((itinerary) => {
     itinerary.comments.push(comments);
     itinerary.save().then((saveditinerary) => {
       res.status(200).send(saveditinerary);
@@ -89,11 +84,11 @@ router.post("/:name/comments", (req, res, next) => {
 });
 
 /////////////delete  comment from the itenerary
-router.delete("/:name/comments", (req, res, next) => {
-  const name = req.params.name;
+router.delete("/:id/comments", (req, res, next) => {
+  const id = req.params.id;
   let comments = { msg: req.body.comments, email: req.body.email };
 
-  itineraryModel.findOne({ name: name }).then((itinerary) => {
+  itineraryModel.findOne({ _id: id }).then((itinerary) => {
     let index = itinerary.comments.indexOf(comments);
     itinerary.comments.splice(index, 1);
 

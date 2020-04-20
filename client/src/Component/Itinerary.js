@@ -11,7 +11,7 @@ import AddItinerary from "./AddItinerary";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Accordion, Container, Row, Col } from "react-bootstrap";
 
 const green = "#ffff00";
 const red = "#FF0000";
@@ -34,21 +34,20 @@ class Itinerary extends Component {
     const newColor = this.state.favColor === green ? red : green;
     this.setState({ favColor: newColor });
   };
-  handelFavorite = (name) => {
+  handelFavorite = (id, name) => {
     const emailAdded = this.props.user.email;
 
-    this.props.fetchItinerariesFavorite(emailAdded, name);
+    this.props.fetchItinerariesFavorite(emailAdded, id, name);
   };
-  handelDeleteFavorite = (name) => {
+  handelDeleteFavorite = (id, name) => {
     const emailAdded = this.props.user.email;
-    this.props.fetchItinerariesDeleteFavorite(emailAdded, name);
+    this.props.fetchItinerariesDeleteFavorite(emailAdded, id, name);
   };
-  handelDeleteComment = (name) => {
-    const email = this.props.user.email;
-    const comments = this.props.itineraries.comments;
-    console.log("comment", comments);
-    console.log("nameItiner", name);
-    this.props.fetchDeleteComment(comments, email, name);
+  handelDeleteComment = (name, id, comments) => {
+    // const email = this.props.user.email;
+    // const msg = this.state.comments.msg;
+
+    this.props.fetchDeleteComment(comments, name, id);
   };
   filter() {
     if (this.props.itineraries) {
@@ -72,14 +71,32 @@ class Itinerary extends Component {
         {filterList &&
           filterList.map((itinerary, index) => (
             <div
-              className="container m-2 itinerary"
+              className="container m-2 itinerary rounded"
               key={index}
               itinerary={itinerary}
             >
-              {/* <div> */}
-              <h3 className="card-title pt-3 text-light">
-                Activities in {itinerary.name} : {itinerary.activities}
-              </h3>
+              <div className="row justify-content-between">
+                <h4 className="card-title pt-3 text-light col-6">
+                  Activities in {itinerary.name} : {itinerary.activities}
+                </h4>
+
+                <FontAwesomeIcon
+                  className="pt-3"
+                  icon={faHeart}
+                  size="3x"
+                  style={
+                    itinerary.favorites.includes(email)
+                      ? { color: "red" }
+                      : { color: "#3986c3" }
+                  }
+                  // onClick={() => this.handelFavorite(itinerary.name)}
+                  onClick={() =>
+                    itinerary.favorites.includes(email)
+                      ? this.handelDeleteFavorite(itinerary._id, itinerary.name)
+                      : this.handelFavorite(itinerary._id, itinerary.name)
+                  }
+                />
+              </div>
               <img
                 className="card-body  align-center"
                 src={itinerary.profile}
@@ -90,8 +107,68 @@ class Itinerary extends Component {
                   The Price for {itinerary.duration} With Hotels{" "}
                   {itinerary.price}
                 </h4>
-                <div className="row justify-content-around">
-                  <FontAwesomeIcon
+                <Accordion defaultActiveKey="0">
+                  {/* <Card.Header className="textColor"> */}
+                  <Accordion.Toggle
+                    as={Button}
+                    variant="outline-info"
+                    size="sm"
+                    eventKey="0"
+                    aria-controls="example-fade-text"
+                  >
+                    What Other Said
+                  </Accordion.Toggle>
+                  {/* </Card.Header> */}
+                  <Accordion.Collapse eventKey="0">
+                    <React.Fragment>
+                      {itinerary.comments &&
+                        itinerary.comments.map((comment) => {
+                          return (
+                            <div>
+                              <Container>
+                                <Row>
+                                  <Col>
+                                    {/* <Card style={{ width: "18rem" }}> */}
+
+                                    <Card.Body>
+                                      <Card.Text className="textColor">
+                                        {comment.msg}
+                                      </Card.Text>
+                                      <footer className="blockquote-footer">
+                                        <cite title="Source Title">
+                                          Written by
+                                        </cite>{" "}
+                                        {comment.email}{" "}
+                                      </footer>
+                                      <Button
+                                        variant="outline-danger"
+                                        size="sm"
+                                        aria-controls="example-fade-text"
+                                        onClick={() =>
+                                          comment.email &&
+                                          comment.email.includes(email)
+                                            ? this.handelDeleteComment(
+                                                itinerary.name,
+                                                itinerary._id,
+                                                itinerary.comments
+                                              )
+                                            : alert("its not your comment")
+                                        }
+                                      >
+                                        Delete Comment
+                                      </Button>
+                                    </Card.Body>
+                                  </Col>
+                                </Row>
+                              </Container>
+                            </div>
+                          );
+                        })}
+                    </React.Fragment>
+                  </Accordion.Collapse>
+                </Accordion>
+                <div className="row justify-content-center">
+                  {/* <FontAwesomeIcon
                     icon={faHeart}
                     size="3x"
                     style={
@@ -102,46 +179,15 @@ class Itinerary extends Component {
                     // onClick={() => this.handelFavorite(itinerary.name)}
                     onClick={() =>
                       itinerary.favorites.includes(email)
-                        ? this.handelDeleteFavorite(itinerary.name)
-                        : this.handelFavorite(itinerary.name)
+                        ? this.handelDeleteFavorite(
+                            itinerary._id,
+                            itinerary.name
+                          )
+                        : this.handelFavorite(itinerary._id, itinerary.name)
                     }
-                  />
+                  /> */}
 
                   <AddComments itinerary={itinerary} />
-                </div>
-                <div>
-                  <div>
-                    {itinerary.comments &&
-                      itinerary.comments.map((comment) => {
-                        return (
-                          <div>
-                            <Card style={{ width: "18rem" }}>
-                              <Card.Header>What Other Said</Card.Header>
-                              <Card.Body>
-                                <Card.Text className="textColor">
-                                  {comment.msg}
-                                </Card.Text>
-                                <footer className="blockquote-footer">
-                                  <cite title="Source Title">Written by</cite>{" "}
-                                  {comment.email}{" "}
-                                </footer>
-                                <Button
-                                  variant="primary"
-                                  onClick={() =>
-                                    comment.email &&
-                                    comment.email.includes(email)
-                                      ? this.handelDeleteComment(itinerary.name)
-                                      : alert("its not your comment")
-                                  }
-                                >
-                                  Delete Comment
-                                </Button>
-                              </Card.Body>
-                            </Card>
-                          </div>
-                        );
-                      })}
-                  </div>
                 </div>
               </div>
             </div>
@@ -157,18 +203,18 @@ const mapStateToProps = (state, ownProps) => {
   return {
     itineraries: state.itineraries.itineraries,
     user: state.users,
-    favorites: state.itineraries.favorites,
+    comments: state.itineraries.comments,
   };
 };
 const mapDispatchToProps = (dispatch) => ({
   fetchItinerariesByCityName: (city) =>
     dispatch(fetchItinerariesByCityName(city)),
 
-  fetchItinerariesFavorite: (emailAdded, name) =>
-    dispatch(fetchItinerariesFavorite(emailAdded, name)),
-  fetchDeleteComment: (comments, email, name) =>
-    dispatch(fetchDeleteComment(comments, email, name)),
-  fetchItinerariesDeleteFavorite: (emailAdded, name) =>
-    dispatch(fetchItinerariesDeleteFavorite(emailAdded, name)),
+  fetchItinerariesFavorite: (emailAdded, id, name) =>
+    dispatch(fetchItinerariesFavorite(emailAdded, id, name)),
+  fetchItinerariesDeleteFavorite: (emailAdded, id, name) =>
+    dispatch(fetchItinerariesDeleteFavorite(emailAdded, id, name)),
+  fetchDeleteComment: (comments, name, id) =>
+    dispatch(fetchDeleteComment(comments, name, id)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Itinerary);

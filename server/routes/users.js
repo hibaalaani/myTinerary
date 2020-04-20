@@ -67,7 +67,7 @@ router.post("/register", async (req, res) => {
         res.send(user);
       } catch (error) {
         console.log("in catch block", error);
-        res.send(error);
+        // res.send(error);
       }
     });
   }
@@ -182,84 +182,84 @@ router.get("/logout", (req, res) => {
 });
 
 ///////////Add Favourite(not used now)
-router.post("/:favorites", (req, res) => {
-  console.log(req.params);
-  let id = req.body.id;
-  let favorite = req.params.favorites;
-  userModel.findOne({ _id: id }).then((user) => {
-    console.log("currentUser", user);
-    user.favorites.push(favorite);
-    user.save();
-    res.send(user);
-  });
-});
-///////////////////get favourite(not used now)
-router.get("/:favorites", (req, res) => {
-  let favorite = req.params.favorites;
-  let id = req.body.id;
+// router.post("/:favorites", (req, res) => {
+//   console.log(req.params);
+//   let id = req.body.id;
+//   let favorite = req.params.favorites;
+//   userModel.findOne({ _id: id }).then((user) => {
+//     console.log("currentUser", user);
+//     user.favorites.push(favorite);
+//     user.save();
+//     res.send(user);
+//   });
+// });
+// ///////////////////get favourite(not used now)
+// router.get("/:favorites", (req, res) => {
+//   let favorite = req.params.favorites;
+//   let id = req.body.id;
 
-  userModel
-    .findOne({ _id: id, favorites: favorite })
-    .then((favorite) => {
-      res.json(favorite);
-    })
-    .catch((err) => res.status(404).json({ error: "User does not exist!" }));
-});
+//   userModel
+//     .findOne({ _id: id, favorites: favorite })
+//     .then((favorite) => {
+//       res.json(favorite);
+//     })
+//     .catch((err) => res.status(404).json({ error: "User does not exist!" }));
+// });
 
-///////////////get one user(not used now)
-router.get("/:id", (req, res) => {
-  let userId = req.params.id;
+// ///////////////get one user(not used now)
+// router.get("/:id", (req, res) => {
+//   let userId = req.params.id;
 
-  userModel
-    .findOne({ id: userId })
-    .then((user) => {
-      console.log("user", user);
-      res.send(user);
-    })
-    .catch((err) => console.log(err));
-});
+//   userModel
+//     .findOne({ id: userId })
+//     .then((user) => {
+//       console.log("user", user);
+//       res.send(user);
+//     })
+//     .catch((err) => console.log(err));
+// });
 
-///////////Add favorites
-router.post("/:name/favorites", (req, res) => {
-  let name = req.params.name;
-  let email = req.body.email;
-  userModel.findOne({ email: email }).then((user) => {
-    user.favorites.push(name);
-    user.save().then((saveduser) => {
-      res.status(200).send(saveduser);
-    });
-  });
-});
+// ///////////Add favorites
+// router.post("/:name/favorites", (req, res) => {
+//   let name = req.params.name;
+//   let email = req.body.email;
+//   userModel.findOne({ email: email }).then((user) => {
+//     user.favorites.push(name);
+//     user.save().then((saveduser) => {
+//       res.status(200).send(saveduser);
+//     });
+//   });
+// });
 
-/////////////delete favourite
-router.delete("/:name/favorites", (req, res) => {
-  let name = req.params.name;
-  let email = req.body.email;
-  userModel.findOne({ email: email }).then((user) => {
-    let index = user.favorites.indexOf(name);
-    user.favorites.splice(index, 1);
-    user.save().then((saveduser) => {
-      res.status(200).send(saveduser);
-    });
-  });
-});
+// /////////////delete favourite
+// router.delete("/:name/favorites", (req, res) => {
+//   let name = req.params.name;
+//   let email = req.body.email;
+//   userModel.findOne({ email: email }).then((user) => {
+//     let index = user.favorites.indexOf(name);
+//     user.favorites.splice(index, 1);
+//     user.save().then((saveduser) => {
+//       res.status(200).send(saveduser);
+//     });
+//   });
+// });
 
-///////////Add comments
-router.post("/:name/comments", (req, res) => {
-  let name = req.params.name;
-  let comments = req.body.comments;
-  let email = req.body.email;
-  userModel.findOne({ email: email }).then((user) => {
-    user.comments.push(comments, name);
-    user.save().then((saveduser) => {
-      res.status(200).send(saveduser);
-    });
-  });
-});
+// ///////////Add comments
+// router.post("/:name/comments", (req, res) => {
+//   let name = req.params.name;
+//   let comments = req.body.comments;
+//   let email = req.body.email;
+//   userModel.findOne({ email: email }).then((user) => {
+//     user.comments.push(comments, name);
+//     user.save().then((saveduser) => {
+//       res.status(200).send(saveduser);
+//     });
+//   });
+// });
 
-router.get("/Account", (req, res) => {
-  res.send("wellcom");
-});
+// router.get("/Account", (req, res) => {
+//   res.send("wellcom");
+// });
 
 router.get("/test", (req, res) => {
   res.send({ msg: "Users test route." });
