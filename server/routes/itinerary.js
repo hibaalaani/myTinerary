@@ -35,7 +35,7 @@ router.post("/:name/favorites", (req, res, next) => {
 
   let name = req.params.name;
 
-  itineraryModel.findOne({ name: name }).then((itinerary) => {
+  itineraryModel.findOne({ _id: name.id }).then((itinerary) => {
     itinerary.favorites.push(email);
     itinerary.save().then((saveditinerary) => {
       res.status(200).send(saveditinerary);
@@ -52,7 +52,7 @@ router.post("/:name/favorites", (req, res, next) => {
 router.delete("/:name/favorites", (req, res, next) => {
   const name = req.params.name;
   const email = req.body.email;
-  itineraryModel.findOne({ name: name }).then((itinerary) => {
+  itineraryModel.findOne({ _id: name.id }).then((itinerary) => {
     ///////apply js
     let index = itinerary.favorites.indexOf(email);
     itinerary.favorites.splice(index, 1);

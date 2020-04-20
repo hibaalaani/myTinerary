@@ -32,7 +32,7 @@ class AddItinerary extends Component {
       this.state.profile === "" ||
       this.state.activities === ""
     ) {
-      alert("You need to  fill these fields");
+      alert("You need to fill these fields");
     } else {
       const newitinerary = {
         name: this.state.name,

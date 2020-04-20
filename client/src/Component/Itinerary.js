@@ -131,7 +131,7 @@ class Itinerary extends Component {
                                     comment.email &&
                                     comment.email.includes(email)
                                       ? this.handelDeleteComment(itinerary.name)
-                                      : this.handelChange
+                                      : alert("its not your comment")
                                   }
                                 >
                                   Delete Comment

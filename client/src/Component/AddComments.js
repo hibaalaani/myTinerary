@@ -28,16 +28,18 @@ class AddComments extends Component {
     });
   };
   onSubmit = (name) => {
-    const email = this.props.user.email;
-    const comments = this.state.comments;
-    console.log("comments", comments);
-    // const name = this.props.match.params.name;
+    if (this.props.user.email == null) {
+      alert("you need tpo log in");
+    } else {
+      const email = this.props.user.email;
+      const comments = this.state.comments;
+      console.log("comments", comments);
 
-    //////add comments
-
-    this.props.addComments(comments, name, email);
-    ///////////close modal
-    this.toggle();
+      //////add comments
+      this.props.addComments(comments, name, email);
+      ///////////close modal
+      this.toggle();
+    }
   };
 
   render() {
