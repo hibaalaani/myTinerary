@@ -29,11 +29,12 @@ class Login extends Component {
     }
   };
   render() {
+    const users = this.props.user;
     return (
       <div className="container">
         {this.props.user.isLoggedin ? (
           <React.Fragment>
-            <UserAccount />
+            <UserAccount users={users} />
           </React.Fragment>
         ) : (
           <form className="form-horizontal" onSubmit={this.handelSubmit}>

@@ -45,6 +45,7 @@ router.post("/register", async (req, res) => {
           id: user.id,
           // name: user.name,
           email: user.email,
+          // picture: user.picture,
         };
 
         // Sign token
@@ -94,6 +95,7 @@ router.post("/login", async (req, res) => {
           name: user.name,
           email: user.email,
           picture: user.picture,
+          favorites: user.favorites,
         };
 
         // Sign token

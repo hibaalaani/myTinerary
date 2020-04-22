@@ -31,6 +31,7 @@ function usersReducers(state = initialState, action) {
         // token: action.payload.data.token,
         token: action.token,
         users: action.payload.name,
+        favorites: action.payload.favorites,
         picture: action.payload.picture,
         email: action.payload.email,
         isLoggedin: true,

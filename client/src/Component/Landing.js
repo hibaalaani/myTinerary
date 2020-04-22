@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "../App.css";
 import Circle from "../Component/images/Circle.png";
 import CarouselImg from "./CarouselImg";
+import HeaderMatirial from "./HeaderMatirial";
+
 import { Link } from "react-router-dom";
 import { fetchCitiesAction } from "../store/actions/cityActions";
 import { connect } from "react-redux";
@@ -18,10 +20,10 @@ class Landing extends Component {
   render() {
     const cities = this.props.cities;
     return (
-      <div className="container-fluid">
+      <div className="container">
         <header className="col-12 header">
           <section className="container-for-header-text col-12">
-            <div className="header-text-wrapper col-md-6 col-sm-12">
+            <div className="header-text-wrapper col-sm-12">
               <h1>My Itinerary</h1>
               <p>make your trip with LOVE</p>
             </div>
@@ -39,10 +41,11 @@ class Landing extends Component {
             <img src={Circle} alt="looking" className="circle" />
           </Link>
           <p className="mt-4 textSize col-sm-12">
-            Want to build your own MYtinerary ?
+            Want to build your own Itinerary ?
           </p>
 
           {cities.length > 0 && <CarouselImg cities={cities} />}
+          <HeaderMatirial />
         </div>
       </div>
     );

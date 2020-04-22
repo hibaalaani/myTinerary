@@ -17,8 +17,10 @@ import {
   DropdownItem,
   Button,
   Form,
+  ButtonGroup,
 } from "reactstrap";
-// import FormControl from "react-bootstrap/FormControl";
+import { Image } from "react-bootstrap";
+// import Image from "react-bootstrap/Image";
 class Header extends Component {
   constructor(props) {
     super();
@@ -58,7 +60,7 @@ class Header extends Component {
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink Component={Link} to="/AddCity">
+                <NavLink href="/AddCity">
                   {/*                   
                   <Link to="/AddCity" id="RouterNavLink"> */}
                   New City
@@ -66,15 +68,13 @@ class Header extends Component {
                 </NavLink>
               </NavItem>
               {this.props.user.isLoggedin ? (
-                <NavLink>
-                  <Link to="/LogOut" id="RouterNavLink">
-                    {" "}
-                    Log out
-                  </Link>
+                <NavLink href="/LogOut">
+                  {/* <Link href="/LogOut" id="RouterNavLink"> */} Log Out
+                  {/* </Link> */}
                 </NavLink>
               ) : (
                 <UncontrolledDropdown nav inNavbar>
-                  <DropdownToggle nav caret>
+                  <DropdownToggle nav as={ButtonGroup} caret>
                     Sign
                   </DropdownToggle>
                   <DropdownMenu right>
@@ -90,13 +90,20 @@ class Header extends Component {
               )}
             </Nav>
             <Form inline>
-              <Button variant="outline-success ">
-                {this.props.user.isLoggedin ? (
-                  <p> Hello {this.props.user.users}</p>
-                ) : (
-                  <Link to="/Login">Login </Link>
-                )}
-              </Button>
+              {/* <Button variant="outline-success "> */}
+              {this.props.user.isLoggedin ? (
+                <Link to="/UserAccount">
+                  {/* <p> Hello {this.props.user.users}</p> */}
+                  <Image
+                    src={this.props.user.picture}
+                    style={{ width: 50 }}
+                    roundedCircle
+                  />
+                </Link>
+              ) : (
+                <Link to="/Login">Login</Link>
+              )}
+              {/* </Button> */}
             </Form>
           </Collapse>
         </Navbar>

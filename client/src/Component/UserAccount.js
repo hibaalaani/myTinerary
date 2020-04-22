@@ -5,14 +5,20 @@ import { login } from "../store/actions/usersAction";
 // import { fetchUsersAction } from "../store/actions/usersAction";
 class UserAccount extends Component {
   render() {
-    console.log(this.props);
+    const users = this.props.users;
+    console.log("from userAccount", this.props.users);
     return (
       <div className="container">
-        <h1> you are finish the registration </h1>{" "}
-        {this.props.users.favorites &&
-          this.props.users.favorites.map((favorite, index) => {
+        {/* {users.favorites &&
+          users.favorites.map((favorite, index) => {
+            console.log(favorite);
             return <h1 key={index}>{favorite}</h1>;
-          })}
+          })} */}
+        {users.favorites ? (
+          <p>{users.favorites}</p>
+        ) : (
+          <h1>you have no favorite</h1>
+        )}
         {/* <UserFavoriteItinerary /> */}
       </div>
     );

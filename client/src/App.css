@@ -1,11 +1,12 @@
 body {
   margin: 0;
+  padding: 0;
   background-color: #b2b7be;
 }
 
 .App {
   text-align: center;
-  margin-top: 5vh;
+  /* margin-top: 5vh; */
 }
 
 .App-logo {
@@ -102,12 +103,12 @@ body {
   text-align: center;
 }
 
-body header {
+.header {
   background-image: url("./Component/images/PhotoWithCamera.jpg");
   background-position: 50% 80%;
   background-size: 100%;
   background-repeat: no-repeat;
-  height: 700px;
+  /* height: 700px; */
   margin: 0 auto;
 
 }
@@ -117,22 +118,24 @@ body header {
 }
 
 .header-text-wrapper {
-  /* padding: 20%; */
-  margin: 20% auto;
-  /* width: 80%; */
+
+  padding-top: 40%;
+
   float: none;
 }
 
 .container-for-header-text p {
-  margin-top: 10%;
+  margin-top: 0;
   font: normal 1.2em sans-serif;
   color: #cc350f;
+  padding-bottom: 20%;
 
 }
 
 .container-for-header-text h1 {
   font: normal 2.4em "Patua One", serif;
   color: #cc350f;
+  margin-top: 0;
 
 }
 
@@ -149,4 +152,9 @@ body header {
   justify-content: center;
   float: none;
   margin: 0 auto;
+}
+
+.super-colors {
+  background-color: plum;
+  color: #282c34;
 }
