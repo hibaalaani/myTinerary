@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../App.css";
 import Circle from "../Component/images/Circle.png";
 import CarouselImg from "./CarouselImg";
-import HeaderMatirial from "./HeaderMatirial";
+// import HeaderMatirial from "./HeaderMatirial";
 
 import { Link } from "react-router-dom";
 import { fetchCitiesAction } from "../store/actions/cityActions";
@@ -20,12 +20,12 @@ class Landing extends Component {
   render() {
     const cities = this.props.cities;
     return (
-      <div className="container">
+      <div className="container-fluid App">
         <header className="col-12 header">
           <section className="container-for-header-text col-12">
             <div className="header-text-wrapper col-sm-12">
               <h1>My Itinerary</h1>
-              <p>make your trip with LOVE</p>
+              <p>make your trip with Love</p>
             </div>
           </section>
 
@@ -45,7 +45,6 @@ class Landing extends Component {
           </p>
 
           {cities.length > 0 && <CarouselImg cities={cities} />}
-          <HeaderMatirial />
         </div>
       </div>
     );

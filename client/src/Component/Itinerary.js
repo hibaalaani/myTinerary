@@ -67,7 +67,7 @@ class Itinerary extends Component {
     // const { itineraries } = this.props;
     return (
       <div className="container">
-        <h1>Our Itineraries</h1>
+        <h3>Our Itineraries</h3>
         {filterList &&
           filterList.map((itinerary, index) => (
             <div
@@ -98,7 +98,7 @@ class Itinerary extends Component {
                 />
               </div>
               <img
-                className="card-body  align-center"
+                className="card-body"
                 src={itinerary.profile}
                 alt={itinerary.name}
               />

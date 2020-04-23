@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { fetchNewItinerary } from "../store/actions/itineraryActions";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-
+import { Form, Button } from "react-bootstrap";
 class AddItinerary extends Component {
   constructor() {
     super();
@@ -52,45 +52,104 @@ class AddItinerary extends Component {
   };
   render() {
     return (
-      <div
-        className="card p-2 card-itinerary-add border-info"
-        style={{ width: "18rem" }}
-      >
-        <form onSubmit={this.handelSubmit}>
-          <label className="mx-2" htmlFor="name">
-            {" "}
-            Name:
-          </label>
-          <input type="text" id="name" onChange={this.handelChange} />
-          <label className="mx-2" htmlFor="profile">
-            {" "}
-            profile
-          </label>
-          <input type="url" id="profile" onChange={this.handelChange} />
-          <label className="mx-2" htmlFor="duration">
-            duration:
-          </label>
-          <input type="text" id="duration" onChange={this.handelChange} />
-          <label className="mx-2" htmlFor="rating">
-            rating:
-          </label>
-          <input type="text" id="rating" onChange={this.handelChange} />
-          <label className="mx-2" htmlFor="activities">
-            activites:
-          </label>
-          <input type="text" id="activites" onChange={this.handelChange} />
-          <label className="mx-2" htmlFor="hashtags">
-            hashtags:
-          </label>
-          <input type="text" id="hashtags" onChange={this.handelChange} />
-          <label className="mx-2 " htmlFor="price">
-            price:
-          </label>
-          <input type="text" id="price" onChange={this.handelChange} />
-          <button className="mx-2 btn-info" type="submit">
-            Add New Itinerary
-          </button>
-        </form>
+      <div className="card p-2 card-itinerary-add border-info">
+        <Form onSubmit={this.handelSubmit}>
+          <Form.Group controlId="formBasicName">
+            <Form.Label>Name</Form.Label>
+            <Form.Control type="name" placeholder="Enter city name" />
+          </Form.Group>
+
+          <Form.Group controlId="formBasicProfile">
+            <Form.Label>Profile</Form.Label>
+            <Form.Control
+              type="url"
+              placeholder="Profile"
+              onChange={this.handelChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="formBasicDuration">
+            <Form.Label>duration</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="duration"
+              onChange={this.handelChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="formBasicRating">
+            <Form.Label>rating</Form.Label>
+            <Form.Control
+              type="number"
+              placeholder="rating"
+              onChange={this.handelChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="formBasicActivities">
+            <Form.Label>activities</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="activities"
+              onChange={this.handelChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="formBasicHashtags">
+            <Form.Label>Hashtags</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Hashtags"
+              onChange={this.handelChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="formBasicPrice">
+            <Form.Label>price</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="price"
+              onChange={this.handelChange}
+            />
+          </Form.Group>
+
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Form>
+        {/* //   className="card p-2 card-itinerary-add border-info"
+      //   style={{ width: "18rem" }}
+      // >
+      //   <form onSubmit={this.handelSubmit}>
+      //     <label className="mx-2" htmlFor="name">
+      //       {" "}
+      //       Name:
+      //     </label>
+      //     <input type="text" id="name" onChange={this.handelChange} />
+      //     <label className="mx-2" htmlFor="profile">
+      //       {" "}
+      //       profile
+      //     </label>
+      //     <input type="url" id="profile" onChange={this.handelChange} />
+      //     <label className="mx-2" htmlFor="duration">
+      //       duration:
+      //     </label>
+      //     <input type="text" id="duration" onChange={this.handelChange} />
+      //     <label className="mx-2" htmlFor="rating">
+      //       rating:
+      //     </label>
+      //     <input type="text" id="rating" onChange={this.handelChange} />
+      //     <label className="mx-2" htmlFor="activities">
+      //       activites:
+      //     </label>
+      //     <input type="text" id="activites" onChange={this.handelChange} />
+      //     <label className="mx-2" htmlFor="hashtags">
+      //       hashtags:
+      //     </label>
+      //     <input type="text" id="hashtags" onChange={this.handelChange} />
+      //     <label className="mx-2 " htmlFor="price">
+      //       price:
+      //     </label>
+      //     <input type="text" id="price" onChange={this.handelChange} />
+      //     <button className="mx-2 btn-info" type="submit">
+      //       Add New Itinerary
+      //     </button>
+        // </form> */}
       </div>
     );
   }

@@ -5,12 +5,9 @@ import Users from "./Component/Users";
 import Login from "./Component/Login";
 import Cities from "./Component/Cities";
 import AddCity from "./Component/AddCity";
-// import Mytineraries from "./Component/Mytineraries";
+import Footer from "./Component/Footer";
 import Itinerary from "./Component/Itinerary";
 import "bootstrap/dist/css/bootstrap.min.css";
-// get our fontawesome imports
-// import { faHome } from "@fortawesome/free-solid-svg-icons";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Notfound from "./Component/Notfound";
 import Header from "./Component/Header";
@@ -44,6 +41,7 @@ function App() {
           <Route exact path="/Itineraries/:city" component={Itinerary} />
           <Route component={Notfound} />
         </Switch>
+        <Footer />
       </div>
     </Router>
   );

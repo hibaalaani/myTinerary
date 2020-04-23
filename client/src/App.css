@@ -1,16 +1,17 @@
 body {
   margin: 0;
+
   padding: 0;
   background-color: #b2b7be;
+  overflow: scroll;
 }
 
 .App {
   text-align: center;
-  /* margin-top: 5vh; */
+  margin-top: 1vh;
 }
 
 .App-logo {
-
   width: 90%;
   height: 30vh;
   margin: 0px;
@@ -40,8 +41,8 @@ body {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+a {
+  color: #d2dbe7;
 }
 
 /* @keyframes App-logo-spin {
@@ -59,16 +60,19 @@ body {
 
 .itinerary {
   margin: 0 auto;
-  background-color: #61dafb;
+  background-color: #d2dbe7;
+  width: 22rem;
 }
 
 .itinerary img {
-  width: 100%
+  width: 100%;
 }
-
+.colorNav {
+  background-color: #1c2331;
+}
 .footer {
-  width: 50px;
-  text-align: center;
+  background-color: #1c2331;
+  color: white;
 }
 
 .navbar-margin {
@@ -77,19 +81,19 @@ body {
 
 .card {
   width: 18rem;
+  /* width: -webkit-fill-available; */
   position: absolute;
-  height: 18rem;
-  float: left;
+  /* height: 18rem; */
+  display: inline-block;
   background-color: #d2dbe7;
   display: inline-block;
-  margin: 3%;
+  margin: 1%;
   text-align: center;
 }
 
 .card-img {
   width: 16rem;
   height: 16rem;
-
 }
 
 .imgCarsoul {
@@ -97,7 +101,7 @@ body {
   border-radius: 10%;
   background-color: #61dafb;
   height: 18rem;
-  float: left;
+  /* float: left; */
   padding: 2%;
   /* display: inline-block; */
   text-align: center;
@@ -110,7 +114,6 @@ body {
   background-repeat: no-repeat;
   /* height: 700px; */
   margin: 0 auto;
-
 }
 
 .container-for-header-text {
@@ -118,7 +121,6 @@ body {
 }
 
 .header-text-wrapper {
-
   padding-top: 40%;
 
   float: none;
@@ -127,16 +129,14 @@ body {
 .container-for-header-text p {
   margin-top: 0;
   font: normal 1.2em sans-serif;
-  color: #cc350f;
+  color: #cc4928;
   padding-bottom: 20%;
-
 }
 
 .container-for-header-text h1 {
   font: normal 2.4em "Patua One", serif;
-  color: #cc350f;
+  color: #f66642;
   margin-top: 0;
-
 }
 
 .textColor {
@@ -146,10 +146,10 @@ body {
 }
 
 .card.card-itinerary-add {
-  background-color: #dde5f0;
-  text-align: center;
+  background-color: #d2dbe7;
+  text-align: left;
   display: inline-block;
-  justify-content: center;
+  width: 40%;
   float: none;
   margin: 0 auto;
 }
@@ -157,4 +157,9 @@ body {
 .super-colors {
   background-color: plum;
   color: #282c34;
+}
+
+.carsoulName {
+  color: #3e32da;
+  text-align: center;
 }

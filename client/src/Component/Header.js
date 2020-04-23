@@ -15,7 +15,6 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  Button,
   Form,
   ButtonGroup,
 } from "reactstrap";
@@ -42,7 +41,7 @@ class Header extends Component {
     //toggle = () => this.setState({ isOpen: !isOpen });
     return (
       <div>
-        <Navbar color="dark" dark expand="sm">
+        <Navbar className="colorNav" dark expand="sm">
           <Link to="/" id="RouterNavLink">
             <NavbarBrand>MyItenarary</NavbarBrand>
           </Link>

@@ -1,7 +1,7 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode"; // import dependency
-import { Redirect } from "react-router-dom";
-import UserAccount from "../../Component/UserAccount";
+// import { Redirect } from "react-router-dom";
+// import UserAccount from "../../Component/UserAccount";
 export const fetchUsersAction = () => {
   return (dispatch) => {
     //add the full url of your back end

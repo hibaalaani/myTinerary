@@ -35,14 +35,13 @@ export default class CarouselImg extends Component {
             return (
               // <Link to={"/" + city.name}>
               <div key={index}>
+                <h6 className="carsoulName card-title">{city.name}</h6>
                 <img
                   className="imgCarsoul rounded card d-block w-100"
                   //style={style.img}
                   src={city.picture}
                   alt="city"
                 />
-
-                <p className="p-4 mt-4 card-title">{city.name}</p>
               </div>
               // </Link>
             );

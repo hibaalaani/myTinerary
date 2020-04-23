@@ -39,10 +39,11 @@ class Cities extends Component {
     const filterList = this.filter();
 
     return (
-      <div>
-        <div className="justify-content-around">
-          <label htmlFor="filter">Search for City: </label>
+      <div className="container ">
+        <div className="justify-content-between col-sm-12 col-md-12 my-3 ">
+          {/* <label htmlFor="filter"> </label> */}
           <input
+            placeholder="Search for City:"
             className="btn btn-outline-info mr-2"
             type="search"
             id="filter"
@@ -62,10 +63,16 @@ class Cities extends Component {
         {filterList &&
           filterList.map((city, index) => (
             <Link to={"itineraries/" + city.name}>
-              <div key={index} city={city}>
-                <div className="card border-info">
+              <div
+                key={index}
+                city={city}
+                className="col-sm-12
+                col-md-6
+                col-lg-3"
+              >
+                <div className="card border-info ">
                   <h3 className="card-title">{city.name}</h3>
-                  <img className="card-img " src={city.picture} alt="" />
+                  <img className="card-img " src={city.picture} alt="city" />
                 </div>
               </div>
             </Link>
