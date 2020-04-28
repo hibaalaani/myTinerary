@@ -38,7 +38,7 @@ function App() {
           <Route exact path="/Cities" component={Cities} />
           <Route exact path="/AddCity" component={AddCity} />
           <Route exact path="/Itineraries" component={Itinerary} />
-          <Route exact path="/Itineraries/:city" component={Itinerary} />
+          <Route exact path="/Itineraries/all/:city" component={Itinerary} />
           <Route component={Notfound} />
         </Switch>
         <Footer />

@@ -54,7 +54,7 @@ class Cities extends Component {
             <button className="btn btn-outline-info">Add city you like</button>
           </Link>
         </div>
-        {!filterList && (
+        {!this.props.cities && (
           <Spinner animation="border" role="status">
             <span className="sr-only">Loading...</span>
           </Spinner>
@@ -62,9 +62,8 @@ class Cities extends Component {
 
         {filterList &&
           filterList.map((city, index) => (
-            <Link to={"itineraries/" + city.name}>
+            <Link key={index} to={"itineraries/all/" + city.name}>
               <div
-                key={index}
                 city={city}
                 className="col-sm-12
                 col-md-6

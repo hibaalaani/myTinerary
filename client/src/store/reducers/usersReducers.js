@@ -42,7 +42,8 @@ function usersReducers(state = initialState, action) {
         isLoggedin: false,
         token: null,
       };
-
+    // case "DELETE_USER_FAVORITE":
+    //   return { ...state };
     default:
       return state;
   }

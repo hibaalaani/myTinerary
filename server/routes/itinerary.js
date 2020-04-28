@@ -19,8 +19,9 @@ router.get("/all", (_req, res) => {
     .catch((err) => console.log(err));
 });
 //this is how you implement a city route by specific city
-router.get("/:name", (req, res) => {
+router.get("/all/:name", (req, res) => {
   let itineraryRequested = req.params.name;
+  // name = req.params.name;
   console.log("itineraryRequested", itineraryRequested);
   itineraryModel
     .find({ name: itineraryRequested })
@@ -36,7 +37,6 @@ router.post("/:id/favorites", (req, res, next) => {
   let id = req.params.id;
   console.log("id", id);
   itineraryModel.findOne({ _id: id }).then((itinerary) => {
-    console.log(itinerary);
     itinerary.favorites.push(email);
     itinerary.save().then((saveditinerary) => {
       userModel.findOne({ email: email }).then((user) => {
@@ -49,16 +49,18 @@ router.post("/:id/favorites", (req, res, next) => {
 });
 ///////////////////delete user from favorite itinerary
 
-router.delete("/:id/favorites", (req, res, next) => {
-  const id = req.params.id;
-  const email = req.body.email;
+router.post("/:id/deletefavorites", (req, res, next) => {
+  let id = req.params.id;
+  let email = req.body.email;
+  console.log("email", email);
   itineraryModel.findOne({ _id: id }).then((itinerary) => {
     console.log("itinerary:", itinerary);
     ///////apply js
     let index = itinerary.favorites.indexOf(email);
     itinerary.favorites.splice(index, 1);
     itinerary.save().then((saveditinerary) => {
-      userModel.findOne(email).then((user) => {
+      // res.status(200).send(saveditinerary);
+      userModel.findOne({ email: email }).then((user) => {
         console.log("user:", user);
         let index = user.favorites.indexOf(id);
         console.log("index:", index);
@@ -69,7 +71,28 @@ router.delete("/:id/favorites", (req, res, next) => {
     });
   });
 });
+router.post("/userfavorites", (req, res) => {
+  // const ids = [
+  //   "5e9e34cf78914b185c4df850",
+  //   "5ea22907eadb6e55b0fcb76b",
+  //   "5ea1e5c6eadb6e55b0fcb761",
+  // ];
+  console.log("ids", req.body.ids);
+  // const ids = JSON.parse(req.body.ids);
+  const ids = req.body.ids;
 
+  // let arr = ids.map((ele) => new mongoose.Types.ObjectId(ele));
+
+  itineraryModel
+    .find()
+    .where("_id")
+    .in(ids)
+    .exec((err, itineraries) => {
+      console.log("err", err);
+      console.log("object", itineraries);
+      res.send(itineraries);
+    });
+});
 /////////////post comment to the itenerary
 router.post("/:id/comments", (req, res, next) => {
   const id = req.params.id;

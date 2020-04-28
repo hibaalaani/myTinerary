@@ -3,7 +3,7 @@ import "../App.css";
 import Circle from "../Component/images/Circle.png";
 import CarouselImg from "./CarouselImg";
 // import HeaderMatirial from "./HeaderMatirial";
-
+import { googleAuth } from "../store/actions/usersAction";
 import { Link } from "react-router-dom";
 import { fetchCitiesAction } from "../store/actions/cityActions";
 import { connect } from "react-redux";
@@ -16,6 +16,13 @@ class Landing extends Component {
   }
   componentDidMount() {
     this.props.fetchCitiesAction();
+
+    console.log(this.props.location);
+    const code = this.props.location.search.split("=")[1];
+    if (code) {
+      this.props.googleAuth(code);
+      console.log(code);
+    }
   }
   render() {
     const cities = this.props.cities;
@@ -51,11 +58,13 @@ class Landing extends Component {
   }
 }
 const mapStateToProps = (state, ownProps) => {
+  console.log("state", state);
   return {
     cities: state.cities.cities,
   };
 };
 const mapDispatchToProps = (dispatch) => ({
   fetchCitiesAction: (city) => dispatch(fetchCitiesAction(city)),
+  googleAuth: (code) => dispatch(googleAuth(code)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Landing);

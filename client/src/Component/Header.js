@@ -42,7 +42,7 @@ class Header extends Component {
     return (
       <div>
         <Navbar className="colorNav" dark expand="sm">
-          <Link to="/" id="RouterNavLink">
+          <Link to="/">
             <NavbarBrand>MyItenarary</NavbarBrand>
           </Link>
           <NavbarToggler

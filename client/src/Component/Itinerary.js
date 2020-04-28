@@ -35,13 +35,22 @@ class Itinerary extends Component {
     this.setState({ favColor: newColor });
   };
   handelFavorite = (id, name) => {
-    const emailAdded = this.props.user.email;
+    if (this.props.user.email == null) {
+      alert("you need to log in");
+    } else {
+      const emailAdded = this.props.user.email;
 
-    this.props.fetchItinerariesFavorite(emailAdded, id, name);
+      this.props.fetchItinerariesFavorite(emailAdded, id, name);
+    }
   };
   handelDeleteFavorite = (id, name) => {
-    const emailAdded = this.props.user.email;
-    this.props.fetchItinerariesDeleteFavorite(emailAdded, id, name);
+    if (this.props.user.email == null) {
+      alert("you need to log in");
+    } else {
+      const emailAdded = this.props.user.email;
+      console.log("emailAdded", emailAdded);
+      this.props.fetchItinerariesDeleteFavorite(emailAdded, id, name);
+    }
   };
   handelDeleteComment = (name, id, comments) => {
     // const email = this.props.user.email;
@@ -64,7 +73,7 @@ class Itinerary extends Component {
   render() {
     const filterList = this.filter();
     const email = this.props.user.email;
-    // const { itineraries } = this.props;
+
     return (
       <div className="container">
         <h3>Our Itineraries</h3>
@@ -95,6 +104,12 @@ class Itinerary extends Component {
                       ? this.handelDeleteFavorite(itinerary._id, itinerary.name)
                       : this.handelFavorite(itinerary._id, itinerary.name)
                   }
+                  // onClick={() =>
+                  //   itinerary.favorites.includes(email) &&
+                  //     this.props.user.favorites.includes(itinerary._id)
+                  //     ? this.handelDeleteFavorite(itinerary._id, itinerary.name)
+                  //     : this.handelFavorite(itinerary._id, itinerary.name)
+                  // }
                 />
               </div>
               <img
@@ -122,9 +137,9 @@ class Itinerary extends Component {
                   <Accordion.Collapse eventKey="0">
                     <React.Fragment>
                       {itinerary.comments &&
-                        itinerary.comments.map((comment) => {
+                        itinerary.comments.map((comment, index) => {
                           return (
-                            <div>
+                            <div key={index}>
                               <Container>
                                 <Row>
                                   <Col>

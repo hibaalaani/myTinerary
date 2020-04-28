@@ -153,6 +153,8 @@ router.get(
       id: user.id,
       name: user.name,
       email: user.email,
+      picture: user.picture,
+      favorites: user.favorites,
     };
 
     // Sign token

@@ -1,7 +1,7 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode"; // import dependency
 // import { Redirect } from "react-router-dom";
-// import UserAccount from "../../Component/UserAccount";
+// import fetchItinerariesByCityName from "../../Component/Itinerary";
 export const fetchUsersAction = () => {
   return (dispatch) => {
     //add the full url of your back end
@@ -30,6 +30,11 @@ export const register = (newUser) => {
           console.log("token", token);
           const decoded = jwt_decode(token); // decode your token here
           // window.location = "/Login";
+          dispatch({
+            type: "LOGIN_SUCCESS",
+            payload: decoded,
+            token: res.data.token,
+          });
         }
       })
       .catch((error) => {
@@ -47,6 +52,17 @@ export const register = (newUser) => {
   };
 };
 
+export const googleAuth = (code) => {
+  return (dispatch) => {
+    localStorage.setItem("token", code);
+    const decoded = jwt_decode(code);
+    dispatch({
+      type: "LOGIN_SUCCESS",
+      payload: decoded,
+      token: code,
+    });
+  };
+};
 export const login = (userData) => {
   return (dispatch) => {
     axios
@@ -87,3 +103,32 @@ export const logUserOut = () => {
     dispatch({ type: "LOGED_OUT" });
   };
 };
+
+////////////delete email favorite from the itinerary
+// export const fetchItinerariesDeleteFavorite = (emailAdded, id, name) => {
+//   return (dispatch) => {
+//     axios
+//       .delete(`http://localhost:5000/api/itineraries/${id}/favorites`, {
+//         id: id,
+//       })
+//       .then((res) => {
+//         console.log("response", res);
+//         if (res.status === 200) {
+//           //send the user to his account page
+//           dispatch({ type: "DELETE_USER_FAVORITE" });
+//           dispatch(fetchItinerariesByCityName(name));
+//         }
+//       })
+//       .catch((error) => {
+//         console.log("error " + error.response);
+//         if (error.response) {
+//           if (error.response.status === 409) {
+//             alert("problem with email");
+//           } else {
+//             //alert with something else
+//             alert("Be Sure From Your email and link at delete fav");
+//           }
+//         }
+//       });
+//   };
+// };

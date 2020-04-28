@@ -17,7 +17,7 @@ export const fitchItinerariesAction = () => {
 export const fetchItinerariesByCityName = (city) => {
   console.log("city", city);
   return (dispatch) => {
-    fetch("http://localhost:5000/api/itineraries/" + city)
+    fetch("http://localhost:5000/api/itineraries/all/" + city)
       .then((resp) => {
         return resp.json();
       })
@@ -62,7 +62,7 @@ export const fetchItinerariesFavorite = (emailAdded, id, name) => {
 export const fetchItinerariesDeleteFavorite = (emailAdded, id, name) => {
   return (dispatch) => {
     axios
-      .delete(`http://localhost:5000/api/itineraries/${id}/favorites`, {
+      .post(`http://localhost:5000/api/itineraries/${id}/deletefavorites`, {
         email: emailAdded,
       })
       .then((res) => {
@@ -81,6 +81,36 @@ export const fetchItinerariesDeleteFavorite = (emailAdded, id, name) => {
           } else {
             //alert with something else
             alert("Be Sure From Your email and link at delete fav");
+          }
+        }
+      });
+  };
+};
+///////////////fetch the profile favorite
+export const fetchProfileFavorites = (ids) => {
+  console.log("ids", ids);
+
+  return (dispatch) => {
+    axios
+      .post("http://localhost:5000/api/itineraries/userfavorites", {
+        ids: ids,
+      })
+      .then((res) => {
+        console.log("response", res);
+        if (res.status === 200) {
+          //send the user to his account page
+          dispatch({ type: "FETCH_PROFILE_ITINERARY", payload: res.data });
+          // dispatch(fetchItinerariesByCityName(res.data));
+        }
+      })
+      .catch((error) => {
+        console.log("error" + error.response);
+        if (error.response) {
+          if (error.response.status === 409) {
+            alert("problem with email");
+          } else {
+            //alert with something else
+            alert("error from profile action itinerary");
           }
         }
       });
@@ -110,7 +140,7 @@ export const addComments = (comments, name, id, email) => {
             alert("problem with email");
           } else {
             //alert with something else
-            alert("Be Sure From Your email and link");
+            alert("alert from comment action");
           }
         }
       });
@@ -138,7 +168,7 @@ export const fetchDeleteComment = (comments, name, id) => {
             alert("problem with email");
           } else {
             //alert with something else
-            alert("Be Sure From Your email and link");
+            alert("alert from comment action");
           }
         }
       });
@@ -160,14 +190,6 @@ export const fetchNewItinerary = (newitinerary, token) => {
         console.log("response", res);
         if (res.status === 200) {
           //why are you trying to get a token here? this is just bad copy pasting from other routes
-
-          // const token = res.data.token;
-          // localStorage.setItem("token", token);
-          // console.log("token", token);
-          // const decoded = jwt_decode(token); // decode your token here
-          // console.log("decoded", decoded);
-          //send the user to his account page
-
           dispatch({ type: "ADD_ITINERARY" });
           dispatch(fetchItinerariesByCityName(newitinerary.name));
         }
@@ -179,7 +201,7 @@ export const fetchNewItinerary = (newitinerary, token) => {
             alert("problem with email");
           } else {
             //alert with something else
-            alert("error from action itinerary", error);
+            alert("error from add fetch", error);
           }
         }
       });

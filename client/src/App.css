@@ -67,9 +67,11 @@ a {
 .itinerary img {
   width: 100%;
 }
+
 .colorNav {
   background-color: #1c2331;
 }
+
 .footer {
   background-color: #1c2331;
   color: white;
@@ -147,11 +149,16 @@ a {
 
 .card.card-itinerary-add {
   background-color: #d2dbe7;
-  text-align: left;
-  display: inline-block;
-  width: 40%;
+  text-align: center;
+  display: block;
+  width: 100%;
   float: none;
   margin: 0 auto;
+}
+
+.block {
+  display: block;
+  width: 80%;
 }
 
 .super-colors {
