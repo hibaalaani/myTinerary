@@ -39,8 +39,8 @@ class Cities extends Component {
     const filterList = this.filter();
 
     return (
-      <div className="container ">
-        <div className="justify-content-between col-sm-12 col-md-12 my-3 ">
+      <div className="container-fluied ">
+        <div className="justify-content-center col-sm-12 col-md-12 my-3 ">
           {/* <label htmlFor="filter"> </label> */}
           <input
             placeholder="Search for City:"
@@ -66,8 +66,9 @@ class Cities extends Component {
               <div
                 city={city}
                 className="col-sm-12
-                col-md-6
-                col-lg-3"
+                col-md-12
+                city
+                col-lg-3 justify-content-between container mx-2 "
               >
                 <div className="card border-info ">
                   <h3 className="card-title">{city.name}</h3>

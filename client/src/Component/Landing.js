@@ -27,7 +27,7 @@ class Landing extends Component {
   render() {
     const cities = this.props.cities;
     return (
-      <div className="container-fluid App">
+      <div className="container-fluied ">
         <header className="col-12 header">
           <section className="container-for-header-text col-12">
             <div className="header-text-wrapper col-sm-12">
@@ -39,8 +39,8 @@ class Landing extends Component {
           {/* <img src={PhotoWithCamera} className="App-logo " alt="logo" /> */}
         </header>
 
-        <div>
-          <p className="mt-4 textSize col-sm-12 ">
+        <div className="transperant">
+          <p className="pt-4 textSize col-sm-12 ">
             Find your perfect trip ,designed by insiders who know their cities{" "}
           </p>
           <h1 className="textSize mt-4 col-sm-12 ">Start Browing</h1>

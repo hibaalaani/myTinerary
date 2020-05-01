@@ -4,7 +4,7 @@ export default class Footer extends Component {
   render() {
     return (
       <div>
-        <MDBFooter className=" footer font-small pt-4 mt-4">
+        <MDBFooter className=" footer font-small">
           <div className="footer-copyright text-center py-3">
             <MDBContainer fluid>
               &copy; {new Date().getFullYear()} Copyright:{" "}

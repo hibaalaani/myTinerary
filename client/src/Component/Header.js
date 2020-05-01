@@ -40,7 +40,7 @@ class Header extends Component {
   render() {
     //toggle = () => this.setState({ isOpen: !isOpen });
     return (
-      <div>
+      <div className="container-fluied">
         <Navbar className="colorNav" dark expand="sm">
           <Link to="/">
             <NavbarBrand>MyItenarary</NavbarBrand>

@@ -76,7 +76,10 @@ class Itinerary extends Component {
 
     return (
       <div className="container">
-        <h3>Our Itineraries</h3>
+        <div className="textSize display-2">
+          <h3>Our Itineraries</h3>
+        </div>
+
         {filterList &&
           filterList.map((itinerary, index) => (
             <div

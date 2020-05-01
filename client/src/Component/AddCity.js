@@ -39,25 +39,36 @@ class AddCity extends Component {
   };
   render() {
     return (
-      <div>
-        <form onSubmit={this.handelSubmit}>
-          <label className="mx-2" htmlFor="name">
-            {" "}
-            Name:
-          </label>
-          <input type="text" id="name" onChange={this.handelChange} />
-          <label className="mx-2" htmlFor="country">
-            {" "}
-            Country
-          </label>
-          <input type="text" id="country" onChange={this.handelChange} />
-          <label className="mx-2" htmlFor="picture">
-            Picture:
-          </label>
-          <input type="url" id="picture" onChange={this.handelChange} />
-          <button className="mx-2" type="submit">
-            Add New City
-          </button>
+      <div className="container-fluied">
+        <form
+          onSubmit={this.handelSubmit}
+          className="App-header align-items-center"
+        >
+          <div className="d-block ">
+            <label className="mx-2" htmlFor="name">
+              {" "}
+              Name:
+            </label>
+            <input type="text" id="name" onChange={this.handelChange} />
+          </div>
+          <div className="d-block">
+            <label className="mx-2" htmlFor="country">
+              {" "}
+              Country:
+            </label>
+            <input type="text" id="country" onChange={this.handelChange} />
+          </div>
+          <div className="d-block">
+            <label className="mx-2" htmlFor="picture">
+              Picture:
+            </label>
+            <input type="url" id="picture" onChange={this.handelChange} />
+          </div>
+          <div className="d-block">
+            <button className="mx-2" type="submit">
+              Add New City
+            </button>
+          </div>
         </form>
       </div>
     );
