@@ -1,6 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 # line add by me hiba to ignore allsub folder from node-modules
-node_modules/
+# node_modules/
 # dependencies
 
 client/.pnp
