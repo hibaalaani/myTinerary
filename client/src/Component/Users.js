@@ -83,6 +83,7 @@ const mapStateToProps = (state, ownProps) => {
     user: state.users,
   };
 };
+////is equel to propTypes
 const mapDispatchToProps = (dispatch) => ({
   register: (newUser) => dispatch(register(newUser)),
 });
