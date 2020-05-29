@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const passport = require("passport");
-const path = require("path");
+
 const db = require("./keys").mongoURI;
 
 const port = process.env.PORT || 5000;
@@ -35,13 +35,6 @@ app.use("/api/users", require("./routes/users"));
 
 // app.use("/api/users/register", require("./routes/users"));
 // process.env.port is Heroku's port if you choose to deploy the app there
-if (process.env.NODE_ENV === "production") {
-  //set static folder
-  app.use(express.static("client/build"));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
-}
 app.listen(port, () => {
   console.log("Server is running on " + port + "port");
 });
